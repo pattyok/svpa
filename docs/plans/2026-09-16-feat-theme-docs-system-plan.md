@@ -1,7 +1,7 @@
 ---
 title: Theme Item Documentation System
 type: feat
-status: active
+status: completed
 date: 2026-09-16
 ---
 
