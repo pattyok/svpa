@@ -29,6 +29,7 @@
 	color: $hamburgerColor;
 	font-size: 10px;
 	font-weight: 600;
+	display: none;
 
 	&.menu-open {
 		display: none;
@@ -44,7 +45,7 @@
 		}
 
 		&.menu-open {
-			display: block;
+			/* display: block; */
 
 		}
 	}
@@ -123,8 +124,13 @@
 			opacity: 0;
 			transition: transform 0.6s ease;
 
-			& > li {
+			& > .menu {
+				border-top: 1px solid $colorNavLinkBorder;
+			}
+
+			& li {
 				position: relative;
+				border-bottom: 2px solid $colorNavLinkBorder;
 			}
 
 			& .before-navigation__inner,
@@ -146,6 +152,15 @@
 		&.subnav--toggled-on .sub-menu {
 			height: calc(100vh);
 			padding-bottom: 50px;
+		}
+
+		&.subnav--toggled-on {
+			& .after-navigation__inner {
+				display: none;
+			}
+			& .search-dropdown__content {
+				display: none;
+			}
 		}
 
 		&  .sub-menu {
@@ -202,15 +217,15 @@
 		&.menu-item--toggled-on {
 
 			& > a {
-				justify-content: flex-start;
-				background-color: $colorNavBackgroundMobile;
-				color: $colorNavLinkHover;
+				justify-content: flex-end;
+				background-color: $colorNavLinkActiveMobileBG;
+				color: $colorNavLinkActiveMobile;
 				padding-left: 2.875rem;
 			}
 
 			& .dropdown-symbol {
 				background: transparent;
-				border-color: $colorNavLinkHover;
+				border-color: $colorNavLinkActiveMobile;
 				right: auto;
 				left: 20px;
 				top: 50%;
@@ -276,6 +291,7 @@
 	.nav--toggle-sub .dropdown-symbol {
 		height: 12px;
 		width: 12px;
+		border-color: $colorNavLink;
 	}
 
 	.nav--toggle-sub ul ul .dropdown,
@@ -332,7 +348,7 @@ ul.menu {
 	margin: 0;
 	padding: 0;
 	line-height: 1;
-	font-family: var(--navigation-font-family);
+	font-family: $fontFamilyNav;
 
 	& a {
 		font-weight: $menuFontWeight;
@@ -352,7 +368,7 @@ ul.menu {
 
 .main-navigation .menu-item {
 	& a {
-		font-family: var(--navigation-font-family);
+		font-family: $fontFamilyNav;
 		display: flex;
 		gap: 5px;
 		width: 100%;
@@ -445,14 +461,19 @@ ul.menu {
 	padding-left: 3rem;
 }
 
-.main-navigation ul li.menu-item.current-menu-parent > a,
-.main-navigation ul li.menu-item.current-menu-item > a {
-	background-color: $colorNavLinkHoverBG;
-	color: $colorNavLinkHover;
-	text-decoration: none;
-
-	&::after {
+.main-navigation ul li.menu-item.current-menu-parent,
+.main-navigation ul li.menu-item.current-menu-item {
+	& > a {
+		background-color: $colorNavLinkHoverBG;
+		color: $colorNavLinkHover;
 		text-decoration: none;
+
+		&::after {
+			text-decoration: none;
+		}
+	}
+	& .dropdown-symbol {
+		border-color: $colorNavLinkHover;
 	}
 }
 
@@ -506,7 +527,7 @@ ul.menu {
 
 		& .menu {
 			align-items: center;
-			gap: calc(2vw + 10px);
+			gap: calc(2vw + 5px);
 		}
 
 		& button {
@@ -541,24 +562,13 @@ ul.menu {
 		display: flex;
 		align-items: center;
 		height: 100%;
-		padding: 1.95rem 0;
-
-		&::before {
-			content: "";
-			height: 0;
-			width: 0;
-			background-color: $colorNavLinkHoverBG;
-			z-index: -1;
-			border-radius: 50%;
-			position: absolute;
-			left: 0;
-			transition: all 0.3s ease-in-out;
-		}
+		padding: 1.5rem 0 ;
 
 		& a {
 			padding: 0.5rem 0;
 			position: relative;
 			border-bottom: 3px solid transparent;
+			color: $colorNavLink;
 		}
 		&.menu-item-has-children > a {
 			padding-right: 1.5rem;
@@ -570,7 +580,6 @@ ul.menu {
 			& > a {
 				background-color: transparent;
 				color: $colorNavLinkHover;
-				border-bottom: 3px solid $primaryLight;
 				text-decoration: none;
 			}
 			& .dropdown-symbol {
@@ -580,12 +589,11 @@ ul.menu {
 	}
 
 	.main-navigation ul.sub-menu {
+		border-top: 6px solid var(--wp--preset--color--accent-2);
 		background-color: $colorSubNavBackground;
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 		min-width: 275px;
-		border: 1px solid $colorSubNavBackground;
-		border-top: none;
 		box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.20);
 		z-index: 1200;
 
@@ -703,7 +711,7 @@ ul.menu {
 	.primary-menu-container {
 		display: flex;
 		flex-direction: row;
-		justify-content: flex-end;
+		justify-content: flex-start;
 		width: 100%;
 
 		& .menu-extras:not(.hide-desktop-menu) {
@@ -722,43 +730,12 @@ ul.menu {
 	}
 }
 
-@media (--mid-menu-query) {
-	.header-nav-wrapper {
-		display: grid;
-		grid-template-columns: 180px 1fr 225px;
-
-		grid-template-areas:
-			"before search after"
-			"nav nav nav";
-
-		& .navigation-left {
-			grid-area: before;
-			justify-content: flex-end;
-		}
-		& .navigation-right {
-			grid-area: after;
-			align-self: center;
-			& .after-navigation__inner {
-				display: flex;
-				justify-content: center;
-			}
-		}
-		& .main-navigation {
-			grid-area: nav;
-			justify-content: left;
-		}
-		& .header-search-wrapper {
-			grid-area: search;
-			justify-content: flex-end;
-		}
-	}
+@media (--desktop-up) {
 	.primary-menu-container {
-		justify-content: center;
-	}
-	.main-navigation .menu {
-		gap: 40px;
+		justify-content: flex-end;
 	}
 }
+
 
 
 .main-navigation .hide-main {

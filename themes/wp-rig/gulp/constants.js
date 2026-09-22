@@ -4,7 +4,6 @@
 /**
  * External dependencies
  */
-export const gulpPlugins = require( 'gulp-load-plugins' )();
 import path from 'path';
 
 /**
@@ -13,7 +12,7 @@ import path from 'path';
 import {
 	getThemeConfig,
 	configValueDefined,
-} from './utils';
+} from './utils.js';
 
 // Root path is where npm run commands happen
 export const rootPath = process.cwd();

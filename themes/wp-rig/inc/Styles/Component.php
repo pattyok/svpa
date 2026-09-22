@@ -21,12 +21,6 @@ use function wp_styles;
 use function esc_attr;
 use function esc_url;
 use function wp_style_is;
-use function _doing_it_wrong;
-use function wp_print_styles;
-use function post_password_required;
-use function is_singular;
-use function comments_open;
-use function get_comments_number;
 use function apply_filters;
 use function add_query_arg;
 
@@ -92,7 +86,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function template_tags(): array {
 		return array(
-			'print_styles' => array( $this, 'print_styles' ),
+
 		);
 	}
 
@@ -264,44 +258,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		return $urls;
 	}
 
-	/**
-	 * Prints stylesheet link tags directly.
-	 *
-	 * This should be used for stylesheets that aren't global and thus should only be loaded if the HTML markup
-	 * they are responsible for is actually present. Template parts should use this method when the related markup
-	 * requires a specific stylesheet to be loaded. If preloading stylesheets is disabled, this method will not do
-	 * anything.
-	 *
-	 * If the `<link>` tag for a given stylesheet has already been printed, it will be skipped.
-	 *
-	 * @param string ...$handles One or more stylesheet handles.
-	 */
-	public function print_styles( string ...$handles ) {
 
-		// If preloading styles is disabled (and thus they have already been enqueued), return early.
-		if ( ! $this->preloading_styles_enabled() ) {
-			return;
-		}
-
-		$css_files = $this->get_css_files();
-		$handles   = array_filter(
-			$handles,
-			function ( $handle ) use ( $css_files ) {
-				$is_valid = isset( $css_files[ $handle ] ) && ! $css_files[ $handle ]['global'];
-				if ( ! $is_valid ) {
-					/* translators: %s: stylesheet handle */
-					_doing_it_wrong( __CLASS__ . '::print_styles()', esc_html( sprintf( __( 'Invalid theme stylesheet handle: %s', 'wp-rig' ), $handle ) ), 'WP Rig 2.0.0' );
-				}
-				return $is_valid;
-			}
-		);
-
-		if ( empty( $handles ) ) {
-			return;
-		}
-
-		wp_print_styles( $handles );
-	}
 
 	/**
 	 * Determines whether to preload stylesheets and inject their link tags directly within the page content.

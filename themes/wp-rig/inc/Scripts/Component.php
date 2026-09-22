@@ -38,16 +38,7 @@ class Component implements Component_Interface {
 		 * Adds the action and filter hooks to integrate with WordPress.
 		 */
 	public function initialize() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_jquery' ), 100 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_global' ), 100 );
-		add_action( 'wp_head', array( $this, 'jquery_local_fallback' ) );
-	}
-
-		/**
-		 * Registers jQuery UI
-		 */
-	public function register_jquery() {
-		wp_enqueue_script( 'jquery-ui-dialog' );
 	}
 
 	/**
@@ -63,12 +54,7 @@ class Component implements Component_Interface {
 		$js_files = array(
 			'wp-rig-global-js'  => array(
 				'file'         => 'global.min.js',
-				'dependencies' => array( 'jquery', 'wp-rig-popover-js' ),
-				'in_footer'    => true,
-			),
-			'wp-rig-popover-js' => array(
-				'file'         => 'jquery.gpopover.min.js',
-				'dependencies' => array( 'jquery' ),
+				'dependencies' => array(),
 				'in_footer'    => true,
 			),
 
@@ -137,19 +123,5 @@ class Component implements Component_Interface {
 		}
 	}
 
-	/**
-	 * Output the local fallback immediately after jQuery's <script>
-	 *
-	 * @link http://wordpress.stackexchange.com/a/12450
-	 * @param string $src source url.
-	 * @param string $handle source handle.
-	 */
-	public function jquery_local_fallback( $src, $handle = null ) {
 
-		if ( 'jquery' === $handle ) {
-			$add_jquery_fallback = apply_filters( 'script_loader_src', \includes_url( '/js/jquery/jquery.js' ), 'jquery-fallback' );
-		}
-
-		return $src;
-	}
 }

@@ -6,16 +6,17 @@
  */
 import { watch as gulpWatch, series, src } from 'gulp';
 import pump from 'pump';
+import phpcs from 'gulp-phpcs';
 
 /**
  * Internal dependencies
  */
-import { paths, gulpPlugins, PHPCSOptions } from './constants';
-import { getThemeConfig, backslashToForwardSlash } from './utils';
-import { reload } from './browserSync';
-import images from './images';
-import scripts from './scripts';
-import {styles, blockStyles} from './styles';
+import { paths, PHPCSOptions } from './constants.js';
+import { getThemeConfig, backslashToForwardSlash } from './utils.js';
+import { reload } from './browserSync.js';
+import images from './images.js';
+import scripts from './scripts.js';
+import {styles, blockStyles} from './styles.js';
 
 /**
  * Watch everything
@@ -35,9 +36,9 @@ export default function watch() {
 			return pump( [
 				src( path ),
 				// Run code sniffing
-				gulpPlugins.phpcs( PHPCSOptions ),
+				phpcs( PHPCSOptions ),
 				// Log all problems that were found.
-				gulpPlugins.phpcs.reporter( 'log' ),
+				phpcs.reporter( 'log' ),
 			] );
 		} );
 	}

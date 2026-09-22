@@ -45,6 +45,7 @@
 	max-height: 600px;
 	margin-bottom: 0;
 	position: relative;
+	width: 100%;
 }
 
 .wp-block-cover .wp-block-pullquote {
@@ -62,6 +63,13 @@
 				max-width: calc(var(--content-width-wide) / 2);
 			}
 		}
+
+		&.is-style-has-content-flag {
+			& .wp-block-cover__inner-container {
+				max-width: 50%;
+				margin-top: 3rem !important;
+			}
+		}
 	}
 }
 
@@ -76,6 +84,12 @@
 				max-width: calc(var(--content-width-wide) / 3);
 			}
 		}
+		&.is-style-has-content-flag {
+			& .wp-block-cover__inner-container {
+				max-width: 45%;
+				margin-top: 3rem !important;
+			}
+		}
 
 	}
 
@@ -84,4 +98,6 @@
 		padding-left: 3.125rem;
 		padding-right: 3.125rem;
 	}
+
+
 }

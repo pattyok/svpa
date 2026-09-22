@@ -50,7 +50,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		add_filter( 'theme_scandir_exclusions', array( $this, 'filter_scandir_exclusions_for_optional_templates' ) );
 		add_filter( 'script_loader_tag', array( $this, 'filter_script_loader_tag' ), 10, 2 );
 		add_action( 'acf/init', array( $this, 'wpdocs_register_theme_settings' ), 10 );
-		add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ), 40 );
 		add_filter(
 			'safe_style_css',
 			function ( $styles ) {
@@ -241,7 +240,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function wpdocs_register_theme_settings() {
 		if ( function_exists( 'acf_add_options_page' ) ) {
 
-			acf_add_options_page(
+			\acf_add_options_page(
 				array(
 					'page_title' => 'Theme General Settings',
 					'menu_title' => 'Theme Settings',
@@ -253,45 +252,4 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 	}
 
-
-	/** Add a widget to the dashboard.
-	 *
-	 * This function is hooked into the 'wp_dashboard_setup' action above.
-	 */
-	public function add_dashboard_widgets() {
-		global $wp_meta_boxes;
-
-		// remove undesired widgets.
-		unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'] );
-		unset( $wp_meta_boxes['dashboard']['normal']['core']['tribe_dashboard_widget'] );
-		unset( $wp_meta_boxes['dashboard']['normal']['core']['rg_forms_dashboard'] );
-		unset( $wp_meta_boxes['dashboard']['normal']['core']['themeisle'] );
-		unset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity'] );
-		unset( $wp_meta_boxes['dashboard']['normal']['core']['woocommerce_dashboard_recent_reviews'] );
-
-		wp_add_dashboard_widget(
-			'carkeek_dashboard_widget', // Widget slug.
-			get_bloginfo( 'name' ) . ' Site Management', // Title.
-			array( $this, 'dashboard_widget_function' )// Display function.
-		);
-
-		$dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
-
-		$my_widget = array( 'carkeek_dashboard_widget' => $dashboard['carkeek_dashboard_widget'] );
-		unset( $dashboard['carkeek_dashboard_widget'] );
-
-		$sorted_dashboard                             = array_merge( $my_widget, $dashboard );
-		$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-	}
-
-
-	/**
-	 * Create the function to output the contents of your Dashboard Widget.
-	 */
-	public function dashboard_widget_function() {
-		$content = get_option( 'options_dashboard_message' );
-		if ( ! empty( $content ) ) {
-			echo wp_kses_post( '<div class="ck-welcome">' . $content . '</div>' );
-		}
-	}
 }

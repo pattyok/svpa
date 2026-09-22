@@ -7,12 +7,14 @@
 import pump from 'pump';
 import { src, dest } from 'gulp';
 import { pipeline } from 'mississippi';
+import gulpIf from 'gulp-if';
+import phpcs from 'gulp-phpcs';
 
 /**
  * Internal dependencies
  */
-import { paths, PHPCSOptions, gulpPlugins, isProd } from './constants';
-import { getStringReplacementTasks, getThemeConfig } from './utils';
+import { paths, PHPCSOptions, isProd } from './constants.js';
+import { getStringReplacementTasks, getThemeConfig } from './utils.js';
 
 export function phpBeforeReplacementStream() {
 	const config = getThemeConfig();
@@ -21,12 +23,12 @@ export function phpBeforeReplacementStream() {
 	// before replacement functionality
 	return pipeline.obj( [
 		// Only code sniff PHP files if the debug setting is true
-		gulpPlugins.if(
+		gulpIf(
 			config.dev.debug.phpcs,
-			gulpPlugins.phpcs( PHPCSOptions )
+			phpcs( PHPCSOptions )
 		),
 		// Log all problems that were found.
-		gulpPlugins.phpcs.reporter( 'log' ),
+		phpcs.reporter( 'log' ),
 	] );
 }
 

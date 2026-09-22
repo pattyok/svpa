@@ -10,7 +10,7 @@ import rimraf from 'rimraf';
 /**
  * Internal dependencies
  */
-import { filesToMock } from './prod-build.utils';
+import { filesToMock } from './prod-build.utils.js';
 import {
 	prodThemePath,
 	paths,

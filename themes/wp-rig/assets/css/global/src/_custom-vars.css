@@ -1,8 +1,9 @@
 /* stylelint-disable comment-empty-line-before */
 $fontFamilyGlobal: var(--wp--preset--font-family--global);
 $fontFamilyHeadings: var(--wp--preset--font-family--headings);
-$fontFamilyHeadingsSans: var(--wp--preset--font-family--headings-sans);
-$fontFamilyForms: var(--wp--preset--font-family--headings-sans);
+$fontFamilyNav: var(--wp--preset--font-family--global);
+$fontFamilyHeadingsSans: var(--wp--preset--font-family--headings);
+$fontFamilyForms: var(--wp--preset--font-family--headings);
 
 $global: var(--wp--preset--color--contrast);
 $primary: var(--wp--preset--color--primary); /**  green **/
@@ -12,7 +13,7 @@ $secondary: var(--wp--preset--color--secondary); /** blue **/
 $accent1: var(--wp--preset--color--accent); /** orange */
 $accent2: var(--wp--preset--color--accent-2); /** gold */
 $accent3: var(--wp--preset--color--accent);
-$background: var(--wp--preset--color--white);
+$background: var(--wp--preset--color--base);
 
 $gray100: var(--wp--preset--color--gray-100);
 $gray200: var(--wp--preset--color--gray-200);
@@ -37,46 +38,49 @@ $btnBorderRadius: 0;
 $menuFontSize: var(--font-size-nav);
 $menuFontWeight: 600;
 
-$pageHeaderBackgroundColor: var(--wp--preset--gradient--green-light-to-dark);
-$pageHeaderColor: var(--wp--preset--color--white);
+$pageHeaderBackgroundColor: var(--wp--preset--color--primary);
+$pageHeaderColor: var(--wp--preset--color--base);
 
 $btnAltBackground: var(--wp--preset--color--secondary);
 $btnAltBorder: 1px solid var(--wp--preset--color--secondary);
-$btnAltText: var(--wp--preset--color--white);
+$btnAltText: var(--wp--preset--color--base);
 $btnAltBackgroundHover:  var(--wp--preset--color--primary);
 $btnAltBorderHover: 1px solid var(--wp--preset--color--primary);
 $btnAltBackgroundActive:  var(--wp--preset--color--primary);
-$btnAltTextHover:  var(--wp--preset--color--white);
-$btnAltTextActive:  var(--wp--preset--color--white);
+$btnAltTextHover:  var(--wp--preset--color--base);
+$btnAltTextActive:  var(--wp--preset--color--base);
 
-$headerBackground: var(--wp--preset--color--white);
+$headerBackground: var(--wp--preset--color--base);
 
 $colorBorders: var(--wp--preset--color--gray-300);
 $colorBordersDark: var(--wp--preset--color--gray-800);
 $colorSeparator: var(--wp--preset--color--gray-300);
 
-$colorLink: var(--wp--preset--color--secondary);
-$colorLinkHover: var(--wp--preset--color--secondary-dark);
+$colorLink: var(--wp--preset--color--accent-1);
+$colorLinkHover: var(--wp--preset--color--accent-1);
 
 $colorNavBackground: var(--wp--preset--color--base);
-$colorNavLinkMobile: var(--wp--preset--color--secondary);
+$colorNavLinkMobile: var(--wp--preset--color--accent-1);
 $colorNavBackgroundMobile: var(--wp--preset--color--base);
-$colorNavLinkHoverMobile: var(--wp--preset--color--secondary-dark);
-$colorNavLinkActiveMobile: var(--wp--preset--color--secondary-dark);
+$colorNavLinkHoverMobile: var(--wp--preset--color--base);
+$colorNavLinkActiveMobile: var(--wp--preset--color--base);
+$colorNavLinkActiveMobileBG: var(--wp--preset--color--accent-1);
+$colorNavLinkBorder: var(--wp--preset--color--accent-1);
+
+$colorNavLink: var(--wp--preset--color--contrast);
+$colorNavLinkHover: var(--wp--preset--color--accent-1);
 $colorNavLinkHoverBG: var(--wp--preset--color--base);
 
-$colorNavLink: var(--wp--preset--color--secondary);
-$colorNavLinkHover: var(--wp--preset--color--secondary-dark);
 
 
 $colorSubNavBackground: var(--wp--preset--color--base);
-$colorSubNavLink: var(--wp--preset--color--secondary);
+$colorSubNavLink: var(--wp--preset--color--contrast);
 $colorSubNavLinkHoverBG: var(--wp--preset--color--base);
-$colorSubNavLinkHover: var(--wp--preset--color--secondary-dark);
+$colorSubNavLinkHover: var(--wp--preset--color--accent-1);
 
-$colorSubNavLinkMobile: var(--wp--preset--color--secondary);
+$colorSubNavLinkMobile: var(--wp--preset--color--accent-1);
 
-$hamburgerColor: var(--wp--preset--color--primary-dark);
+$hamburgerColor: var(--wp--preset--color--secondary);
 $searchIconBGColor: var(--wp--preset--color--base);
 $searchIconBorder: 1px solid var(--wp--preset--color--secondary);
 $searchIconBorder2x: 2px solid var(--wp--preset--color--secondary);
@@ -85,7 +89,7 @@ $searchIconBGColorHover: transparent;
 $formsFont: var(--form-field-font-family);
 $formsColor: var(--wp--preset--color--gray-800);
 
-$white: var(--wp--preset--color--white);
+$white: var(--wp--preset--color--base);
 $black: var(--wp--preset--color--contrast);
 $blue: var(--wp--preset--color--primary);
 $yellow: var(--wp--preset--color--accent-2);

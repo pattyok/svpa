@@ -37,6 +37,18 @@
 	z-index: 100000; /* Above WP toolbar. */
 }
 
+.photo-credit {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	font-size: 0.75rem;
+	color: var(--wp--preset--color--base);
+}
+
+.wp-block-image {
+	position: relative;
+}
+
 /* Do not show the outline on the skip link target. */
 
 #primary[tabindex="-1"]:focus {

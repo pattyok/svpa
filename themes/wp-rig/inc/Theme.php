@@ -139,27 +139,15 @@ class Theme {
 			new Base_Support\Component(),
 			new Editor\Component(),
 			new Accessibility\Component(),
-			new Comments\Component(),
-			new Image_Sizes\Component(),
-			new PWA\Component(),
 			new Helpers\Component(),
 			new Nav_Menus\Component(),
-			new Sidebars\Component(),
-			new Custom_Background\Component(),
-			new Custom_Header\Component(),
-			new Custom_Logo\Component(),
 			new Post_Thumbnails\Component(),
 			new Customizer\Component(),
+			new Custom_Logo\Component(),
 			new Styles\Component(),
 			new Scripts\Component(),
 			new Blocks\Component(),
 		);
-		if ( class_exists( 'Tribe__Events__Main' ) ) {
-			$components[] = new Tribe_Events\Component();
-		}
-		if ( class_exists( 'WooCommerce' ) ) {
-			$components[] = new WooCommerce\Component();
-		}
 
 		return $components;
 	}

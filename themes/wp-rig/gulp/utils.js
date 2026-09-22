@@ -11,17 +11,22 @@ import rimraf from 'rimraf';
 import mkdirp from 'mkdirp';
 import fs from 'fs';
 import { pipeline } from 'mississippi';
+import { createRequire } from 'module';
+import stringReplace from 'gulp-string-replace';
+import plumber from 'gulp-plumber';
+import notify from 'gulp-notify';
+
+const require = createRequire( import.meta.url );
 
 /**
  * Internal dependencies
  */
 import {
-	gulpPlugins,
 	nameFieldDefaults,
 	prodThemePath,
 	isProd,
 	rootPath,
-} from './constants';
+} from './constants.js';
 
 export const getDefaultConfig = () => require( `${ rootPath }/config/config.default.json` );
 
@@ -77,7 +82,7 @@ export function getStringReplacementTasks() {
 	const config = getThemeConfig( isProd );
 
 	const stringReplacementTasks = Object.keys( nameFieldDefaults ).map( ( nameField ) => {
-		return gulpPlugins.stringReplace(
+		return stringReplace(
 			// Backslashes must be double escaped for regex
 			nameFieldDefaults[ nameField ].replace( /\\/g, '\\\\' ),
 			config.theme[ nameField ],
@@ -96,8 +101,8 @@ export function getStringReplacementTasks() {
 }
 
 export function logError( errorTitle = 'gulp' ) {
-	return gulpPlugins.plumber( {
-		errorHandler: gulpPlugins.notify.onError( {
+	return plumber( {
+		errorHandler: notify.onError( {
 			title: errorTitle,
 			message: '<%= error.message %>',
 		} ),

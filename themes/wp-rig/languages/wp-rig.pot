@@ -1,4 +1,4 @@
-# Copyright (C) 2024 WP Rig
+# Copyright (C) 2026 WP Rig
 # This file is distributed under the same license as the WP Rig package.
 msgid ""
 msgstr ""
@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Last-Translator: The WP Rig Contributors\n"
-"POT-Creation-Date: 2024-09-30 22:31+0000\n"
+"POT-Creation-Date: 2026-08-24 22:59+0000\n"
 "Report-Msgid-Bugs-To: WP Rig\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -162,15 +162,15 @@ msgid "Place header content that will display above the nav tablet and up."
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: inc/Styles/Component.php:288
+#: inc/Styles/Component.php:293
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
-#: inc/WooCommerce/Component.php:183
+#: inc/WooCommerce/Component.php:180
 msgid "Shop Page Footer"
 msgstr ""
 
-#: inc/WooCommerce/Component.php:185
+#: inc/WooCommerce/Component.php:182
 msgid "Displayed on the shop page"
 msgstr ""
 
@@ -208,7 +208,7 @@ msgid " | "
 msgstr ""
 
 #: template-parts/content/error-404.php:17
-msgid "Not to worry, we'll get you back on track."
+msgid "Try searching for the page by name. If you think you reached this in error, please <a href=\"mailto:info@waf2snetwork.org\">reach out</a>."
 msgstr ""
 
 #: template-parts/content/error-500.php:14
@@ -244,22 +244,12 @@ msgstr ""
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: template-parts/content/pagination.php:13
-msgctxt "previous set of search results"
-msgid "Previous"
+#: template-parts/content/related-posts.php:35
+msgid "Read More"
 msgstr ""
 
-#: template-parts/content/pagination.php:14
-msgctxt "next set of search results"
-msgid "Next"
-msgstr ""
-
-#: template-parts/content/pagination.php:15
-msgid "Page navigation"
-msgstr ""
-
-#: template-parts/header/navigation-top.php:12
-msgid "Top menu"
+#: template-parts/content/related-posts.php:41
+msgid "Join Us"
 msgstr ""
 
 #: template-parts/header/navigation.php:16
@@ -270,14 +260,14 @@ msgstr ""
 msgid "Open menu"
 msgstr ""
 
-#: template-parts/header/navigation.php:20
+#: template-parts/header/navigation.php:23
 msgid "Menu"
 msgstr ""
 
-#: template-parts/header/navigation.php:21
+#: template-parts/header/navigation.php:24
 msgid "Close"
 msgstr ""
 
-#: template-parts/header/search.php:14
+#: template-parts/header/search.php:18
 msgid "Open search"
 msgstr ""

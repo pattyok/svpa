@@ -12,8 +12,8 @@ import fs from 'fs';
 /**
  * Internal dependencies
  */
-import { paths } from './constants';
-import { getThemeConfig } from './utils';
+import { paths } from './constants.js';
+import { getThemeConfig } from './utils.js';
 
 /**
  * Conditionally set up BrowserSync.

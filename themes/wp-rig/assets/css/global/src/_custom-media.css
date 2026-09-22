@@ -11,7 +11,7 @@
 @custom-media --tablet-large-up screen and (min-width: 782px);
 @custom-media --tablet-wide-up screen and (min-width: 1024px);
 @custom-media --tablet-wide-down screen and (max-width: 1023px);
-@custom-media --desktop-up screen and (min-width: 1260px);
+@custom-media --desktop-up screen and (min-width: 1290px);
 @custom-media --desktop-wide-up screen and (min-width: 1500px);
 @custom-media --mobile-only screen and (max-width: 600px);
 @custom-media --two-column-break-point-down screen and (max-width: 781px);

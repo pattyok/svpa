@@ -6,11 +6,13 @@
  */
 import { src, dest } from 'gulp';
 import pump from 'pump';
+import newer from 'gulp-newer';
+import imagemin from 'gulp-imagemin';
 
 /**
  * Internal dependencies
  */
-import { paths, gulpPlugins } from './constants';
+import { paths } from './constants.js';
 
 /**
  * Optimize images.
@@ -20,8 +22,8 @@ import { paths, gulpPlugins } from './constants';
 export default function images( done ) {
 	return pump( [
 		src( paths.images.src ),
-		gulpPlugins.newer( paths.images.dest ),
-		gulpPlugins.imagemin(),
+		newer( paths.images.dest ),
+		imagemin(),
 		dest( paths.images.dest ),
 	], done );
 }

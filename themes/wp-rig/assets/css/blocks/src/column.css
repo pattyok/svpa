@@ -52,43 +52,26 @@
 
 	.wp-block-columns {
 
-		&.is-style-bordered {
+
+		&.is-style-borders {
+			column-gap: var(--wp--preset--spacing--50);
 
 			& .wp-block-column {
 				position: relative;
 
 				&::after {
+					content: "";
 					height: 100%;
-					width: 0;
+					width: 1px;
 					position: absolute;
 					top: 0;
 					right: calc(-1*var(--wp--preset--spacing--50)/2);
-					border-width: 0;
-					border-right-width: 1px;
+					background-color: var(--wp--preset--color--grey-med);
 				}
-			}
-		}
-
-	}
-
-}
-
-@media (min-width: 1024px) {
-
-	.wp-block-columns {
-
-		&.is-style-split-background {
-
-			.wp-block-column {
-				padding-left: calc(var(--wp--style--block-gap)/2);
-				padding-right: calc(var(--wp--style--block-gap)/2);
-
-				&:first-child {
-					padding-left: var(--padding-responsive-wide);
-				}
-
 				&:last-child {
-					padding-right: var(--padding-responsive-wide);
+					&::after {
+						display: none;
+					}
 				}
 			}
 		}
@@ -96,3 +79,4 @@
 	}
 
 }
+

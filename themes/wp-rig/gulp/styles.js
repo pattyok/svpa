@@ -15,19 +15,25 @@ import stylelint from 'stylelint';
 import reporter from 'postcss-reporter';
 import calc from 'postcss-calc';
 import { pipeline } from 'mississippi';
+import newer from 'gulp-newer';
+import phpcs from 'gulp-phpcs';
+import postcss from 'gulp-postcss';
+import gulpIf from 'gulp-if';
+import tabify from 'gulp-tabify';
+import rename from 'gulp-rename';
 
 /**
  * Internal dependencies
  */
-import { rootPath, paths, gulpPlugins, isProd } from './constants';
+import { rootPath, paths, isProd } from './constants.js';
 import {
 	getThemeConfig,
 	getStringReplacementTasks,
 	logError,
 	configValueDefined,
 	appendBaseToFilePathArray,
-} from './utils';
-import { server } from './browserSync';
+} from './utils.js';
+import { server } from './browserSync.js';
 // get the config
 const config = getThemeConfig();
 
@@ -37,17 +43,17 @@ export function stylesBeforeReplacementStream() {
 	const phpcsBin = Object.prototype.hasOwnProperty.call( config.dev, 'phpcsBin' ) ? config.dev.phpcsBin : `${ rootPath }/vendor/bin/phpcs`;
 	return pipeline.obj( [
 		logError( 'CSS' ),
-		gulpPlugins.newer( {
+		newer( {
 			dest: paths.styles.dest,
 			extra: [ paths.config.themeConfig ],
 		} ),
-		gulpPlugins.phpcs( {
+		phpcs( {
 			bin: phpcsBin,
 			standard: 'WordPress',
 			warningSeverity: 0,
 		} ),
 		// Log all problems that were found.
-		gulpPlugins.phpcs.reporter( 'log' ),
+		phpcs.reporter( 'log' ),
 	] );
 }
 
@@ -134,7 +140,7 @@ export function stylesAfterReplacementStream() {
 	// Return a single stream containing all the
 	// after replacement functionality
 	return pipeline.obj( [
-		gulpPlugins.postcss( [
+		postcss( [
 			AtImport( {
 				path: [ paths.styles.srcDir ],
 				plugins: [
@@ -142,12 +148,12 @@ export function stylesAfterReplacementStream() {
 				],
 			} ),
 		] ),
-		gulpPlugins.postcss( postcssPlugins ),
-		gulpPlugins.if(
+		postcss( postcssPlugins ),
+		gulpIf(
 			config.dev.debug.styles,
-			gulpPlugins.tabify( 2, true )
+			tabify( 2, true )
 		),
-		gulpPlugins.rename( {
+		rename( {
 			suffix: '.min',
 		} ),
 		// gulpPlugins.if(
@@ -182,7 +188,7 @@ export function styles( done ) {
 		src( paths.styles.src, { sourcemaps: ! isProd } ),
 		stylesBeforeReplacementStream(),
 		// Only do string replacements when building for production
-		gulpPlugins.if(
+		gulpIf(
 			isProd,
 			getStringReplacementTasks()
 		),
@@ -196,7 +202,7 @@ export function blockStyles( done ) {
 		src( paths.styles.blockSrc, { sourcemaps: ! isProd } ),
 		stylesBeforeReplacementStream(),
 		// Only do string replacements when building for production
-		gulpPlugins.if(
+		gulpIf(
 			isProd,
 			getStringReplacementTasks()
 		),

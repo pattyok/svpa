@@ -16,9 +16,9 @@
 		color: inherit;
 	}
 }
+.wp-block-heading,
 h1, h2, h3, h4, h5, h6 {
-	margin-top: 0;
-	margin-bottom: var(--wp--preset--spacing--30);
+	color: var(--wp--preset--color--header);
 }
 
 h1,
@@ -57,10 +57,9 @@ h3,
 .has-h-4-font-size,
 h4,
 .h4 {
-	font-family: $fontFamilyHeadings;
-	color: var(--wp--preset--color--global);
+	font-family: $fontFamilyHeadings;;
 	font-size: var(--font-size-h4);
-	font-weight: 700;
+	font-weight: 800;
 }
 
 .single-post h4,
@@ -68,12 +67,9 @@ h4,
 .has-h-5-font-size,
 h5,
 .h5 {
-	color: var(--wp--preset--color--global);
 	font-family: $fontFamilyHeadings;
 	font-size: var(--font-size-h5);
-	font-weight: 600;
-	letter-spacing: 0.9px;
-	text-transform: uppercase;
+	font-weight: 800;
 }
 
 .single-post h5,
@@ -87,6 +83,22 @@ h6,
 	font-weight: 600;
 }
 
+.wp-block-heading,
+.wp-block-paragraph {
+	&.is-style-subhead {
+		font-family: $fontFamilyHeadings;
+		font-weight: 700;
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.8px;
+		color: var(--wp--preset--color--primary);
+
+		& + .wp-block-heading {
+			margin-top: 0;
+		}
+	}
+}
+
 .has-large-font-size {
 	line-height: 1.7;
 }
@@ -94,6 +106,10 @@ h6,
 .has-xx-large-font-size {
 	font-weight: 800;
 	font-family: $fontFamilyHeadings;
+}
+
+.is-style-intro-text {
+	font-weight: 500;
 }
 
 .all-caps {

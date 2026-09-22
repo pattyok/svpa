@@ -1,42 +1,18 @@
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-.site-header {
-	border-bottom: 1px solid var(--color-border-dark);
-	background-color: var(--wp--preset--color--background);
-	position: sticky;
-	top: 0;
-	width: 100%;
-	z-index: 100;
-}
-
-.admin-bar .site-header {
-	top: 32px;
-}
-@media (--admin-bar-query) {
-	.admin-bar .site-header {
-		top: 46px;
-	}
-}
-
-.custom-logo-link {
-	display: block;
-}
 
 .site-branding {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0.5rem 1.25rem 0.75rem;
+	padding: 1.25rem 0.75rem;
 
 	& img {
 		max-width: var(--header-image-width);
 		margin: 0 auto;
-		transition: max-width 0.3s ease;
 	}
 }
-
-
 
 .site-title {
 	margin: 0;
@@ -85,67 +61,103 @@
 	padding: 1.0625rem 1.875rem;
 }
 
-.primary-menu-container {
+.site-header {
 	& .search-form {
 		padding: 0;
 		border-top: 2px solid $colorBorders;
 		border-bottom: 2px solid $colorBorders;
 		& button {
 			border: none;
-			color: var(--wp--preset--color--tint-dark);
+			color: var(--wp--preset--color--contrast);
 			background: transparent;
+			&:after {
+				content: " ";
+				display: block;
+				width: 22px;
+				height: 22px;
+				mask-image: url("../../images/search.svg");
+				mask-repeat: no-repeat;
+				mask-position: center;
+				mask-size: contain;
+				background-color: currentColor;
+			}
 		}
 		& input[type="text"] {
 			border: none;
 			padding: 1.5rem 1.5625rem;
 		}
 	}
+	.gtranslate_wrapper {
+		position: relative;
+		height: 32px;
+		width: 200px;
+
+
+		& .gt_switcher {
+			font-family: var(--wp--preset--font-family--headings) !important;
+
+			font-weight: 500 !important;
+			position: absolute;
+			top: 0;
+			right: 0;
+			& a {
+				font-weight: 500 !important;
+				font-size: 14px;
+				line-height: 1.15;
+			}
+		}
+	}
 }
+
+
 
 @media (--wide-menu-query) {
 
 	.site-header--inner {
 		display: grid;
-		grid-template-columns: 180px 1fr;
+		grid-template-columns: calc(var(--header-image-width) + 2vw) 1fr;
 		grid-template-areas:
-			"branding mainnav";
+			"branding topnav"
+			"mainnav mainnav";
 
 		width: 100%;
-		padding-left: 1rem;
-		padding-right: 2.5rem;
 	}
 
 	.site-branding {
 		grid-area: branding;
-		justify-content: flex-start;
+		justify-content: center;
+		align-items: center;
+		padding-bottom: 0;
 	}
 
 	.header-top {
 		grid-area: topnav;
 		display: flex;
 		justify-content: flex-end;
-		align-items: center;
-		padding: 0 1.875rem;
+		align-items: flex-start;
+		padding: 5px;
 	}
 
 	.header-nav-wrapper {
 		grid-area: mainnav;
-		align-items: flex-end;
+		align-items: center;
 		justify-content: flex-end;
 		background-color: $colorNavBackground;
 		width: 100%;
+		padding-right: 1rem;
+		padding-left: 1rem;
 	}
 
 	.header-search-wrapper {
 		margin-top: 0;
 		margin-bottom: 0;
-		height: 100%;
 		border-left: none;
 		position: relative;
 		display: flex;
-		align-items: flex-end;
+		align-items: center;
 		justify-content: flex-start;
 		flex:  1 1 auto;
+
 	}
 
 	button.search-toggle {
@@ -167,8 +179,11 @@
 	.header-search {
 		width: 100vw;
 		border: 1px solid $colorBorders;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		background-color: #fff;
-		border-top: none;
+		border-top: 6px solid var(--wp--preset--color--accent-2);
 		z-index: 200;
 		visibility: hidden;
 		height: 0;
@@ -183,25 +198,52 @@
 		& button {
 			font-size: 22px;
 		}
+
+		& .search-form {
+			border: none;
+		}
 	}
 
 	.site-header {
 		width: 100%;
 	}
+	.after-navigation__inner {
+		& > .wp-block-group {
+			display: flex;
+			flex-direction: column-reverse;
+		}
+	}
 
 }
+
 @media (--desktop-up) {
-
-
-	button.search-toggle {
-		margin-bottom: 1.6rem;
-	}
 
 	.navigation-left,
 	.navigation-right {
 		align-self: center;
 	}
+	.site-branding {
+		padding: 0;
+	}
 
+
+	.site-header--inner {
+		grid-template-areas:
+			"topnav topnav"
+			"branding mainnav";
+
+		width: 100%;
+	}
+
+}
+
+@media (--desktop-wide-up) {
+	.site-header--inner{
+		padding-left: 3rem;
+	}
+	.header-nav-wrapper {
+		padding-right: 3rem;
+	}
 }
 
 

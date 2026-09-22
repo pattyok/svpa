@@ -1,27 +1,94 @@
 .footer-main {
-	& .footer-donate {
+	h2 {
+		font-size: var(--font-size-h5);
+	}
+	form {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-end;
+		gap: var(--wp--preset--spacing--20);
+		& button {
+			margin-right: auto;
+		}
 	}
+
+
 }
 
 @media (--two-column-break-point-down) {
 	.footer-main {
-		.footer-columns {
-			display: grid;
-			grid-template-areas: 
-				"logo donate"
-				"main main";
-			& > .footer-logo {
-				grid-area: logo;
+		.footer-donate,
+		.footer-newsletter {
+			& > .wp-block-group {
+				border-top: 1px solid var(--wp--preset--color--base);
+				padding-top: var(--wp--preset--spacing--40);
 			}
-			& > .footer-donate {
-				grid-area: donate;	
-			}
-			& > .footer-content {
-				grid-area: main;
-			}
+		}
+		.wp-block-carkeek-blocks-site-credits {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: var(--wp--preset--spacing--40);
 		}
 	}
 }
+@media (--tablet-up) {
+	.footer-main {
+		.footer-columns {
+			display: grid;
+			gap: 6rem;
+			grid-template-columns: 45% 45%;
+			& .footer-newsletter {
+				grid-column: span 2;
+			}
+		}
+		& .footer-newsletter {
+			& > .wp-block-group {
+				border-top: 1px solid var(--wp--preset--color--base);
+				padding-top: var(--wp--preset--spacing--70);
+			}
+		}
+		form {
+			display: flex;
+			flex-direction: row;
+			max-width: 500px;
+		}
+	}
+}
+
+@media (--desktop-up) {
+	.footer-main {
+		& .footer-columns {
+			display: flex;
+
+			& .wp-block-column {
+				position: relative;
+				&:after {
+					content: "";
+					display: block;
+					width: 1px;
+					height: 100%;
+					background-color: var(--wp--preset--color--base);
+					position: absolute;
+					top: 0;
+					right: -3rem;
+				}
+				&:last-child {
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+		& .footer-newsletter {
+			& > .wp-block-group {
+				border-top: none;
+				padding-top: 0;
+			}
+		}
+		.wp-block-carkeek-blocks-site-credits {
+			display: flex;
+			gap: var(--wp--preset--spacing--20);
+		}
+	}
+}
+

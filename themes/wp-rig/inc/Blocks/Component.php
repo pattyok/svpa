@@ -33,6 +33,7 @@ class Component implements Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ) );
+		add_filter( 'render_block', array( $this, 'display_photo_credit_on_image_blocks' ), 10, 2 );
 	}
 
 
@@ -61,5 +62,41 @@ class Component implements Component_Interface {
 			 */
 			wp_enqueue_script( $handle, $asset, $data['dependencies'], $version, $data['in_footer'] );
 		}
+	}
+
+	public function display_photo_credit_on_image_blocks( $block_content, $block ) {
+		// Check if it's the core image block and has an ID
+		$photo_credit = '';
+		$is_cover     = false;
+		if ( ( 'core/image' === $block['blockName']  ) && ! empty( $block['attrs']['id'] ) ) {
+			$image_id = $block['attrs']['id'];
+			// Retrieve your custom photo credit (e.g., from an attachment meta field)
+			$photo_credit = get_post_meta( $image_id, 'photo_credit', true );
+		} elseif ( 'core/media-text' === $block['blockName'] && ! empty( $block['attrs']['mediaId'] ) ) {
+			$image_id = $block['attrs']['mediaId'];
+			$photo_credit = get_post_meta( $image_id, 'photo_credit', true );
+		} elseif ( 'core/cover' === $block['blockName'] && ! empty( $block['attrs']['id'] ) ) {
+			$image_id = $block['attrs']['id'];
+			$photo_credit = get_post_meta( $image_id, 'photo_credit', true );
+			$is_cover     = true;
+		}
+
+		if ( ! empty( $photo_credit ) ) {
+			$credit_html = '<span class="photo-credit">' . esc_html( $photo_credit ) . '</span>';
+
+			if ( $is_cover ) {
+				$last_div_position = strrpos( $block_content, '</div>' );
+				if ( false !== $last_div_position ) {
+					$block_content = substr_replace( $block_content, $credit_html . '</div>', $last_div_position, strlen( '</div>' ) );
+				}
+			} else {
+				$last_figure_position = strrpos( $block_content, '</figure>' );
+				if ( false !== $last_figure_position ) {
+					$block_content = substr_replace( $block_content, $credit_html . '</figure>', $last_figure_position, strlen( '</figure>' ) );
+				}
+			}
+		}
+
+		return $block_content;
 	}
 }

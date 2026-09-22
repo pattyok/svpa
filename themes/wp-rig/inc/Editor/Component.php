@@ -50,8 +50,6 @@ class Component implements Component_Interface {
 		// Add support for wide-aligned images.
 		add_theme_support( 'align-wide' );
 
-		// Disable custom colors in the color picker.
-		add_theme_support( 'disable-custom-colors' );
 
 		// Enable templates.
 		add_theme_support( 'block-template-parts' );

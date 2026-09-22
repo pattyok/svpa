@@ -33,7 +33,6 @@
 	--wp--preset--color--gray-800: #3d3d3d;
 	--wp--preset--color--background: #fff;
 
-	--navigation-font-family: var(--wp--preset--font-family--headings);
 
 	--global-text-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 	--color-error: #cf2e2e;
@@ -49,7 +48,7 @@
 	--font-size-button: calc(16 / var(--global-font-size) * 1rem);
 	--font-size-forms: calc(18 / var(--global-font-size) * 1rem);
 	--font-size-caption: calc(18 / var(--global-font-size) * 1rem);
-	--font-size-cta: calc(20 / var(--global-font-size) * 1rem);
+	--font-size-cta: calc(19 / var(--global-font-size) * 1rem);
 	--font-size-quote: calc(22 / var(--global-font-size) * 1rem);
 	--font-size-nav: calc(17 / var(--global-font-size) * 1rem);
 
@@ -66,16 +65,17 @@
 	--element-bold: var(--font-weight--bold);
 
 	/* Heading font sizes */
-	--font-size-h1: calc(60 / var(--global-font-size) * 1rem);
-	--font-size-h2: calc(40 / var(--global-font-size) * 1rem);
+	--font-size-h1: calc(56 / var(--global-font-size) * 1rem);
+	--font-size-h1-alt: calc(46 / var(--global-font-size) * 1rem);
+	--font-size-h2: calc(36 / var(--global-font-size) * 1rem);
 	--font-size-h3: calc(25 / var(--global-font-size) * 1rem);
-	--font-size-h4: calc(24 / var(--global-font-size) * 1rem);
-	--font-size-h5: calc(16 / var(--global-font-size) * 1rem);
+	--font-size-h4: calc(25 / var(--global-font-size) * 1rem);
+	--font-size-h5: calc(25 / var(--global-font-size) * 1rem);
 	--font-size-h6: calc(16 / var(--global-font-size) * 1rem);
 	--heading-spacing: 0.5em;
 
 	--header-height: 100px;
-	--header-image-width: 125px;
+	--header-image-width: 260px;
 	--header-image-width-small: 100px;
 	--ck-fixed-image-ratio: 1.33333;
 	--ck-archive-image-ratio: 72%;
@@ -91,8 +91,9 @@
 @media (--tablet-up) {
 	:root {
 		--global-font-line-height: 1.44;
-		--header-image-width: 150px;
-		--header-image-width-small: 150px;
+		--header-image-width: 356px;
+		--font-size-h2: calc(41 / var(--global-font-size) * 1rem);
+		--font-size-h3: calc(32 / var(--global-font-size) * 1rem);
 	}
 }
 
@@ -100,9 +101,11 @@
 
 	:root {
 		--content-width: 74vw;
-		--font-size-h1: calc(72 / var(--global-font-size) * 1rem);
-		--font-size-h2: calc(48 / var(--global-font-size) * 1rem);
-		--font-size-h3: calc(40 / var(--global-font-size) * 1rem);
+		--font-size-h1: calc(60 / var(--global-font-size) * 1rem);
+		--font-size-h1-alt: calc(50 / var(--global-font-size) * 1rem);
+		--font-size-h2: calc(46 / var(--global-font-size) * 1rem);
+		--font-size-h3: calc(36 / var(--global-font-size) * 1rem);
+		--font-size-h4: calc(28 / var(--global-font-size) * 1rem);
 
 		--font-size-quote: calc(34 / var(--global-font-size) * 1rem);
 	}
@@ -113,10 +116,7 @@
 		--content-width: 64vw;
 		--content-width-wide: 80vw;
 		--member-menu-btn-max-width: 125px;
+		--header-image-width: clamp(290px, 24vw, 356px);
 
-		--font-size-h2: calc(50 / var(--global-font-size) * 1rem);
-		--font-size-h4: calc(25 / var(--global-font-size) * 1rem);
-		--font-size-h5: calc(18 / var(--global-font-size) * 1rem);
-		--font-size-h6: calc(18 / var(--global-font-size) * 1rem);
 	}
 }

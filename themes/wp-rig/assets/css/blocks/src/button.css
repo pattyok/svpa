@@ -8,8 +8,8 @@
 		& .wp-block-button__link {
 			background-color: transparent;
 			padding: 0;
-			color: var(--wp--preset--color--accent);
-			font-weight: 700;
+			color: var(--wp--preset--color--accent-1);
+			font-weight: 800;
 			font-family: var(--wp--preset--font-family--headings);
 			text-align: left;
 			text-transform: none;

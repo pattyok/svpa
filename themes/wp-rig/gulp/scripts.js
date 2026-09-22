@@ -8,24 +8,27 @@
 import { src, dest } from 'gulp';
 import pump from 'pump';
 import { pipeline } from 'mississippi';
+import newer from 'gulp-newer';
+import gulpIf from 'gulp-if';
+import babel from 'gulp-babel';
+import uglify from 'gulp-uglify';
+import rename from 'gulp-rename';
 
 /**
  * Internal dependencies
  */
-import { paths, gulpPlugins, isProd, assetsDir } from './constants';
-import { getThemeConfig, getStringReplacementTasks, logError } from './utils';
+import { paths, isProd, assetsDir } from './constants.js';
+import { getThemeConfig, getStringReplacementTasks, logError } from './utils.js';
 
 export function scriptsBeforeReplacementStream() {
 	// Return a single stream containing all the
 	// before replacement functionality
 	return pipeline.obj( [
 		logError( 'JavaScript' ),
-		gulpPlugins.newer( {
+		newer( {
 			dest: paths.scripts.dest,
 			extra: [ paths.config.themeConfig ],
 		} ),
-		gulpPlugins.eslint(),
-		gulpPlugins.eslint.format(),
 	] );
 }
 
@@ -35,16 +38,16 @@ export function scriptsAfterReplacementStream() {
 	// Return a single stream containing all the
 	// after replacement functionality
 	return pipeline.obj( [
-		gulpPlugins.babel( {
+		babel( {
 			presets: [
 				'@babel/preset-env',
 			],
 		} ),
-		gulpPlugins.if(
+		gulpIf(
 			! config.dev.debug.scripts,
-			gulpPlugins.uglify()
+			uglify()
 		),
-		gulpPlugins.rename( {
+		rename( {
 			suffix: '.min',
 		} ),
 	] );
@@ -60,7 +63,7 @@ export default function scripts( done ) {
 		src( paths.scripts.src, { sourcemaps: ! isProd } ),
 		scriptsBeforeReplacementStream(),
 		// Only do string replacements when building for production
-		gulpPlugins.if(
+		gulpIf(
 			isProd,
 			getStringReplacementTasks()
 		),

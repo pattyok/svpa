@@ -33,113 +33,18 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Need this function even though its empty
 	 */
 	public function initialize() {
-		add_action( 'init', array( $this, 'sitefooter_add_custom_shortcode' ) );
-		add_action( 'init', array( $this, 'register_template_layouts' ) );
 		add_filter( 'excerpt_more', array( $this, 'my_theme_excerpt_more' ) );
 		add_filter( 'excerpt_length', array( $this, 'my_theme_excerpt_length' ) );
 		add_action( 'acf/init', array( $this, 'acf_google_maps_api' ) );
 
-		add_filter( 'term_link', array( $this, 'update_term_link' ), 10, 3 );
 		add_action( 'ck_custom_archive_layout_modal_dialog__after_title', array( $this, 'custom_archive_layout_modal_dialog_after_title' ) );
-		add_filter( 'get_the_archive_title', array( $this, 'custom_archive_title' ) );
+		add_action( 'ck_custom_archive_layout_modal_dialog__after_content', array( $this, 'custom_archive_layout_modal_dialog_after_content' ) );
 
 		add_filter( 'carkeek_events_location_display', array( $this, 'carkeek_events_block_location_display' ), 10, 2 );
 		add_filter( 'carkeek_events_block_before_slots', array( $this, 'carkeek_events_block_before_slots' ), 10, 3 );
 
-		add_filter( 'ck_custom_archive_resource_link__link', array( $this, 'custom_archive_link' ), 10, 3 );
-		add_action( 'ck_custom_archive_layout__after_excerpt', array( $this, 'custom_archive_after_excerpt_resource_link' ) );
-
-		add_filter( 'ck_custom_archive_post__meta_before_title', array( $this, 'custom_archive_meta_before_post_title' ), 10, 2 );
-		add_action( 'ck_custom_archive_layout_modal_dialog__after_content', array( $this, 'custom_archive_layout_modal_dialog_after_content' ) );
 	}
 
-	/** Custom Archive Title
-	 * Remove the default archive title prefix for categories and tags
-	 *
-	 * @param string $title the default title.
-	 * @return string the modified title.
-	 */
-	public function custom_archive_title( $title ) {
-		$title = single_term_title( '', false );
-
-		if ( is_tax( 'region' ) && str_contains( $title, 'State' ) === false ) {
-			$title = $title . ' Region';
-		}
-
-		return $title;
-	}
-
-	/** Custom Archive Link
-	 * Modify the link for custom archive resources
-	 *
-	 * @param string $link the original link.
-	 * @param object $post the post object.
-	 * @param array  $attributes the block attributes.
-	 * @return string the modified link.
-	 */
-	public function custom_archive_link( $link, $post_id, $attributes ) {
-		// Custom logic for modifying the link.
-		if ( ! function_exists( 'get_field' ) ) {
-			return $link;
-		}
-		$custom_link = get_field( 'resource_link', $post_id );
-
-		$link = '';
-		if ( isset( $custom_link['pdf'] ) && ! empty( $custom_link['pdf'] ) ) {
-			$link = $custom_link['pdf'];
-		} elseif ( isset( $custom_link['url'] ) && ! empty( $custom_link['url'] ) ) {
-			$link = $custom_link['url'];
-		}
-		return $link;
-	}
-
-	/** if the archive has class archive-link add before the post title */
-	public function custom_archive_meta_before_post_title( $meta, $data ) {
-		if ( strpos( $data->className, 'has-archive-link' ) !== false ) {
-			$link = $this->make_breadcrumbs( 'post', false, false );
-			if ( ! empty( $link ) ) {
-				$meta = $link;
-			}
-		}
-		return $meta;
-	}
-
-	/** Custom Archive After Excerpt Resource Link
-	 * Add a resource link after the excerpt if the custom field is set.
-	 *
-	 * @param string $excerpt the original excerpt.
-	 * @return string the modified excerpt with resource link if applicable.
-	 */
-	public function custom_archive_after_excerpt_resource_link() {
-		$post_id = get_the_ID();
-		if ( 'resource_link' !== get_post_type( $post_id ) ) {
-			return;
-		}
-		if ( ! function_exists( 'get_field' ) ) {
-			return;
-		}
-		echo '<div class="ck-archive-resource-notes">'; // phpcs:ignore
-		the_field( 'resource_notes' );
-		$custom_link = get_field( 'resource_link_spanish', $post_id );
-		if ( ! empty( $custom_link ) ) {
-			$link = '';
-			if ( isset( $custom_link['pdf'] ) && ! empty( $custom_link['pdf'] ) ) {
-				$link = $custom_link['pdf'];
-			} elseif ( isset( $custom_link['url'] ) && ! empty( $custom_link['url'] ) ) {
-				$link = $custom_link['url'];
-			}
-			if ( ! empty( $link ) ) {
-				echo '<p>Also available in <a class="resource-link" target="_blank" href="' . esc_url( $link ) . '">Spanish</a></p>';
-			}
-		}
-
-		/** show an edit link in the REST API context */
-		if ( defined( 'REST_REQUEST' ) && REST_REQUEST && isset( $_GET['context'] ) && $_GET['context'] === 'edit' ) {
-			echo '<a class="edit-link hide-frontend" target="_blank" href="' . esc_url( get_edit_post_link( $post->ID ) ) . '">Edit</a>';
-		}
-
-		echo '</div>'; // phpcs:ignore
-	}
 
 	/**
 	 * Customize excerpt more ending
@@ -395,18 +300,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 	}
 
-
-
-	/**
-	 * Put the @Copyright in a shortcode so we can put all footer copy in the widgets
-	 * Optionally include the site name to override the default
-	 *
-	 * [site_copy][/site_copy]
-	 */
-	public function sitefooter_add_custom_shortcode() {
-		add_shortcode( 'site_copy', array( $this, 'site_footer_do_custom_shortcode' ) );
-	}
-
 	/**
 	 * Put the @Copyright in a shortcode so we can put all footer copy in the widgets
 	 * Optionally include the site name to override the default
@@ -499,13 +392,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	}
 
 
-	public function update_term_link( $termlink, $term, $taxonomy ) {
-		if ( 'services' === $taxonomy && is_object( $term ) && ! empty( $term->slug ) ) {
-			$termlink = home_url( '/our-services/' . $term->slug );
-		}
-		return $termlink;
-	}
-
 	/** Add Email to modal dialog content */
 	public function custom_archive_layout_modal_dialog_after_content() {
 		$email = get_field( 'people_email' );
@@ -548,8 +434,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		if ( 'list' === $data['postLayout'] ) {
 			if ( has_term( 'featured', 'carkeek_event_category', $post_id ) ) {
 				$content = '<div class="ck-event-block-featured">Featured Event</div>';
-			} elseif ( has_term( 'featured', 'skgt_event_category', $post_id ) ) {
-				$content = '<div class="ck-event-block-featured">Featured Volunteer Opportunity</div>';
 			}
 		}
 		return $content;
@@ -594,41 +478,5 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		return $top;
 	}
 
-	/** Register template layouts for this component */
-	public function register_template_layouts() {
-		$post_type_object = get_post_type_object( 'resource' );
-		if ( $post_type_object ) {
-			$post_type_object->template = array(
-				array(
-					'core/group',
-					array(
-						'layout' => array( 'type' => 'constrained' ),
-					),
-					array(
-						array( 'core/paragraph' ),
-					),
-				),
-				array(
-					'carkeek-blocks/custom-archive',
-					array(
-						'numberOfPosts'        => -1,
-						'postTypeSelected'     => 'resource_link',
-						'displayPostExcerpt'   => false,
-						'displayFeaturedImage' => false,
-						'postLayout'           => 'list',
-						'sortBy'               => 'title',
-						'filterByTaxonomy'     => true,
-						'groupListings'        => true,
-						'groupTaxSelected'     => 'topic',
-						'taxonomySelected'     => 'topic',
-						'newWindow'            => true,
-						'className'            => 'is-style-table',
-						'groupHideParents'     => true,
-						'groupHideEmpty'       => true,
-					),
-				),
 
-			);
-		}
-	}
 }
