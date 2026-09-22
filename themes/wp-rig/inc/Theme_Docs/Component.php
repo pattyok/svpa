@@ -72,7 +72,7 @@ class Component implements Component_Interface {
 			return array();
 		}
 
-		$manifest = json_decode( file_get_contents( $manifest_path ), true );
+		$manifest = json_decode( file_get_contents( $manifest_path ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		return is_array( $manifest ) ? $manifest : array();
 	}
@@ -130,8 +130,8 @@ class Component implements Component_Interface {
 			echo '<h3>' . esc_html( str_replace( array( '-', '_' ), ' ', $category ) ) . '</h3><ul>';
 			foreach ( $entries as $entry ) {
 				$is_active = ( $entry['slug'] === $selected['slug'] );
-				$url       = esc_url( add_query_arg( 'doc', $entry['slug'], menu_page_url( self::PAGE_SLUG, false ) ) );
-				echo '<li><a' . ( $is_active ? ' class="is-active"' : '' ) . ' href="' . $url . '">' . esc_html( $entry['title'] ) . '</a></li>';
+				$url       = add_query_arg( 'doc', $entry['slug'], menu_page_url( self::PAGE_SLUG, false ) );
+				echo '<li><a' . ( $is_active ? ' class="is-active"' : '' ) . ' href="' . esc_url( $url ) . '">' . esc_html( $entry['title'] ) . '</a></li>';
 			}
 			echo '</ul>';
 		}
@@ -167,7 +167,7 @@ class Component implements Component_Interface {
 		$html_path = get_theme_file_path( "docs/{$entry['category']}/{$entry['slug']}.html" );
 		if ( file_exists( $html_path ) ) {
 			// Pre-rendered at build time from developer-authored Markdown, not user input.
-			echo file_get_contents( $html_path ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
+			echo file_get_contents( $html_path ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		}
 	}
 }

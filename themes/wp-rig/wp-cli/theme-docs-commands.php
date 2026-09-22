@@ -44,7 +44,7 @@ class Theme_Docs_Command extends WP_CLI_Command {
 	 * @param array $args Positional arguments: category, slug.
 	 * @param array $assoc_args Associative arguments: related-file, force.
 	 */
-	public function scaffold( array $args, array $assoc_args ): void {
+	public function scaffold( array $args, array $assoc_args ) {
 		list( $category, $slug ) = $args;
 
 		if ( ! preg_match( '/^[a-z0-9]+(-[a-z0-9]+)*$/', $category ) ) {
@@ -60,8 +60,8 @@ class Theme_Docs_Command extends WP_CLI_Command {
 			WP_CLI::error( 'Missing required --related-file=<path> argument.' );
 		}
 
-		$force   = WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
-		$doc_dir = get_theme_file_path( "docs/{$category}" );
+		$force    = WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
+		$doc_dir  = get_theme_file_path( "docs/{$category}" );
 		$doc_path = "{$doc_dir}/{$slug}.md";
 
 		if ( file_exists( $doc_path ) && ! $force ) {

@@ -18,7 +18,7 @@ import colors from 'ansi-colors';
  */
 import { paths, isProd } from './constants.js';
 
-const REQUIRED_FIELDS = [ 'title', 'related_file' ];
+const REQUIRED_FIELDS = ['title', 'related_file'];
 
 /**
  * Read every docs/**\/*.md source file and parse its frontmatter + body.
@@ -27,32 +27,47 @@ const REQUIRED_FIELDS = [ 'title', 'related_file' ];
  * @return {Array} parsed doc entries
  */
 function readDocs() {
-	const files = glob.sync( paths.docs.src );
+	const files = glob.sync(paths.docs.src);
 	const entries = [];
 
-	for ( const filePath of files ) {
-		const raw = fs.readFileSync( filePath, 'utf8' );
+	for (const filePath of files) {
+		const raw = fs.readFileSync(filePath, 'utf8');
 		let parsed;
 
 		try {
-			parsed = frontMatter( raw );
-		} catch ( error ) {
-			log( colors.red( `${ colors.bold( 'Docs:' ) } could not parse frontmatter in ${ filePath }: ${ error.message }` ) );
+			parsed = frontMatter(raw);
+		} catch (error) {
+			log(
+				colors.red(
+					`${colors.bold('Docs:')} could not parse frontmatter in ${filePath}: ${error.message}`
+				)
+			);
 			continue;
 		}
 
-		const missing = REQUIRED_FIELDS.filter( ( field ) => ! parsed.attributes[ field ] );
-		if ( missing.length ) {
-			log( colors.yellow( `${ colors.bold( 'Docs:' ) } skipping ${ filePath }, missing required field(s): ${ missing.join( ', ' ) }` ) );
+		const missing = REQUIRED_FIELDS.filter(
+			(field) => !parsed.attributes[field]
+		);
+		if (missing.length) {
+			log(
+				colors.yellow(
+					`${colors.bold('Docs:')} skipping ${filePath}, missing required field(s): ${missing.join(', ')}`
+				)
+			);
 			continue;
 		}
 
 		// Category is the first path segment under docs/, e.g. docs/components/x.md -> "components".
-		const relativeDir = path.dirname( path.relative( paths.docs.srcDir, filePath ) );
-		const category = ( '.' === relativeDir ) ? 'uncategorized' : relativeDir.split( path.sep )[ 0 ];
-		const slug = path.basename( filePath, '.md' );
+		const relativeDir = path.dirname(
+			path.relative(paths.docs.srcDir, filePath)
+		);
+		const category =
+			'.' === relativeDir
+				? 'uncategorized'
+				: relativeDir.split(path.sep)[0];
+		const slug = path.basename(filePath, '.md');
 
-		entries.push( {
+		entries.push({
 			slug,
 			category,
 			title: parsed.attributes.title,
@@ -60,8 +75,8 @@ function readDocs() {
 			summary: parsed.attributes.summary || '',
 			body: parsed.body,
 			sourcePath: filePath,
-			updatedAt: fs.statSync( filePath ).mtime.toISOString(),
-		} );
+			updatedAt: fs.statSync(filePath).mtime.toISOString(),
+		});
 	}
 
 	return entries;
@@ -71,53 +86,64 @@ function readDocs() {
  * Compile docs/**\/*.md into HTML fragments plus a manifest.json for the
  * "Theme Docs" admin page. Only runs the compile step in production; in dev
  * mode this validates frontmatter and logs problems without writing files.
- * @param {function} done function to call when async processes finish
+ * @param {Function} done function to call when async processes finish
  */
-export default function docs( done ) {
-	const entries = readDocs();
-
-	if ( ! isProd ) {
+export default function docs(done) {
+	if (!isProd) {
+		// readDocs() validates frontmatter and logs problems as a side effect.
+		readDocs();
 		return done();
 	}
 
+	const entries = readDocs();
 	const manifest = [];
 
-	for ( const entry of entries ) {
-		const destDir = `${ paths.docs.dest }/${ entry.category }`;
-		mkdirp.sync( destDir );
+	for (const entry of entries) {
+		const destDir = `${paths.docs.dest}/${entry.category}`;
+		mkdirp.sync(destDir);
 
 		let html;
 		try {
-			html = marked.parse( entry.body );
-		} catch ( error ) {
-			log( colors.red( `${ colors.bold( 'Docs:' ) } could not render ${ entry.sourcePath }: ${ error.message }` ) );
+			html = marked.parse(entry.body);
+		} catch (error) {
+			log(
+				colors.red(
+					`${colors.bold('Docs:')} could not render ${entry.sourcePath}: ${error.message}`
+				)
+			);
 			continue;
 		}
 
-		fs.writeFileSync( `${ destDir }/${ entry.slug }.html`, html );
+		fs.writeFileSync(`${destDir}/${entry.slug}.html`, html);
 
 		// Copy any local assets authored alongside this doc.
-		const assetsSrcDir = `${ paths.docs.srcDir }/${ entry.category }/assets/${ entry.slug }`;
-		if ( fs.existsSync( assetsSrcDir ) ) {
-			const assetsDestDir = `${ destDir }/assets/${ entry.slug }`;
-			mkdirp.sync( assetsDestDir );
-			for ( const asset of fs.readdirSync( assetsSrcDir ) ) {
-				fs.copyFileSync( `${ assetsSrcDir }/${ asset }`, `${ assetsDestDir }/${ asset }` );
+		const assetsSrcDir = `${paths.docs.srcDir}/${entry.category}/assets/${entry.slug}`;
+		if (fs.existsSync(assetsSrcDir)) {
+			const assetsDestDir = `${destDir}/assets/${entry.slug}`;
+			mkdirp.sync(assetsDestDir);
+			for (const asset of fs.readdirSync(assetsSrcDir)) {
+				fs.copyFileSync(
+					`${assetsSrcDir}/${asset}`,
+					`${assetsDestDir}/${asset}`
+				);
 			}
 		}
 
-		manifest.push( {
+		manifest.push({
 			slug: entry.slug,
 			category: entry.category,
 			title: entry.title,
 			related_file: entry.relatedFile,
 			summary: entry.summary,
 			updated_at: entry.updatedAt,
-		} );
+		});
 	}
 
-	mkdirp.sync( paths.docs.dest );
-	fs.writeFileSync( `${ paths.docs.dest }/manifest.json`, JSON.stringify( manifest, null, 2 ) );
+	mkdirp.sync(paths.docs.dest);
+	fs.writeFileSync(
+		`${paths.docs.dest}/manifest.json`,
+		JSON.stringify(manifest, null, 2)
+	);
 
 	done();
 }
