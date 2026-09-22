@@ -1,0 +1,8 @@
+@use "sass:string";
+
+$types: "doc", "docx", "ppt", "pptx", "pdf", "xls", "xlsx", "csv", "txt";
+@each $type in $types {
+	a[href$=".#{$type}"]::after {
+		content: " [#{string.to-upper-case($type)}]";
+	}
+}

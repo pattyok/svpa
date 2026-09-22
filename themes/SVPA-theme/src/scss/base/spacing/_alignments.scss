@@ -1,0 +1,59 @@
+@use "../../abstracts/" as *;
+
+.aligncenter,
+.alignleft,
+.alignright {
+	margin-inline: auto !important;
+	float: none !important;
+}
+
+.aligncenter,
+.alignleft,
+.alignright,
+.alignwide,
+.alignfull {
+	clear: both;
+}
+
+:root .alignwide {
+	@include alignwide;
+}
+
+:root .alignfull {
+	@include alignfull;
+}
+
+@include mq($bp--blocks) {
+	.alignleft,
+	.alignright {
+		max-width: 22rem !important;
+
+		&:first-child + * {
+			margin-block-start: 0;
+		}
+	}
+
+	.alignleft {
+		float: left !important;
+		margin-inline-end: $gap !important;
+		margin-block-end: $gap;
+
+		.is-layout-constrained > & {
+			margin-inline-start: calc(
+				(100% - $width--content) / 2
+			) !important;
+		}
+	}
+
+	.alignright {
+		float: right !important;
+		margin-inline-start: $gap !important;
+		margin-block-end: $gap;
+
+		.is-layout-constrained > & {
+			margin-inline-end: calc(
+				(100% - $width--content) / 2
+			) !important;
+		}
+	}
+}
