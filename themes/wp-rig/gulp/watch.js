@@ -14,6 +14,7 @@ import phpcs from 'gulp-phpcs';
 import { paths, PHPCSOptions } from './constants.js';
 import { getThemeConfig, backslashToForwardSlash } from './utils.js';
 import { reload } from './browserSync.js';
+import docs from './docs.js';
 import images from './images.js';
 import scripts from './scripts.js';
 import {styles, blockStyles} from './styles.js';
@@ -48,4 +49,6 @@ export default function watch() {
 	gulpWatch( backslashToForwardSlash( paths.scripts.src[ 0 ] ), series( scripts, reload ) );
 
 	gulpWatch( backslashToForwardSlash( paths.images.src ), series( images, reload ) );
+
+	gulpWatch( backslashToForwardSlash( paths.docs.src ), docs );
 }

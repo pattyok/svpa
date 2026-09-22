@@ -114,6 +114,11 @@ const paths = {
 			`${ rootPath }/languages/*.po`,
 		],
 	},
+	docs: {
+		src: `${ rootPath }/docs/**/*.md`,
+		srcDir: `${ rootPath }/docs`,
+		dest: `${ rootPath }/docs`,
+	},
 	languages: {
 		src: [
 			`${ rootPath }/**/*.php`,
@@ -144,6 +149,7 @@ if ( isProd ) {
 		src: `${ prodThemePath }/**/*.php`,
 		dest: `${ prodThemePath }/languages/${ config.theme.slug }.pot`,
 	};
+	paths.docs.dest = `${ prodThemePath }/docs`;
 }
 
 export { paths };

@@ -34,6 +34,8 @@
 !/tribe-events/
 !/theme.json
 !/parts/
+!/docs/
+!/wp-cli/
 
 !.babelrc
 !composer.json

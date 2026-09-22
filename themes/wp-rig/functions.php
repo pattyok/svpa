@@ -64,3 +64,8 @@ require get_template_directory() . '/inc/functions.php';
 
 // Initialize the theme.
 call_user_func( 'WP_Rig\WP_Rig\wp_rig' );
+
+// Load WP-CLI commands.
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require get_template_directory() . '/wp-cli/theme-docs-commands.php';
+}
