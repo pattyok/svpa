@@ -45,6 +45,10 @@ class Theme_Docs_Command extends WP_CLI_Command {
 	 * @param array $assoc_args Associative arguments: related-file, force.
 	 */
 	public function scaffold( array $args, array $assoc_args ) {
+		if ( count( $args ) < 2 ) {
+			WP_CLI::error( 'Usage: wp theme-docs scaffold <category> <slug> --related-file=<path>' );
+		}
+
 		list( $category, $slug ) = $args;
 
 		if ( ! preg_match( '/^[a-z0-9]+(-[a-z0-9]+)*$/', $category ) ) {
