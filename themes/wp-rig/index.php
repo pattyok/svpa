@@ -21,8 +21,9 @@ get_header();
 	<main id="primary" class="site-main">
 		<?php
 		if ( have_posts() ) {
-
+			if ( get_post_type() != 'people' ) {
 				get_template_part( 'template-parts/content/page-header', get_post_type() );
+			}
 
 			if ( ! is_singular() ) {
 				?>

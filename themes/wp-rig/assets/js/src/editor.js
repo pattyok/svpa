@@ -128,6 +128,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		},
 	]);
 
+	wp.blocks.registerBlockStyle('core/columns', [
+		{
+			name: 'reverse-mobile',
+			label: 'Reverse on Mobile',
+		},
+	]);
+
 	wp.blocks.registerBlockStyle('core/cover', [
 		{
 			name: 'has-content-flag',
@@ -141,19 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			label: 'Stacked',
 		},
 	]);
-	wp.blocks.registerBlockStyle('core/media-text', [
-		{
-			name: 'stacked-icon',
-			label: 'Icon on Top',
-		},
-	]);
 
-	wp.blocks.registerBlockStyle('core/media-text', [
-		{
-			name: 'side-icon',
-			label: 'Icon on Side',
-		},
-	]);
 
 	wp.blocks.registerBlockVariation('core/buttons', {
 		name: 'buttons-cta',
@@ -182,6 +177,28 @@ document.addEventListener('DOMContentLoaded', function () {
 		attributes: {
 			align: 'wide',
 			verticalAlignment: 'middle',
+			imageFill: true,
+			ckShowPhotoCredit: true,
+		},
+		scope: ['inserter'],
+		keywords: ['image', 'media-text'],
+	});
+
+	wp.blocks.registerBlockVariation('core/media-text', {
+		name: 'media-text-stacked',
+		title: 'Media Text - Stacked',
+		icon: 'align-wide',
+		innerBlocks: [
+			['core/heading', {}],
+			['core/paragraph', { fontSize: 'default' }],
+			[
+				'core/buttons',
+				{},
+				[['core/button', { className: 'is-style-arrow-link' }]],
+			],
+		],
+		attributes: {
+			className: 'is-style-stacked',
 			imageFill: true,
 			ckShowPhotoCredit: true,
 		},
@@ -261,9 +278,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		isDefault: true,
 		attributes: {
 			layout: { inherit: true },
-			style: {
-			dimensions: { aspectRatio: '4/3' },
-			},
 			align: 'full',
 			dimRatio: 10,
 			sizeSlug: 'full',
@@ -276,7 +290,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				{
 					fontSize: 'default',
 					align: 'center',
-					className: 'is-style-intro-text',
 				},
 			],
 		],
@@ -291,12 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			layout: { inherit: true },
 			align: 'full',
 			style: {
-				spacing: {
-					padding: {
-						top: 'var:preset|spacing|60',
-						bottom: 'var:preset|spacing|60',
-					},
-				},
+
 			},
 			className: 'page-intro',
 		},
@@ -305,7 +313,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				'core/paragraph',
 				{
 					fontSize: 'large',
-					align: 'center',
 					className: 'is-style-intro-text',
 				},
 			],

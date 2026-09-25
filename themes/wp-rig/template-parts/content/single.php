@@ -22,38 +22,25 @@ namespace WP_Rig\WP_Rig;
 			</div>
 			<div class="entry-meta">
 				<div class="entry-details">
-					<div class="entry-date"><?php the_date(); ?></div>
+
 					<?php
-					$contact  = array();
-					$location = '';
+
+					$byline = '';
 					if ( function_exists( 'get_field' ) ) :
-						if ( ! empty( get_field( 'contact_name' ) ) ) :
-							$contact[] = get_field( 'contact_name' );
+						if ( ! empty( get_field( 'post_byline' ) ) ) :
+							$byline = get_field( 'post_byline' );
 						endif;
-						if ( ! empty( get_field( 'contact_organization' ) ) ) :
-							$contact[] = get_field( 'contact_organization' );
-						endif;
-						if ( ! empty( get_field( 'contact_email' ) ) ) :
-							$contact[] = '<a href="mailto:' . get_field( 'contact_email' ) . '">' . get_field( 'contact_email' ) . '</a>';
-						endif;
-						$location = get_field( 'story_location' );
 					endif;
 					?>
-					<?php if ( ! empty( $location ) ) : ?>
-						<div class="entry-location">
+					<?php if ( ! empty( $byline ) ) : ?>
+						<div class="entry-byline">
 
-							<span class="meta-label">Location:</span>
-							<?php echo $location; ?>
+							<span class="meta-label">By:</span>
+							<?php echo $byline; ?>
 
 						</div>
 					<?php endif; ?>
-					<?php if ( ! empty( $contact ) ) : ?>
-						<div class="entry-contact">
-
-							<span class="meta-label">Contact:</span>
-							<?php echo implode( ', ', $contact ); ?>
-						</div>
-					<?php endif; ?>
+					<div class="entry-date">Published: <?php the_date(); ?></div>
 
 				</div>
 				<?php wp_rig()->make_social_share_links( true ); ?>
@@ -69,9 +56,7 @@ namespace WP_Rig\WP_Rig;
 
 </article><!-- #post-<?php the_ID(); ?> -->
 
-<?php if ( get_post_type() === 'post' ) : ?>
-	<?php get_template_part( 'template-parts/content/entry-footer', get_post_type() ); ?>
-<?php endif; ?>
+
 <?php if ( ! empty( block_template_part( get_post_type() . '-footer' ) ) ) : ?>
 
 	<?php

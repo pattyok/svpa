@@ -13,7 +13,7 @@
 	& .entry-header {
 		max-width: 100%;
 		padding: $spacingSmall 0;
-		background: var(--wp--preset--color--tint-lt);
+		border-bottom: 1px solid var(--color-border);
 		margin-bottom: $spacingSmall;
 		display: flex;
 		flex-direction: column;
@@ -29,24 +29,32 @@
 			flex-direction: column;
 			gap: 0.5rem;
 		}
-		& .meta-label {
-			font-weight: 800;
+		& .entry-date {
+			font-weight: 600;
+			font-size: 0.9375rem;
+		}
+		& .entry-byline {
+			font-style: italic;
 		}
 		& .entry-parent-link {
 			color: $primary;
 			text-transform: uppercase;
 			font-family: $fontFamilyHeadings;
-			font-weight: 600;
-			letter-spacing: 0.9px;
-			margin-bottom: 1rem;
+			font-size: 1rem;
+			font-weight: 700;
+			letter-spacing: 0.8px;
 			display: block;
 		}
 		& h1 {
 			margin: 0;
+			color: $accent1;
 		}
 		& .social-share-links__label {
 			text-transform: uppercase;
-			font-weight: 600;
+			font-family: $fontFamilyHeadings;
+			font-size: 1rem;
+			font-weight: 700;
+			letter-spacing: 0.8px;
 		}
 		& .social-share-links {
 			display: flex;

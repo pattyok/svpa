@@ -30,6 +30,10 @@
 	width: 50%;
 }
 
+.wp-block-media-text.is-image-fill-element.is-style-stacked .editor-media-container__resizer {
+	height: auto !important;
+}
+
 
 .hidden-front-end {
 	display: block;

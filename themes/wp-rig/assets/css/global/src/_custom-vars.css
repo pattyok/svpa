@@ -10,9 +10,9 @@ $primary: var(--wp--preset--color--primary); /**  green **/
 $primaryDark: var(--wp--preset--color--primary-dark); /**  dark green **/
 $primaryLight: var(--wp--preset--color--primary-light); /** light green **/
 $secondary: var(--wp--preset--color--secondary); /** blue **/
-$accent1: var(--wp--preset--color--accent); /** orange */
+$accent1: var(--wp--preset--color--accent-1); /** green */
 $accent2: var(--wp--preset--color--accent-2); /** gold */
-$accent3: var(--wp--preset--color--accent);
+$accent3: var(--wp--preset--color--accent-3);
 $background: var(--wp--preset--color--base);
 
 $gray100: var(--wp--preset--color--gray-100);
@@ -20,7 +20,7 @@ $gray200: var(--wp--preset--color--gray-200);
 $gray400: var(--wp--preset--color--gray-400);
 $gray800: var(--wp--preset--color--gray-800);
 
-$colorHeadings: var(--wp--preset--color--primary);
+$colorHeadings: var(--wp--preset--color--headings);
 
 $btnBackground:  var(--wp--preset--color--accent);
 $btnBorder: 1px solid var(--wp--preset--color--accent);

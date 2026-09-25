@@ -13,6 +13,10 @@
 	.footer-main {
 		display: none;
 	}
+	.entry-footer,
+	.social-share-links {
+		display: none;
+	}
 
 
 	.site-header .site-description {

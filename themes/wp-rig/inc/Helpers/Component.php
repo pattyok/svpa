@@ -37,11 +37,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		add_filter( 'excerpt_length', array( $this, 'my_theme_excerpt_length' ) );
 		add_action( 'acf/init', array( $this, 'acf_google_maps_api' ) );
 
-		add_action( 'ck_custom_archive_layout_modal_dialog__after_title', array( $this, 'custom_archive_layout_modal_dialog_after_title' ) );
 		add_action( 'ck_custom_archive_layout_modal_dialog__after_content', array( $this, 'custom_archive_layout_modal_dialog_after_content' ) );
 
 		add_filter( 'carkeek_events_location_display', array( $this, 'carkeek_events_block_location_display' ), 10, 2 );
 		add_filter( 'carkeek_events_block_before_slots', array( $this, 'carkeek_events_block_before_slots' ), 10, 3 );
+
+		add_filter( 'the_title', array( $this, 'people_the_title' ), 10, 2 );
+		add_filter( 'post_type_link', array( $this, 'custom_annual_report_permalink' ), 10, 4 );
 
 	}
 
@@ -77,7 +79,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function template_tags(): array {
 		return array(
-			'get_social_links'          => array( $this, 'get_social_links' ),
 
 			'get_random_images_array'   => array( $this, 'get_random_images_array' ),
 			'get_custom_excerpt'        => array( $this, 'get_custom_excerpt' ),
@@ -89,29 +90,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		);
 	}
 
-	/**
-	 * Get Social links as defined in the Theme options
-	 *
-	 * @param string $styles Optional. Css classes to add to component.
-	 * @return string Whether the AMP plugin is active and the current request is for an AMP endpoint.
-	 */
-	public function get_social_links( $styles = null ) {
-		if ( ! function_exists( 'get_field' ) ) {
-			return;
-		}
-		$social = get_field( 'social_icons', 'option' );
-		$html   = '';
-		if ( ! empty( $social ) ) {
-			$html = '<ul class="no-list social-links ' . $styles . '">';
-			foreach ( $social as $soc ) {
-				if ( ! empty( $soc['link'] ) ) {
-					$html .= '<li><a href="' . $soc['link'] . '" title="' . $soc['link_title'] . '" target="_blank"><i class="icon-' . $soc['type'] . '"></i></a></li>';
-				}
-			}
-			$html .= '</ul>';
-		}
-		return $html;
-	}
+
 
 
 	/** Get Random Images
@@ -165,7 +144,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	private function make_fb_button( $text = null ) {
 		$url = get_the_permalink();
 
-		$fb_link = '<a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode( $url ) . '"' . $this->make_new_window() . ' title="Share on Facebook"><i class="fa-brands fa-facebook-f"></i>' . $text . '</a>'; // phpcs:ignore.
+		$fb_link = '<a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode( $url ) . '"' . $this->make_new_window() . ' title="Share on Facebook"><i class="ck-icon facebook"></i>' . $text . '</a>'; // phpcs:ignore.
 		return $fb_link;
 	}
 
@@ -177,7 +156,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	private function make_twitter_button( $text = null ) {
 		$url   = get_the_permalink();
 		$title = get_the_title();
-		$tweet = '<a class="share-link" href="http://twitter.com/intent/tweet?text=' . $title . '&url=' . $url . '"' . $this->make_new_window() . ' title="Share on Twitter"><i class="fa-brands fa-x-twitter"></i>' . $text . '</a>';
+		$tweet = '<a class="share-link" href="http://twitter.com/intent/tweet?text=' . $title . '&url=' . $url . '"' . $this->make_new_window() . ' title="Share on Twitter"><i class="ck-icon twitter" aria-hidden="true"></i>' . $text . '</a>';
 		return $tweet;
 	}
 
@@ -189,7 +168,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	private function make_email_button( $text = null ) {
 		$url   = get_the_permalink();
 		$title = get_the_title();
-		$email = '<a class="share-link" href="mailto:?subject=' . $title . '&body=' . urlencode( $url ) . '" title="Share Via Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i> ' . $text . '</a>'; // phpcs:ignore.
+		$email = '<a class="share-link" href="mailto:?subject=' . $title . '&body=' . urlencode( $url ) . '" title="Share Via Email"><i class="ck-icon email" aria-hidden="true"></i> ' . $text . '</a>'; // phpcs:ignore.
 		return $email;
 	}
 
@@ -201,7 +180,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	private function make_linkedin_button( $text = null ) {
 		$url   = get_the_permalink();
 		$title = get_the_title();
-		$tweet = '<a class="share-link" href="http://www.linkedin.com/shareArticle?mini=true&url=' . $title . '&url=' . $url . '" ' . $this->make_new_window() . ' title="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i>' . $text . '</a>';
+		$tweet = '<a class="share-link" href="http://www.linkedin.com/shareArticle?mini=true&url=' . $title . '&url=' . $url . '" ' . $this->make_new_window() . ' title="Share on LinkedIn"><i class="ck-icon linkedin" aria-hidden="true"></i>' . $text . '</a>';
 		return $tweet;
 	}
 	/**
@@ -212,7 +191,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	private function make_bluesky_button( $text = null ) {
 		$url   = get_the_permalink();
 		$title = get_the_title();
-		$tweet = '<a class="share-link" href="https://bsky.app/intent/compose?text=' . $title . '&url=' . $url . '" ' . $this->make_new_window() . ' title="Share on Bluesky"><i class="fa-brands fa-bluesky"></i>' . $text . '</a>';
+		$tweet = '<a class="share-link" href="https://bsky.app/intent/compose?text=' . $title . '&url=' . $url . '" ' . $this->make_new_window() . ' title="Share on Bluesky"><i class="ck-icon bluesky" aria-hidden="true"></i>' . $text . '</a>';
 		return $tweet;
 	}
 	/** Check to see if it has http, if not, add it */
@@ -231,7 +210,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param string $text optional text before the icon.
 	 */
 	private function make_print_button( $text = null ) {
-		$email = '<a class="share-link print-this-js" href="#" title="Print this Page"><i class="fa-solid fa-print" aria-hidden="true"></i> ' . $text . '</a>';
+		$email = '<a class="share-link print-this-js" href="#" title="Print this Page"><i class="ck-icon print" aria-hidden="true"></i> ' . $text . '</a>';
 		return $email;
 	}
 
@@ -391,6 +370,24 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 	}
 
+	/** Alter people titles to include meta data */
+	public function people_the_title( $title, $post_id ) {
+		if ( is_admin() ) {
+			return $title;
+		}
+		if ( 'people' === get_post_type( $post_id ) ) {
+			$job_title = get_field( 'people_job_title', $post_id );
+			$additional = get_field( 'people_additional', $post_id );
+			if ( ! empty( $job_title ) ) {
+				$title .= ', <span class="people-job-title">' . esc_html( $job_title ) . '</span>';
+			}
+			if ( ! empty( $additional ) ) {
+				$title .= ' &mdash; <span class="people-additional">' . esc_html( $additional ) . '</span>';
+			}
+		}
+		return $title;
+	}
+
 
 	/** Add Email to modal dialog content */
 	public function custom_archive_layout_modal_dialog_after_content() {
@@ -399,17 +396,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$fname = explode( ' ', $name )[0];
 
 		if ( ! empty( $email ) ) {
-			echo '<a class="ck-modal-item-email" href="mailto:' . esc_attr( $email ) . '"> Contact ' . esc_html( $fname ) . '</a>';
+			echo '<a class="ck-modal-item-email" href="mailto:' . antispambot( esc_attr( $email ) ) . '"> Email ' . esc_html( $fname ) . '</a>';
 		}
-	}
-
-	/** Add Job Title to Modal Dialog Content */
-	public function custom_archive_layout_modal_dialog_after_title() {
-		$job_title = get_field( 'job_title' );
-		if ( ! empty( $job_title ) ) {
-			echo '<p class="ck-modal-item-job-title">' . esc_html( $job_title ) . '</p>';
-		}
-		return;
 	}
 
 	/** Add Event Date before title for Volunteer Events */
@@ -476,6 +464,19 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$parent = wp_get_term_taxonomy_parent_id( $parent, $taxonomy );
 		}
 		return $top;
+	}
+
+	/** Replace the Permalink for Annual Report post type */
+	public function custom_annual_report_permalink( $post_link, $post, $leavename, $sample ) {
+		if ( is_admin() ) {
+			return $post_link;
+		}
+		if ( 'annual_report' === $post->post_type ) {
+			if ( function_exists( 'get_field' ) ) {
+				return get_field( 'svpa_ar_pdf', $post->ID );
+			}
+		}
+		return $post_link;
 	}
 
 

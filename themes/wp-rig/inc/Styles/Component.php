@@ -399,7 +399,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return string Adobe Typekit URL, or empty string if no typekit should be used.
 	 */
 	protected function get_typekit_fonts_url(): string {
-		return '';
+		return 'https://use.typekit.net/tvr1eqm.css';
 	}
 
 	/**

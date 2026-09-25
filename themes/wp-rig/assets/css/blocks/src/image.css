@@ -21,8 +21,9 @@
 	}
 
 	& figcaption {
-		font-size: 1.0625rem;
+		font-size: 1rem;
 		color: $global;
+		font-style: italic;
 	}
 
 }
@@ -49,12 +50,12 @@
 		}
 
 		&.alignleft {
-			padding-right: 1.75rem;
+			padding-right: 1rem;
 			padding-left: var(--gutter-width-page);
 
 
 			& figcaption {
-				padding-right: 1.75rem;
+				padding-right: 1rem;
 				padding-left: var(--gutter-width-page);
 				text-align: left;
 				display: block;

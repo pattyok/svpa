@@ -7,8 +7,8 @@
 ?>
 <div class="print-only">
 	<?php
-	echo do_shortcode( '[site_copy]' ) . '<br>';
+	echo '&copy;' . date( 'Y' ) . ' ' . get_bloginfo('name') . '<br>';
 	echo get_permalink() . '<br>'; //phpcs:ignore
-	echo date( 'F j, Y g:i a' ); //phpcs:ignore
+	echo wp_date( 'F j, Y g:i a' ); //phpcs:ignore
 	?>
 </div>

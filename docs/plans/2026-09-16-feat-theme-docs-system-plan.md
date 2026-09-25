@@ -1,7 +1,7 @@
 ---
 title: Theme Item Documentation System
 type: feat
-status: active
+status: completed
 date: 2026-09-16
 ---
 
@@ -44,12 +44,12 @@ This keeps Markdown parsing entirely in the JS build toolchain (`marked` + `fron
 `wp-rig` currently has no `wp-cli/` directory (that pattern only exists in the sibling `wprig` theme, at `wprig/wp-cli/wp-rig-commands.php:1`, registered from `wprig/functions.php:87-89`). Add the same pattern to `wp-rig`:
 
 - `wp-rig/wp-cli/theme-docs-commands.php` — a `Docs_Command extends WP_CLI_Command` class with a `scaffold` method:
-  `wp rig docs scaffold <category> <slug> --related-file=<path>`
+  `wp theme-docs scaffold <category> <slug> --related-file=<path>`
   - Creates `docs/<category>/<slug>.md` with the frontmatter stub above (title auto-generated from the slug, e.g. `post-meta` → "Post Meta").
   - Errors via `WP_CLI::error()` if the target file already exists, unless `--force` is passed.
 - Registered from `wp-rig/functions.php` the same way `wprig` does it (`if ( defined( 'WP_CLI' ) && WP_CLI ) { require get_template_directory() . '/wp-cli/theme-docs-commands.php'; }`).
 
-**Claude Code convention:** rather than building a second, separately-maintained stub generator, add a short rule (in a `CLAUDE.md` at the `wp-content` repo root) instructing that whenever a new theme component/pattern file is created, the same `wp rig docs scaffold ...` command is run (via the Local site's WP-CLI) to generate the stub, which is then filled in. One implementation, one frontmatter schema, no drift between "the CLI way" and "the AI way."
+**Claude Code convention:** rather than building a second, separately-maintained stub generator, add a short rule (in a `CLAUDE.md` at the `wp-content` repo root) instructing that whenever a new theme component/pattern file is created, the same `wp theme-docs scaffold ...` command is run (via the Local site's WP-CLI) to generate the stub, which is then filled in. One implementation, one frontmatter schema, no drift between "the CLI way" and "the AI way."
 
 ### Admin UI
 
@@ -76,22 +76,29 @@ New file `wp-rig/inc/theme-docs-admin.php` (procedural, matching the theme's exi
 
 ## Acceptance Criteria
 
-- [ ] `wp-rig/gulp/docs.js` compiles `docs/**/*.md` to HTML fragments + `manifest.json` during `npm run bundle`, and validates (without failing the build) during `npm run dev` / `gulp watch`.
-- [ ] `marked` and `front-matter` added to `wp-rig/package.json` devDependencies.
-- [ ] A malformed doc file is logged and skipped, not fatal to the bundle.
-- [ ] `wp-rig/wp-cli/theme-docs-commands.php` provides `wp rig docs scaffold <category> <slug> --related-file=<path>`, refusing to overwrite an existing file without `--force`.
-- [ ] `wp-rig/functions.php` registers the new WP-CLI command file (mirroring `wprig/functions.php:87-89`).
-- [ ] `wp-rig/inc/theme-docs-admin.php` registers a `manage_options`-gated "Theme Docs" top-level admin page, grouped by category, rendering compiled doc HTML.
-- [ ] Orphaned docs (missing `related_file`) and possibly-stale docs (related file newer than doc) are visibly flagged in the admin list.
-- [ ] Local images/files referenced from a doc resolve correctly both in the `wp-rig` source tree and in the bundled `SVPA-theme` output.
-- [ ] `wp-content/.gitignore` allowlists `!themes/SVPA-theme`, and the theme's current state is committed before any subsequent `npm run bundle`.
-- [ ] A `CLAUDE.md` note documents the scaffold-on-create convention for AI-assisted component creation.
+- [x] `wp-rig/gulp/docs.js` compiles `docs/**/*.md` to HTML fragments + `manifest.json` during `npm run bundle`, and validates (without failing the build) during `npm run dev` / `gulp watch`. Verified with a real `NODE_ENV=production gulp docs` run against an isolated test directory: manifest + HTML fragment output confirmed correct.
+- [x] `marked` and `front-matter` added to `wp-rig/package.json` devDependencies (installed and verified working).
+- [x] A malformed doc file is logged and skipped, not fatal to the bundle. Verified: a doc missing `title`/`related_file` logs a warning and the task still completes.
+- [x] `wp-rig/wp-cli/theme-docs-commands.php` provides `wp theme-docs scaffold <category> <slug> --related-file=<path>`, refusing to overwrite an existing file without `--force`. (Registered as its own top-level `theme-docs` command rather than nested under `wp rig`, since `rig` belongs to a different, unrelated theme's command set - see Sources.)
+- [x] `wp-rig/functions.php` registers the new WP-CLI command file.
+- [x] `wp-rig/inc/Theme_Docs/Component.php` registers a `manage_options`-gated "Theme Docs" top-level admin page, grouped by category, rendering compiled doc HTML. Built as a proper `Component_Interface` implementation (registered in `inc/Theme.php`'s `get_default_components()`), matching wp-rig's actual OOP component architecture rather than SVPA-theme's procedural style originally assumed in this plan.
+- [x] Orphaned docs (missing `related_file`) and possibly-stale docs (related file newer than doc) are visibly flagged in the admin list.
+- [x] Local images/files referenced from a doc resolve correctly both in the `wp-rig` source tree and in the bundled production output (asset-copy logic verified via the same isolated test run; no image-bearing doc was authored yet to exercise it end-to-end, but the copy code path was exercised structurally).
+- [x] `wp-content/.gitignore` allowlists `!themes/SVPA-theme`, and the theme's current state is committed before any subsequent `npm run bundle`.
+- [x] A `CLAUDE.md` note documents the scaffold-on-create convention for AI-assisted component creation.
 
 ## Success Metrics
 
 - Every new component/pattern added after this ships has a corresponding doc within the same working session (measured informally — no doc left un-scaffolded).
 - Zero production `npm run bundle` failures caused by doc content.
 - SVPA-theme is committed to git and stays in sync with `wp-rig` going forward (no more silent, unversioned drift).
+
+## Implementation Notes (discovered during `/ce:work`)
+
+- **`wp-rig` uses an OOP `Component_Interface` architecture**, not the procedural style this plan originally assumed (based on `SVPA-theme`'s current code). The admin page shipped as `wp-rig/inc/Theme_Docs/Component.php`, implementing `Component_Interface` and registered in `inc/Theme.php`'s `get_default_components()`, matching `inc/Blocks/Component.php` and friends.
+- **`themes/wprig` (no hyphen) is an abandoned experiment**, not a real alternative to `wp-rig`: zero git commits ever, and its own `.ai/agent-state.md` marks onboarding "Incomplete." Confirmed `wp-rig` is correct via its most recent commit (`01a92c0`, "getting theme set up," made by the project owner the same day this plan was executed). Documented in the new repo-root `CLAUDE.md` so this isn't rediscovered later.
+- **Pre-existing, out-of-scope bug found and left alone at the user's request:** `wp-rig/config/config.json` has `theme.slug: "svpa"`, but the real production theme directory is `SVPA-theme` - a different string, not a casing variant. This means `npm run bundle` currently writes to a brand-new, unused `themes/svpa` directory instead of updating the live `SVPA-theme`, for *all* bundled output (PHP, styles, scripts, images - not just docs). The docs build output was still verified correct by temporarily overriding the target to an isolated throwaway directory (never touching `SVPA-theme` or the committed config). The user chose to fix the slug mismatch separately, outside this feature.
+- WP-CLI command registered as its own top-level `wp theme-docs scaffold ...` rather than nested under `wp rig ...`, since the `rig` namespace belongs to a different, unrelated theme's (`wprig`'s) command set.
 
 ## Dependencies & Risks
 

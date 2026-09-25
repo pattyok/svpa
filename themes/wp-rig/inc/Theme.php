@@ -147,6 +147,7 @@ class Theme {
 			new Styles\Component(),
 			new Scripts\Component(),
 			new Blocks\Component(),
+			new Theme_Docs\Component(),
 		);
 
 		return $components;
