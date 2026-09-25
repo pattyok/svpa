@@ -4,6 +4,19 @@
 .wp-block-cover {
 	padding: 0;
 
+	&:not(.has-aspect-ratio) {
+		aspect-ratio: 1.6 !important;
+		width: 100% !important;
+		height: auto;
+		min-height: 350px;
+		max-height: 650px;
+		& .wp-block-cover__image-background {
+			height: 100%;
+			width: 100%;
+
+		}
+	}
+
 	& .wp-block-columns {
 		margin-bottom: 0;
 	}
@@ -42,7 +55,7 @@
 .wp-block-cover.is-style-page-header {
 	height: 66vw;
 	min-height: 350px !important;
-	max-height: 600px;
+	max-height: 620px;
 	margin-bottom: 0;
 	position: relative;
 	width: 100%;
@@ -60,7 +73,8 @@
 			display: flex;
 
 			& .wp-block-cover__inner-container {
-				max-width: calc(var(--content-width-wide) / 2);
+				width: 50%;
+    			max-width: min(50%, 650px);
 			}
 		}
 
@@ -79,10 +93,6 @@
 
 		&.has-custom-content-position {
 			display: flex;
-
-			& .wp-block-cover__inner-container {
-				max-width: calc(var(--content-width-wide) / 3);
-			}
 		}
 		&.is-style-has-content-flag {
 			& .wp-block-cover__inner-container {
@@ -100,4 +110,12 @@
 	}
 
 
+}
+
+/** Full width page content cover - with inner content has margins */
+.page-content > .wp-block-cover.has-custom-content-position {
+	& .wp-block-cover__inner-container {
+		margin-right: var(--padding-responsive-wide) !important;
+		margin-left: var(--padding-responsive-wide) !important;
+	}
 }

@@ -21,6 +21,14 @@
 		&.is-style-mobile-full {
 			max-width: 100%;
 		}
+		&.is-style-reverse-mobile {
+			flex-direction: column-reverse;
+
+			& .wp-block-column {
+				height: auto;
+				overflow: hidden;
+			}
+		}
 	}
 	.wp-block-column {
 

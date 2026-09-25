@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "entry-meta",
+    "category": "template-parts",
+    "title": "Entry Meta",
+    "related_file": "template-parts/content/entry-meta.php",
+    "summary": "Renders the post meta line (date, author, etc.) under an entry.",
+    "updated_at": "2026-09-22T17:14:20.601Z"
+  }
+]

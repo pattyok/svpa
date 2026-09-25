@@ -7,7 +7,7 @@
 
 :root {
 	--global-font-size: 16;
-	--global-font-line-height: 1.33;
+	--global-font-line-height: 1.5;
 	--line-height--tall: 1.56667;
 	--line-height--extra: 1.8;
 
@@ -55,9 +55,9 @@
 	--padding-button: 1rem 1.5rem;
 
 	/* Main family font weights */
-	--font-weight--light: 400; /**book*/
-	--font-weight--regular: 500; /**roman*/
-	--font-weight--medium: 600; /**medium*/
+	--font-weight--light: 300; /**book*/
+	--font-weight--regular: 300; /**roman*/
+	--font-weight--medium: 400; /**medium*/
 	--font-weight--demi-bold: 700; /**demi-bold*/
 	--font-weight--bold: 800; /*extra bold*/
 	--font-weight--black: 900; /*black*/
@@ -101,6 +101,7 @@
 
 	:root {
 		--content-width: 74vw;
+		--content-width-wide: 83vw;
 		--font-size-h1: calc(60 / var(--global-font-size) * 1rem);
 		--font-size-h1-alt: calc(50 / var(--global-font-size) * 1rem);
 		--font-size-h2: calc(46 / var(--global-font-size) * 1rem);
@@ -114,7 +115,7 @@
 @media (--desktop-up) {
 	:root {
 		--content-width: 64vw;
-		--content-width-wide: 80vw;
+		--content-width-wide: 74vw;
 		--member-menu-btn-max-width: 125px;
 		--header-image-width: clamp(290px, 24vw, 356px);
 

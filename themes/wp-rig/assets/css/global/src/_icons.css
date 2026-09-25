@@ -1,0 +1,34 @@
+.ck-icon {
+	display: inline-block;
+	width: 1.375rem;
+	height: 1.375rem;
+	&:after {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: currentColor;
+		mask-image: var(--icon-url);
+		mask-position: center;
+		mask-repeat: no-repeat;
+		mask-size: contain;
+	}
+	&.facebook {
+		--icon-url: url(../../images/facebook.svg);
+	}
+	&.linkedin {
+		--icon-url: url(../../images/linkedin.svg);
+	}
+	&.twitter {
+		--icon-url: url(../../images/x-twitter.svg);
+	}
+	&.bluesky {
+		--icon-url: url(../../images/bluesky.svg);
+	}
+	&.email {
+		--icon-url: url(../../images/envelope.svg);
+	}
+	&.print {
+		--icon-url: url(../../images/print.svg);
+	}
+}

@@ -33,8 +33,7 @@ html {
 body {
 
 	max-width: 100vw;
-	font-weight: 400;
-	font-weight: var(--font-weight--light);
+	font-weight: var(--font-weight--regular);
 	line-height: var(--global-font-line-height);
 	-webkit-font-smoothing: antialiased;
 }
@@ -169,13 +168,13 @@ button.facetwp-load-more,
 .arrow-link > a,
 a.arrow-link {
 	font-family: var(--wp--preset--font-family--headings);
-	color: var(--wp--preset--color--accent);
+	color: $colorLink;
 	border: none;
 	padding: 0;
 	text-align: left;
 	font-size: var(--font-size-cta);
 	text-transform: none;
-	font-weight: 700;
+	font-weight: 800;
 	text-decoration: none;
 	display: flex !important;
 	align-items: center;

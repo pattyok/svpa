@@ -1,9 +1,0 @@
-@use "../abstracts/" as *;
-
-.flow {
-	@include flow;
-}
-
-.flow-sm {
-	@include flow(0.5em);
-}

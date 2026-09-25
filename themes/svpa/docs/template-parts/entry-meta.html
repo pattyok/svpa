@@ -1,0 +1,11 @@
+<p>Renders the meta line under a post entry - typically the publish date and
+author byline. Included from <code>template-parts/content/entry.php</code> for
+single posts and archive listings.</p>
+<h2>Usage</h2>
+<pre><code class="language-php">get_template_part( &#39;template-parts/content/entry-meta&#39; );
+</code></pre>
+<h2>Notes</h2>
+<ul>
+<li>Only renders for the <code>post</code> post type.</li>
+<li>Pulls formatting from <code>wp_rig()-&gt;posted_on()</code> and <code>wp_rig()-&gt;posted_by()</code>.</li>
+</ul>

@@ -25,27 +25,7 @@
 	}
 }
 
-.is-style-intro-text {
-	font-size: var(--wp--preset--font-size--large);
-	font-family: $fontFamilyHeadings;
-	line-height: 1.7;
-}
 
-.is-style-footnotes {
-	font-size: var(--wp--preset--font-size--small);
-	font-style: italic;
-	text-align: center;
-}
-ol.is-style-footnotes,
-ul.is-style-footnotes {
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	list-style-position: inside;
-
-}
 
 .edit-link {
 	font-size: 12px;

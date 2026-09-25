@@ -13,8 +13,7 @@ themes/*/bower_components/
 
 
 !themes/wp-rig
-!themes/wa-farm-2-schools
-!themes/SVPA-theme
+!themes/svpa
 
 !plugins/.gitignore
 !mu-plugins/crk-functionality-plugin.php

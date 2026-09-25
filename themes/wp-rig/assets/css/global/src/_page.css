@@ -83,9 +83,10 @@
 			bottom: 1rem;
 			right: 1rem;
 			color: #fff;
-			font-size: 1.0625rem;
+			font-size: 1rem;
 			text-align: right;
-			font-weight: 500;
+			font-weight: 400;
+			font-style: italic;
 			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 			& a {
 				color: #fff;

@@ -34,6 +34,7 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ) );
 		add_filter( 'render_block', array( $this, 'display_photo_credit_on_image_blocks' ), 10, 2 );
+		add_action( 'init', array( $this, 'register_acf_blocks' ) );
 	}
 
 
@@ -98,5 +99,13 @@ class Component implements Component_Interface {
 		}
 
 		return $block_content;
+	}
+
+	/** Register ACF blocks for the theme */
+	public function register_acf_blocks() {
+		// Register your ACF blocks here
+		register_block_type(
+			get_template_directory() . '/acf-blocks/people_email/block.json'
+		);
 	}
 }
