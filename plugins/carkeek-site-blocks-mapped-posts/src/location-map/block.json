@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "carkeek-site-blocks/location-map",
+	"version": "2.0.5",
+	"title": "Location Map",
+	"category": "widgets",
+	"icon": "location-alt",
+	"description": "Block displaying a specific location.",
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"color": {
+			"background": true,
+			"text": true
+		}
+	},
+	"keywords": [ ],
+	"textdomain": "carkeek-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./script.js",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

@@ -1,0 +1,43 @@
+
+
+.wp-block-carkeek-site-blocks-expand-collapse {
+	& .cks-expand-inner-blocks {
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--30);
+		&[aria-expanded="false"] {
+			display: none;
+		}
+		& ul {
+			margin-top:0;
+			margin-bottom: 0;
+		}
+		& p {
+			margin-top:0;
+			margin-bottom: 0;
+		}
+	}
+	& .cks-expand-button {
+		& span {
+			display: flex;
+			align-items: center;
+			gap: 0.5em;
+		}
+		& span::after {
+			content:  "";
+			background-color: currentColor;
+			mask-size: contain;
+			mask-repeat: no-repeat;
+			mask-position: center;
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			vertical-align: middle;
+			mask-image: url(images/plus.svg)
+		}
+		&[aria-expanded="true"] {
+			& span::after {
+				mask-image: url(images/minus.svg)
+			}
+		}
+	}
+}

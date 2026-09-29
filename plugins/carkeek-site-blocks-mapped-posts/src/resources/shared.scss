@@ -1,0 +1,49 @@
+.leaflet-marker-icon {
+	&.icon-closed {
+		svg path.marker {
+			fill: #264D53;
+		}
+	}
+	&.icon-featured {
+		svg path.marker {
+			fill: #9fb523;
+		}
+	}
+}
+
+.location-data-item {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 0.25rem;
+	& > span {
+		display: inline-block;
+		width: 1.5rem;
+		height: 1.65rem;
+		flex: 0 0 auto;
+		margin-right: 0.5rem;
+		vertical-align: middle;
+		mask-size: contain;
+		mask-repeat: no-repeat;
+		mask-position: center;
+		background-color: currentColor;
+
+		&.icon-location {
+			mask-image: url('../img/icon-location.svg');
+		}
+		&.icon-acreage {
+			mask-image: url('../img/icon-acreage.svg');
+		}
+		&.icon-access {
+			mask-image: url('../img/icon-access.svg');
+		}
+		&.icon-hiking-walking {
+			mask-image: url('../img/icon-hiking.svg');
+		}
+		&.icon-bird-wildlife-watching {
+			mask-image: url('../img/icon-birdwatching.svg');
+		}
+		&.icon-fishing {
+			mask-image: url('../img/icon-fishing.svg');
+		}
+	}
+}

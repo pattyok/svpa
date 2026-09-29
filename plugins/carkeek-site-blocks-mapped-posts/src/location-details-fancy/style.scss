@@ -1,0 +1,59 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Importand that the line height is set to 1.8 and gaps are set to 16px otherwise it messes with the calculation of the max height.
+ * The max height is calculated based on the width of the block, so it is responsive.
+ * The max height is set to 40% of the width minus some padding.
+ * The text will be truncated if it exceeds the max height.
+ */
+
+ .wp-block-carkeek-site-blocks-project-details {
+	font-size: 16px;
+	line-height: 1.8;
+	& > ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		& li {
+			margin: 0;
+		}
+
+		& li ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		& .project-label {
+			font-weight: 700;
+		}
+	}
+	& .project-details-text {
+		margin-top: 16px;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+	&.loaded .project-details-text {
+		opacity: 1;
+	}
+
+}
+
+.sg-read-more-btn {
+	margin: 8px 0 0 0 !important;
+	border: none;
+	background-color: transparent;
+	padding: 0.5rem 0 0;
+	color: var(--wp--preset--color--global);
+	line-height: 1.8;
+	&:hover {
+		background-color: transparent;
+		color: var(--wp--preset--color--global);
+		border: none;
+		text-decoration: underline;
+	}
+}

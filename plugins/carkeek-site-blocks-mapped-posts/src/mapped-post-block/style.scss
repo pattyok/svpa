@@ -1,0 +1,325 @@
+:root {
+    --am-map-height: 650px;
+    --am-list-width: 0;
+	--form-control-color: var(--wp--preset--color--primary);
+}
+
+.wp-block-carkeek-site-blocks-mapped-posts-block,
+.page-content > .wp-block-carkeek-site-blocks-mapped-posts-block {
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+    max-width: 100%;
+}
+#mapped-posts-data {
+    display: none;
+}
+
+.archive-map-wrapper {
+    position: relative;
+
+    .archive-map {
+        position: relative;
+    }
+
+    .leaflet-container {
+        width: 100%;
+        height: var(--am-map-height);
+    }
+}
+
+.archive-map-top {
+    margin: 0 auto;
+	padding: var(--wp--preset--spacing--70) 0;
+    max-width: var(--content-width-wide);
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--30);
+}
+.archive-map-intro,
+.archive-map-filters {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.archive-map-filters {
+	font-family: var(--wp--preset--font-family--headings-sans);
+	& fieldset {
+		border: none;
+		margin: 0;
+		padding: 0;
+			&.radio-view-mode {
+				& legend {
+					font-size: 1.4375rem;
+					margin-bottom: 0.5rem;
+				}
+			}
+		}
+
+	& .archive-search-list {
+		& input {
+			padding: 0 !important;
+			&:focus-visible {
+				outline: none !important;
+			}
+		}
+		.react-select__control {
+			padding: 4px 10px;
+		}
+		.react-select__option {
+			padding: 8px 12px;
+		}
+		.react-select__option--is-selected,
+		.react-select__option--is-focused {
+			background-color: var(--wp--preset--color--secondary);
+			color: #fff;
+		}
+		.react-select-container {
+			z-index: 1100;
+		}
+		& > label > span {
+			border: 0;
+			clip: rect(1px, 1px, 1px, 1px); /* For older browsers */
+			clip-path: inset(50%); /* Modern approach */
+			height: 1px;
+			width: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			white-space: nowrap; /* Prevents text from wrapping and potentially becoming visible */
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.archive-map-filters {
+		fieldset {
+			&.radio-view-mode {
+			display: flex;
+			gap: 1rem;
+
+				& .archive-filters-list {
+					flex-direction: row;
+					display: flex;
+					gap: 1rem;
+					line-height: 1.84;
+				}
+			}
+		}
+
+	}
+	.archive-filters-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--wp--preset--spacing--50);
+	}
+	.archive-filter-reset {
+		align-self: flex-start;
+		justify-self: flex-start;
+		background-color: #fff;
+		color: var(--wp--preset--color--primary);
+		&:hover {
+			background-color: var(--wp--preset--color--accent);
+			color: #fff;
+		}
+	}
+}
+
+@media (min-width: 1024px) {
+	.archive-map-filters {
+		align-items: center;
+		fieldset {
+			legend {
+				float: left;
+			}
+		}
+	}
+	.archive-filters-content {
+		grid-template-columns: 1fr 165px;
+		& > :first-child {
+			min-width: 400px;
+		}
+	}
+}
+
+
+
+ul.archive-filters-list {
+
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		& li {
+			display: grid;
+			grid-template-columns: 1em auto;
+			align-items: center;
+			gap: 0.5em;
+		}
+
+
+}
+
+
+.archive-filter-icon {
+    display: inline-block;
+}
+
+
+
+
+.archive-map-wrapper {
+.leaflet-popup-content-wrapper {
+	border-radius: 0;
+	padding: 0;
+	width: 325px;
+	& .leaflet-popup-content {
+		margin: 0;
+	}
+    .map-archive-popup {
+        font-family: var(--wp--preset--font-family--global);
+        font-size: 1.375rem;
+		& ul {
+			font-size: 1.25rem;
+		}
+		.popup-link {
+			color: var(--wp--preset--color--accent) !important;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.popup-image {
+			width: 100%;
+			aspect-ratio: 4 /3;
+			background-size: cover;
+			background-position: center;
+		}
+
+        .popup-content {
+			padding: 1.875rem;
+
+		}
+		.popup-data {
+			margin-top: 0.5rem;
+			color: var(--wp--preset--color--primary);
+			font-weight: 500;
+		}
+
+
+
+    }
+}
+}
+
+
+.archive-map-wrapper {
+
+	.leaflet-container a.leaflet-popup-close-button {
+		background-color: var(--wp--preset--color--accent);
+		color: #fff !important;
+		&:hover {
+			background-color: var(--wp--preset--color--primary);
+			color: #fff !important;
+		}
+	}
+    .leaflet-bar {
+        border-radius: 0;
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+        a {
+            border-radius: 0 !important;
+        }
+    }
+
+	/** Fade map controls when popup is open because we cannot control with z-index on account of the way to dom is structured **/
+	.leaflet-control {
+	transition: opacity 1s;
+	}
+
+	.leaflet-container:has(.leaflet-popup)
+	:is(.leaflet-control-container, .leaflet-control-container *) {
+	pointer-events: none;
+	}
+
+	.leaflet-container:has(.leaflet-popup) .leaflet-control {
+	opacity: 0;
+	}
+
+
+
+	.map-legend  {
+		background: #fff;
+		font-family: var(--wp--preset--font-family--headings-sans);
+		color: var(--wp--preset--color--contrast);
+		font-size: 1.125rem;
+		padding: 0.5rem 1rem;
+	}
+	.map-legend-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 1rem;
+		&--interactive {
+			&:hover {
+				cursor: pointer;
+				text-decoration: underline;
+			}
+		}
+		&--active {
+			font-weight: 600;
+		}
+
+	}
+	.map-legend-icon {
+		width: 20px;
+		height: 25px;
+		& svg {
+			width: 100%;
+			height: auto;
+		}
+		&.icon-featured {
+			svg path.marker {
+				fill: #9fb523;
+			}
+		}
+		&.icon-closed {
+			svg path.marker {
+				fill: #264D53;
+			}
+		}
+	}
+
+	.marker-cluster-small {
+		background-color: rgba(37, 77, 83, 0.6);
+	}
+
+	.marker-cluster-small div {
+		background-color: rgba(37, 77, 83, 0.6);
+	}
+
+	.marker-cluster-medium {
+		background-color: rgba(37, 77, 83, 0.6);
+	}
+
+	.marker-cluster-medium div {
+		background-color: rgba(37, 77, 83, 0.6);
+	}
+
+	.marker-cluster-large {
+		background-color: rgba(37, 77, 83, 0.6);
+	}
+
+	.marker-cluster-large div {
+		background-color: rgba(37, 77, 83, 0.6);
+	}
+
+	.marker-cluster div {
+		color: #fff;
+		font-family: var(--global-font-family);
+	}
+}
+
+
+@import '../resources/shared.scss';

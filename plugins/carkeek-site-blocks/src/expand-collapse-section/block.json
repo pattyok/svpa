@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "carkeek-site-blocks/expand-collapse",
+	"version": "0.1.0",
+	"title": "Expand/Collapse Section",
+	"category": "widgets",
+	"description": "Hide some content under an expand selector.",
+	"supports": {
+		  "align": [ "full", "wide" ]
+	},
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": "Read More"
+		},
+		"labelOpen": {
+			"type": "string",
+			"default": "Read Less"
+		},
+		"uniqueID": {
+			"type": "string"
+		}
+	},
+	"keywords": ["accordion","expand","collapse","skagit"],
+	"textdomain": "carkeek-blocks",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./script.js"
+  }

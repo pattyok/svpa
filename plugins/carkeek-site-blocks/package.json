@@ -15,11 +15,11 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^32.0.0",
+		"@wordpress/scripts": "^30.25.0",
 		"classnames": "^2.3.2",
 		"reactjs-popup": "^2.0.5"
 	},
 	"dependencies": {
-		"@10up/block-components": "^1.18.2"
+		"@10up/block-components": "^1.21.4"
 	}
 }

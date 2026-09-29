@@ -2,14 +2,11 @@
 
 .wp-block-carkeek-blocks-link-tile {
 	position:relative;
-	display: flex;
-	flex-direction: column;
+	display: flex
+;
     align-items: center;
     justify-content: center;
-	padding: 1rem;
-text-align: center;
 
-	& .ck-link-tile__hover_text_edit,
 	& .ck-link-tile__title_edit {
 		text-decoration: none;
 		z-index: 40;

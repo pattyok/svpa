@@ -150,6 +150,11 @@
 
 .wp-block-carkeek-blocks-extended-gallery {
 	--slide-gutter: var(--wp--preset--spacing--20);
+	& .ck-lightbox-overlay {
+		& .wp-block-heading, .wp-block-paragraph {
+			text-shadow: 0 0 8px rgba(0, 0, 0, 0.50);
+		}
+	}
 }
 
 .home .wp-block-carkeek-blocks-extended-gallery {
@@ -407,6 +412,20 @@
 				& > * {
 					flex: 1 1 50%;
 				}
+			}
+		}
+	}
+}
+
+
+@media (hover: hover) {
+	.wp-block-carkeek-blocks-extended-gallery {
+		& .slick-play {
+			opacity: 0;
+		}
+		&:hover {
+			& .slick-play {
+				opacity: 1;
 			}
 		}
 	}
