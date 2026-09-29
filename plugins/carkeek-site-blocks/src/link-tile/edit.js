@@ -1,9 +1,9 @@
-import { Link, Image, MediaToolbar  } from '@10up/block-components';
-import { useBlockProps, BlockControls, RichText } from "@wordpress/block-editor";
+import { Link, Image, MediaToolbar } from '@10up/block-components';
+import { useBlockProps, BlockControls } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 
 const BlockEdit = (props) => {
-    const { attributes, setAttributes, isSelected } = props;
+    const { attributes, setAttributes } = props;
     const { linkText, linkHoverText, linkUrl, opensInNewTab, imageId, focalPoint } = attributes;
 
 
@@ -73,15 +73,6 @@ const BlockEdit = (props) => {
                 placeholder='Enter Link Text here...'
                 ariaLabel='Read more about our services'
             />
-			{isSelected && (
-			<RichText
-				tagName="span"
-				className="ck-link-tile__hover_text_edit"
-				value={ linkHoverText }
-				onChange={ value => setAttributes({linkHoverText: value}) }
-				placeholder='Enter Hover Text here...'
-			/>
-			)}
 			<span className="ck-link-tile__overlay"></span>
         </div>
     )

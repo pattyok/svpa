@@ -1,0 +1,18 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+ .wp-block-carkeek-site-blocks-project-details {
+	height: 40vw;
+	overflow: hidden;
+	&.is-selected,
+	&.has-child-selected {
+		height: auto;
+	}
+	& .block-notes {
+		font-style: italic;
+		font-size: 0.9rem;
+	}
+}

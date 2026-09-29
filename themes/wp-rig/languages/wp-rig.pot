@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Last-Translator: The WP Rig Contributors\n"
-"POT-Creation-Date: 2026-08-24 22:59+0000\n"
+"POT-Creation-Date: 2026-09-29 17:00+0000\n"
 "Report-Msgid-Bugs-To: WP Rig\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -141,10 +141,6 @@ msgstr ""
 msgid "Intro Text"
 msgstr ""
 
-#: inc/Jetpack/Component.php:134
-msgid "Load more<i class=\"icon-plus\"></i>"
-msgstr ""
-
 #: inc/Nav_Menus/Component.php:71
 msgid "Primary"
 msgstr ""
@@ -153,25 +149,24 @@ msgstr ""
 msgid "Secondary"
 msgstr ""
 
-#: inc/Sidebars/Component.php:71
-msgid "Header Top"
+#: inc/Theme_Docs/Component.php:54, inc/Theme_Docs/Component.php:55, inc/Theme_Docs/Component.php:87
+msgid "Theme Docs"
 msgstr ""
 
-#: inc/Sidebars/Component.php:73
-msgid "Place header content that will display above the nav tablet and up."
+#: inc/Theme_Docs/Component.php:90
+msgid "No docs have been compiled yet. Run npm run bundle (or npm run dev) in wp-rig after adding a docs/**/*.md file."
 msgstr ""
 
-#. translators: %s: stylesheet handle
-#: inc/Styles/Component.php:293
-msgid "Invalid theme stylesheet handle: %s"
+#: inc/Theme_Docs/Component.php:161
+msgid "possibly stale"
 msgstr ""
 
-#: inc/WooCommerce/Component.php:180
-msgid "Shop Page Footer"
+#: inc/Theme_Docs/Component.php:159
+msgid "orphaned: source file not found"
 msgstr ""
 
-#: inc/WooCommerce/Component.php:182
-msgid "Displayed on the shop page"
+#: inc/Theme_Docs/Component.php:165
+msgid "Related file:"
 msgstr ""
 
 #. translators: %s: post title

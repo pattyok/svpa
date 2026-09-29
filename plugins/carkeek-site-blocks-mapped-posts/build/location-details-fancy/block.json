@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "carkeek-site-blocks/location-details",
+  "version": "0.1.2",
+  "title": "Location Details",
+  "category": "widgets",
+  "icon": "admin-home",
+  "description": "Add location meta.",
+  "example": {},
+  "supports": {
+    "multiple": false,
+    "typography": {
+      "fontSize": true
+    }
+  },
+  "usesContext": [
+    "postId",
+    "postType"
+  ],
+  "textdomain": "carkeek-site-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

@@ -4,8 +4,8 @@
 !.gitignore
 
 !carkeek-site-blocks/
+!carkeek-site-blocks-mapped-posts/
 !carkeek-site-blocks/**
-!wa-f2s-mobilize-sync
-!wa-f2s-mobilize-sync/**
-!ck-photo-credit
-!ck-photo-credit/**
+!carkeek-site-blocks-mapped-posts/**
+!volunteer-event-management/
+!volunteer-event-management/**

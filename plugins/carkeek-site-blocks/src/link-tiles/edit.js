@@ -32,14 +32,14 @@ const BlockEdit = (props) => {
 							label="Columns"
 							value={ props.attributes.columns }
 							onChange={ (value) => props.setAttributes({ columns: value }) }
-							min={ 1 }
+							min={ 2 }
             				max={ 6 }
 						/>
 						<RangeControl
 							label="Columns (Tablet)"
 							value={ props.attributes.columnsTablet }
 							onChange={ (value) => props.setAttributes({ columnsTablet: value }) }
-							min={ 1 }
+							min={ 2 }
             				max={ 6 }
 						/>
 						<RangeControl

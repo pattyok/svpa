@@ -1,0 +1,21 @@
+
+.block-editor-block-list__layout.wp-block-carkeek-blocks-expand-section__inner-blocks {
+    border: 1px solid #ebebeb;
+    padding: 1rem;
+}
+
+.wp-block-carkeek-site-blocks-expand-collapse {
+	& .cks-expand-inner-blocks {
+		display: none;
+		border: 1px solid #ebebeb;
+		padding: 1rem;
+	}
+	&.has-child-selected,
+	&.is-selected {
+		& .cks-expand-inner-blocks {
+			display: block;
+		}
+	}
+
+}
+

@@ -1,0 +1,10 @@
+.leaflet-container {
+	font-family: var(--wp--preset--font-family--global);
+	& a {
+		color: 	#A9A9A9 !important;
+		&:hover {
+			color: var(--wp--preset--color--accent) !important;
+			text-decoration: none;
+		}
+	}
+}
