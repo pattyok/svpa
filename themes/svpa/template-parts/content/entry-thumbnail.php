@@ -40,9 +40,9 @@ if ( ! empty( $focal_point ) ) {
 
 }
 if ( $is_header ) {
-	if ( function_exists( 'get_field' ) ) {
-		$photo_credit = get_field( 'photo_credit', get_post_thumbnail_id() );
-	}
+
+	$photo_credit = get_post_meta( get_post_thumbnail_id(), 'ck_photo_credit', true );
+
 	$use_opacity = get_option( '_carkeekblocks_featuredimage_use_opacity', false );
 	if ( true == $use_opacity ) {
 		$image_opacity = get_post_meta( $postid, '_carkeekblocks_featured_image_opacity', true );
@@ -71,7 +71,7 @@ if ( is_singular( get_post_type() ) || $is_header ) {
 		);
 		?>
 		<?php if ( $photo_credit ) : ?>
-			<p class="featured-image-credit"><?php echo wp_kses_post( $photo_credit ); ?></p>
+			<p class="ck-photo-credit ck-photo-credit--overlay"><?php echo wp_kses_post( $photo_credit ); ?></p>
 		<?php endif; ?>
 	</div><!-- .post-thumbnail -->
 

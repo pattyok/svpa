@@ -201,6 +201,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$typekit_fonts_url = $this->get_typekit_fonts_url();
 		if ( ! empty( $typekit_fonts_url ) ) {
 			wp_enqueue_style( 'svpa-typekit', $typekit_fonts_url, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+			add_editor_style( $typekit_fonts_url );
 		}
 
 		// Enqueue block editor stylesheet.
