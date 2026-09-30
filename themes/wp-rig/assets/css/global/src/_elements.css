@@ -31,7 +31,7 @@ html {
 /* Fallback for when there is no custom background color defined. */
 
 body {
-
+	font-family: var(--wp--preset--font-family--global);
 	max-width: 100vw;
 	font-weight: var(--font-weight--regular);
 	line-height: var(--global-font-line-height);

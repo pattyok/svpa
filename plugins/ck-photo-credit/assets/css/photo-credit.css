@@ -1,0 +1,55 @@
+.wp-block-media-text,
+.wp-block-cover {
+	position: relative;
+}
+
+.wp-block-media-text.is-image-fill-element > .wp-block-media-text__media:has(.ck-photo-credit--overlay) {
+	aspect-ratio: var(--ck-fixed-image-ratio, 1.3333);
+	height: auto;
+	min-height: auto;
+}
+
+.ck-photo-credit {
+	font-size: 0.875rem;
+	line-height: 1.35;
+	max-width: 72ch;
+	z-index: 4;
+}
+
+.ck-photo-credit--below {
+	margin-top: 0.625rem;
+	color: currentColor;
+}
+
+.ck-photo-credit--overlay {
+	position: absolute;
+	right: 0.5rem;
+	bottom: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	color: #fff;
+	font-weight: 400;
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	max-width: calc( 100% - 1rem );
+}
+
+.editor-styles-wrapper .ck-photo-credit-enabled.ck-photo-credit-position-overlay {
+	outline: 1px dashed rgba( 0, 0, 0, 0.2 );
+}
+
+.editor-styles-wrapper .ck-photo-credit--editor {
+	margin-top: 0.5rem;
+	pointer-events: none;
+}
+
+.editor-styles-wrapper .ck-photo-credit-editor-mount {
+	position: relative;
+	z-index: 3;
+}
+
+.editor-styles-wrapper figure {
+	position: relative;
+}
+
+.editor-styles-wrapper .ck-photo-credit--editor.ck-photo-credit--overlay {
+	max-width: calc( 100% - 1rem );
+}

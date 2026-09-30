@@ -235,6 +235,7 @@
 		margin-right: 0;
 		padding: var(--wp--preset--spacing--80) var(--gutter-width-page-wide);
 		margin-bottom: var(--wp--preset--spacing--80);
+		border-bottom: 1px solid var(--color-border);
 		& .ck-custom-archive-title-header .ck-custom-archive-title_link {
 			font-size: var(--font-size-h2);
 		}

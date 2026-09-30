@@ -16,7 +16,6 @@
 			font-size: var(--font-size-cta);
 			border: none;
 			position: relative;
-			display: flex;
 			align-items: center;
 			letter-spacing: 0;
 
