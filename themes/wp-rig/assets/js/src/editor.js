@@ -221,7 +221,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		isDefault: true,
 		attributes: {
 			layout: { inherit: true },
-			align: 'full',
 			className: 'section',
 		},
 		innerBlocks: [
@@ -240,7 +239,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	wp.blocks.registerBlockVariation('core/group', {
 		name: 'section',
 		title: 'Section - Dark Background',
-		isDefault: true,
 		attributes: {
 			layout: { inherit: true },
 			align: 'full',
