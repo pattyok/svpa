@@ -165,6 +165,7 @@ a.wp-block-button__link:hover {
 	text-decoration: none;
 }
 
+.js-ck-custom-archive-load-more,
 button.facetwp-load-more,
 .arrow-link > a,
 a.arrow-link {
@@ -179,9 +180,11 @@ a.arrow-link {
 	text-decoration: none;
 	display: flex !important;
 	align-items: center;
+	letter-spacing: 0;
 
 }
 
+.js-ck-custom-archive-load-more,
 .is-style-cta .wp-block-button__link,
 button.facetwp-load-more,
 .arrow-link > a,
@@ -206,6 +209,8 @@ a.arrow-link {
 	}
 
 	&:hover {
+		background-color: transparent;
+		color: $colorLink;
 		&::after {
 			transform: translateX(5px);
 		}

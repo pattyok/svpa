@@ -463,3 +463,7 @@
 .ck-photo-credit--below {
 	font-style: italic;
 }
+
+ul.ck-blocks-gallery-grid.has-caption-under .ck-blocks-gallery-grid-item figure {
+	justify-content: flex-start;
+}
