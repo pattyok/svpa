@@ -8,8 +8,8 @@
 namespace WP_Rig\WP_Rig\Customizer;
 
 use WP_Rig\WP_Rig\Component_Interface;
-use function WP_Rig\WP_Rig\svpa;
 use WP_Customize_Manager;
+use function WP_Rig\WP_Rig\svpa;
 use function add_action;
 use function bloginfo;
 use function wp_enqueue_script;

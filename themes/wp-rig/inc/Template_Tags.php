@@ -51,8 +51,8 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: classname/type of the variable, 2: interface name */
-						__( 'The theme templating component %1$s does not implement the %2$s interface.', 'wp-rig' ),
-						gettype( $component ),
+						__( 'The theme templating component %1$s does not implement the %2$s interface.', 'wp-rig' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						gettype( $component ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 						Templating_Component_Interface::class
 					)
 				);
@@ -78,8 +78,8 @@ class Template_Tags {
 			throw new BadMethodCallException(
 				sprintf(
 					/* translators: %s: template tag name */
-					__( 'The template tag %s does not exist.', 'wp-rig' ),
-					'wp_rig()->' . $method . '()'
+					__( 'The template tag %s does not exist.', 'wp-rig' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+					'wp_rig()->' . $method . '()' // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 				)
 			);
 		}
@@ -107,9 +107,9 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'wp-rig' ),
-						$method_name,
-						get_class( $component )
+						__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'wp-rig' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						$method_name, // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						get_class( $component ) // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 					)
 				);
 			}
@@ -118,9 +118,9 @@ class Template_Tags {
 				throw new RuntimeException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'wp-rig' ),
-						$method_name,
-						get_class( $component )
+						__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'wp-rig' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						$method_name, // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						get_class( $component ) // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 					)
 				);
 			}

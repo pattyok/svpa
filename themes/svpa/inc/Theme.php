@@ -54,8 +54,8 @@ class Theme {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: classname/type of the variable, 2: interface name */
-						__( 'The theme component %1$s does not implement the %2$s interface.', 'svpa' ),
-						gettype( $component ),
+						__( 'The theme component %1$s does not implement the %2$s interface.', 'svpa' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						gettype( $component ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 						Component_Interface::class
 					)
 				);
@@ -117,8 +117,8 @@ class Theme {
 			throw new InvalidArgumentException(
 				sprintf(
 					/* translators: %s: slug */
-					__( 'No theme component with the slug %s exists.', 'svpa' ),
-					$slug
+					__( 'No theme component with the slug %s exists.', 'svpa' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+					$slug // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 				)
 			);
 		}

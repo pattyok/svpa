@@ -67,6 +67,9 @@
 		margin-top: var(--wp--preset--spacing--40);
 	}
 }
+.wp-block-paragraph + .wp-block-buttons {
+	margin-top: var(--wp--preset--spacing--40);
+}
 
 
 .home .page-content > [class*="wp-block-"]:first-child {

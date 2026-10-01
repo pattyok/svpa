@@ -16,6 +16,7 @@
 
 	const TARGET_BLOCKS = [ 'core/media-text', 'core/cover', 'core/image' ];
 	const ATTR_SHOW = 'ckShowPhotoCredit';
+	const ATTR_USE_CAPTION = 'ckPhotoCreditUseCaption';
 	const ATTR_POSITION = 'ckPhotoCreditPosition';
 
 	function isTargetBlock( blockName ) {
@@ -29,6 +30,10 @@
 
 		settings.attributes = settings.attributes || {};
 		settings.attributes[ ATTR_SHOW ] = {
+			type: 'boolean',
+			default: false,
+		};
+		settings.attributes[ ATTR_USE_CAPTION ] = {
 			type: 'boolean',
 			default: false,
 		};
@@ -138,6 +143,16 @@
 			];
 
 			if ( showCredit ) {
+				controls.push(
+					el( ToggleControl, {
+					key: 'toggle',
+					label: __( 'Use Photo Caption', 'wp-rig' ),
+					checked: attributes[ ATTR_USE_CAPTION ] || false,
+					onChange: function( value ) {
+						setAttributes( { [ ATTR_USE_CAPTION ]: value } );
+					},
+				} ),
+				);
 				controls.push(
 					el( SelectControl, {
 						key: 'position',

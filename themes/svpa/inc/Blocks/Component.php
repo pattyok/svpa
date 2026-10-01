@@ -54,7 +54,6 @@ class Component implements Component_Interface {
 		$js_dir = get_theme_file_path( '/assets/js/' );
 
 		foreach ( $js_files as $handle => $data ) {
-			// $src     = $css_uri . $data['file'];
 			$version = svpa()->get_asset_version( $js_dir . $data['file'] );
 			$asset   = $js_uri . svpa()->get_asset_path( $data['file'] );
 
@@ -65,19 +64,26 @@ class Component implements Component_Interface {
 		}
 	}
 
+	/**
+	 * Appends photo credit markup to rendered image, media-text, and cover blocks.
+	 *
+	 * @param string $block_content Rendered block markup.
+	 * @param array  $block         Parsed block data.
+	 * @return string Modified block markup.
+	 */
 	public function display_photo_credit_on_image_blocks( $block_content, $block ) {
-		// Check if it's the core image block and has an ID
+		// Check if it's the core image block and has an ID.
 		$photo_credit = '';
 		$is_cover     = false;
-		if ( ( 'core/image' === $block['blockName']  ) && ! empty( $block['attrs']['id'] ) ) {
+		if ( ( 'core/image' === $block['blockName'] ) && ! empty( $block['attrs']['id'] ) ) {
 			$image_id = $block['attrs']['id'];
-			// Retrieve your custom photo credit (e.g., from an attachment meta field)
+			// Retrieve your custom photo credit (e.g., from an attachment meta field).
 			$photo_credit = get_post_meta( $image_id, 'photo_credit', true );
 		} elseif ( 'core/media-text' === $block['blockName'] && ! empty( $block['attrs']['mediaId'] ) ) {
-			$image_id = $block['attrs']['mediaId'];
+			$image_id     = $block['attrs']['mediaId'];
 			$photo_credit = get_post_meta( $image_id, 'photo_credit', true );
 		} elseif ( 'core/cover' === $block['blockName'] && ! empty( $block['attrs']['id'] ) ) {
-			$image_id = $block['attrs']['id'];
+			$image_id     = $block['attrs']['id'];
 			$photo_credit = get_post_meta( $image_id, 'photo_credit', true );
 			$is_cover     = true;
 		}
@@ -101,9 +107,9 @@ class Component implements Component_Interface {
 		return $block_content;
 	}
 
-	/** Register ACF blocks for the theme */
+	/** Register ACF blocks for the theme. */
 	public function register_acf_blocks() {
-		// Register your ACF blocks here
+		// Register your ACF blocks here.
 		register_block_type(
 			get_template_directory() . '/acf-blocks/people_email/block.json'
 		);

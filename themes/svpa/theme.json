@@ -431,7 +431,7 @@
 				},
 				"typography": {
 					"textDecoration": "none",
-					"fontWeight": "800"
+					"fontWeight": "700"
 				},
 				":hover": {
 					"typography": {

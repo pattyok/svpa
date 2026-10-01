@@ -74,7 +74,7 @@
 
 			& .wp-block-cover__inner-container {
 				width: 50%;
-    			max-width: min(50%, 650px);
+				max-width: min(50%, 650px);
 			}
 		}
 

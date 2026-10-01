@@ -7,7 +7,7 @@
 ?>
 <div class="print-only">
 	<?php
-	echo '&copy;' . date( 'Y' ) . ' ' . get_bloginfo('name') . '<br>';
+	echo '&copy;' . esc_html( gmdate( 'Y' ) ) . ' ' . esc_html( get_bloginfo( 'name' ) ) . '<br>';
 	echo get_permalink() . '<br>'; //phpcs:ignore
 	echo wp_date( 'F j, Y g:i a' ); //phpcs:ignore
 	?>

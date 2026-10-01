@@ -44,7 +44,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		add_filter( 'the_title', array( $this, 'people_the_title' ), 10, 2 );
 		add_filter( 'post_type_link', array( $this, 'custom_annual_report_permalink' ), 10, 4 );
-
 	}
 
 
@@ -194,12 +193,17 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$tweet = '<a class="share-link" href="https://bsky.app/intent/compose?text=' . $title . '&url=' . $url . '" ' . $this->make_new_window() . ' title="Share on Bluesky"><i class="ck-icon bluesky" aria-hidden="true"></i>' . $text . '</a>';
 		return $tweet;
 	}
-	/** Check to see if it has http, if not, add it */
-	function make_url( $string ) {
-		if ( ! preg_match( '~^(?:f|ht)tps?://~i', $string ) ) {
-			$string = 'http://' . $string;
+	/**
+	 * Check to see if it has http, if not, add it.
+	 *
+	 * @param string $url_string URL string to normalize.
+	 * @return string Normalized URL string.
+	 */
+	private function make_url( $url_string ) {
+		if ( ! preg_match( '~^(?:f|ht)tps?://~i', $url_string ) ) {
+			$url_string = 'http://' . $url_string;
 		}
-		return $string;
+		return $url_string;
 	}
 
 
@@ -217,9 +221,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Make Social Links
 	 *
-	 * @param boolean $echo whether to echo or return the the html.
+	 * @param boolean $echo_result whether to echo or return the the html.
 	 */
-	public function make_social_share_links( $echo = false ) {
+	public function make_social_share_links( $echo_result = false ) {
 		$links = '<ul class="social-share-links list-inline">
 		<li class="list-inline-item social-share-links__label label">Share: </li>
 		<li class="list-inline-item">' . $this->make_email_button() . '</li>
@@ -228,7 +232,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		<li class="list-inline-item">' . $this->make_linkedin_button() . '</li>
 		<li class="list-inline-item">' . $this->make_print_button() . '</li>
 	</ul>';
-		if ( $echo ) {
+		if ( $echo_result ) {
 			echo $links; // phpcs:ignore
 		} else {
 			return $links;
@@ -297,7 +301,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		);
 		$content = empty( $content ) ? get_bloginfo( 'name' ) . ' ' : $content;
 		$html    = '<div class="site-copy"><span class="site-info">&copy; ' . esc_attr( gmdate( 'Y' ) ) . ' ' . $content . '</span>';
-		if ( 'true' == $atts['credits'] ) {
+		if ( true === $atts['credits'] || 'true' === $atts['credits'] ) {
 				$html .= ' <a class="info-popover" href="#" data-popover="site-credit-pop">Site Credits</a>
 							<div class="gpopover no-list" id="site-credit-pop">
 								<ul class="no-list">
@@ -328,7 +332,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$landing_pages = get_field( 'acf_landing_page', 'options' ); // set this up as a repeater with post type and landing page.
 			$post_types    = wp_list_pluck( $landing_pages, 'landing_page', 'post_type' );
 		}
-		$parent = 0; // default to no parent
+		$parent = 0; // Default to no parent.
 
 		$is_h1 = true;
 		if ( isset( $post_types[ $post_type ] ) ) {
@@ -370,13 +374,19 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 	}
 
-	/** Alter people titles to include meta data */
+	/**
+	 * Alter people titles to include meta data.
+	 *
+	 * @param string $title   Post title.
+	 * @param int    $post_id Post ID.
+	 * @return string Modified title.
+	 */
 	public function people_the_title( $title, $post_id ) {
 		if ( is_admin() ) {
 			return $title;
 		}
 		if ( 'people' === get_post_type( $post_id ) ) {
-			$job_title = get_field( 'people_job_title', $post_id );
+			$job_title  = get_field( 'people_job_title', $post_id );
 			$additional = get_field( 'people_additional', $post_id );
 			if ( ! empty( $job_title ) ) {
 				$title .= ', <span class="people-job-title">' . esc_html( $job_title ) . '</span>';
@@ -400,7 +410,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 	}
 
-	/** Add Event Date before title for Volunteer Events */
+	/**
+	 * Add Event Date before title for Volunteer Events.
+	 *
+	 * @param string $meta_before Existing meta markup before the title.
+	 * @param array  $data        Block data.
+	 * @return string Modified meta markup.
+	 */
 	public function custom_vol_event_archive_meta_before_title( $meta_before, $data ) {
 		$event_date  = get_field( 'event_start_date_time' );
 		$meta_before = '';
@@ -408,7 +424,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$meta_before .= '<div class="ck-item-event-featured">Featured Volunteer Opportunity</div>';
 		}
 		if ( ! empty( $event_date ) ) {
-			// Format date Day, Month Date
+			// Format date Day, Month Date.
 			$event_date = new \DateTime( $event_date );
 			if ( $event_date ) {
 				$meta_before .= '<div class="ck-item-event-date">' . esc_html( $event_date->format( 'l, M j' ) ) . '</div>';
@@ -417,7 +433,14 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		return $meta_before;
 	}
 
-	/** Add Featured Event Text before event if in list view */
+	/**
+	 * Add Featured Event Text before event if in list view.
+	 *
+	 * @param string $content Existing block content.
+	 * @param int    $post_id Post ID.
+	 * @param array  $data    Block data.
+	 * @return string Modified block content.
+	 */
 	public function carkeek_events_block_before_slots( $content, $post_id, $data ) {
 		if ( 'list' === $data['postLayout'] ) {
 			if ( has_term( 'featured', 'carkeek_event_category', $post_id ) ) {
@@ -427,10 +450,16 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		return $content;
 	}
 
-	/** Limit Event query to Events with and end date in the future */
+	/**
+	 * Limit Event query to Events with and end date in the future.
+	 *
+	 * @param array $args Existing query args.
+	 * @param array $data Block data.
+	 * @return array Modified query args.
+	 */
 	public function carkeek_block_event_archive_query( $args, $data ) {
-		$args['meta_key']   = 'event_start_date_time';
-		$args['meta_query'] = array(
+		$args['meta_key']   = 'event_start_date_time'; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		$args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			'key'     => 'event_start_date_time',
 			'value'   => current_time( 'Y-m-d H:i:s' ),
 			'compare' => '>=',
@@ -439,14 +468,26 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		return $args;
 	}
 
-	// ** Customize Location Display for Events Block - add class arrow-link if the html contains a link */
+	/**
+	 * Customize Location Display for Events Block - add class arrow-link if the html contains a link.
+	 *
+	 * @param string $location_html Existing location markup.
+	 * @param int    $post_id       Post ID.
+	 * @return string Modified location markup.
+	 */
 	public function carkeek_events_block_location_display( $location_html, $post_id ) {
 		if ( strpos( $location_html, '<a ' ) !== false ) {
 			$location_html = str_replace( '<a ', '<a class="arrow-link" ', $location_html );
 		}
 		return $location_html;
 	}
-	/** Get the top level term for a resource post - expanded to make it more flexible */
+	/**
+	 * Get the top level term for a resource post - expanded to make it more flexible.
+	 *
+	 * @param int    $post_id  Post ID.
+	 * @param string $taxonomy Taxonomy slug.
+	 * @return int Top level term ID.
+	 */
 	public function get_top_level_parent_term( $post_id, $taxonomy ) {
 		$terms = wp_get_post_terms( $post_id, $taxonomy );
 		if ( empty( $terms ) || is_wp_error( $terms ) ) {
@@ -466,7 +507,15 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		return $top;
 	}
 
-	/** Replace the Permalink for Annual Report post type */
+	/**
+	 * Replace the Permalink for Annual Report post type.
+	 *
+	 * @param string  $post_link Existing permalink.
+	 * @param WP_Post $post      Post object.
+	 * @param bool    $leavename Whether to keep the post name.
+	 * @param bool    $sample    Whether this is for a sample permalink.
+	 * @return string Modified permalink.
+	 */
 	public function custom_annual_report_permalink( $post_link, $post, $leavename, $sample ) {
 		if ( is_admin() ) {
 			return $post_link;
@@ -478,6 +527,4 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 		return $post_link;
 	}
-
-
 }

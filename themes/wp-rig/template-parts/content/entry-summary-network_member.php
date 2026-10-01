@@ -3,11 +3,11 @@
  * Template part for displaying a post's content
  *
  * @package wp_rig
- */	
+ */
 
 namespace WP_Rig\WP_Rig;
 
-if (! function_exists( 'get_field' ) ) {
+if ( ! function_exists( 'get_field' ) ) {
 	return;
 }
 ?>
@@ -17,7 +17,7 @@ if (! function_exists( 'get_field' ) ) {
 			
 			<?php
 			if ( get_field( 'network_website' ) ) {
-				echo sprintf(
+				printf(
 					'<a href="%s" target="_blank" rel="noopener">%s</a>',
 					esc_url( get_field( 'network_website' ) ),
 					esc_html( get_the_title() )

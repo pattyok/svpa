@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template part for displaying related posts
+ *
+ * @package svpa
+ */
 
 $rel_posts = get_field( 'related_posts' );
 if ( ! is_array( $rel_posts ) ) {
@@ -24,40 +29,40 @@ $rel_posts        = array_merge( $rel_posts, wp_list_pluck( $additional_posts, '
 	<h2 class="ck-custom-archive__headline">You might also like</h2>
 	<div class="ck-custom-archive__list alignwide ck-columns__wrap" style="--ck-column-gap-vert: var(--wp--preset--spacing--30); --ck-column-gap: var(--wp--preset--spacing--30);">
 <?php
-// only show 3 posts
+// Only show 3 posts.
 $n     = 0;
 $shown = 0;
 while ( $shown < 3 ) :
 	if ( ! isset( $rel_posts[ $n ] ) ) {
 		break;
 	}
-	$post_id    = $rel_posts[ $n ];
-	$link_label = __( 'Read More', 'svpa' );
-	// if event make sure event date is in the future
-	if ( get_post_type( $post_id ) == 'carkeek_event' || get_post_type( $post_id ) == 'vol_event' ) {
-		$event_date = get_post_type( $post_id ) == 'vol_event' ? get_post_meta( $post_id, 'event_start_date', true ) : get_post_meta( $post_id, '_carkeek_event_start', true );
-		$event_date = date( 'Ymd', strtotime( $event_date ) );
-		$today      = date( 'Ymd' );
+	$related_post_id = $rel_posts[ $n ];
+	$link_label      = __( 'Read More', 'svpa' );
+	// If event, make sure event date is in the future.
+	if ( 'carkeek_event' === get_post_type( $related_post_id ) || 'vol_event' === get_post_type( $related_post_id ) ) {
+		$event_date = 'vol_event' === get_post_type( $related_post_id ) ? get_post_meta( $related_post_id, 'event_start_date', true ) : get_post_meta( $related_post_id, '_carkeek_event_start', true );
+		$event_date = gmdate( 'Ymd', strtotime( $event_date ) );
+		$today      = gmdate( 'Ymd' );
 		$link_label = __( 'Join Us', 'svpa' );
 		if ( $event_date < $today ) {
 			++$n;
 			continue;
 		}
 	}
-	setup_postdata( $post_id );
+	setup_postdata( $related_post_id );
 	?>
 		<div class="ck-columns-item ck-custom-archive-item  archive-item-id-1">
-			<a class="ck-custom-archive-image-link layout-landscape" href="<?php the_permalink( $post_id ); ?>">
+			<a class="ck-custom-archive-image-link layout-landscape" href="<?php the_permalink( $related_post_id ); ?>">
 				<?php
-				if ( has_post_thumbnail( $post_id ) ) {
-					echo get_the_post_thumbnail( $post_id, 'large' );
+				if ( has_post_thumbnail( $related_post_id ) ) {
+					echo get_the_post_thumbnail( $related_post_id, 'large' );
 				}
 				?>
 			</a>
 
-				<h3 class="ck-custom-archive-title-header"><a class="ck-custom-archive-title_link" href="<?php the_permalink( $post_id ); ?>"><?php echo get_the_title( $post_id ); //phpcs:ignore ?></a></h3>
-				<p class="ck-custom-archive-excerpt"><?php echo wp_trim_words( get_the_excerpt( $post_id ), 20 ); //phpcs:ignore ?></p>
-				<a class="ck-custom-archive-more-link arrow-link" href="<?php the_permalink( $post_id ); ?>"><?php echo esc_html( $link_label ); ?><span class="screen-reader-text"><?php echo get_the_title( $post_id ); //phpcs:ignore ?></span></a>
+				<h3 class="ck-custom-archive-title-header"><a class="ck-custom-archive-title_link" href="<?php the_permalink( $related_post_id ); ?>"><?php echo get_the_title( $related_post_id ); //phpcs:ignore ?></a></h3>
+				<p class="ck-custom-archive-excerpt"><?php echo wp_trim_words( get_the_excerpt( $related_post_id ), 20 ); //phpcs:ignore ?></p>
+				<a class="ck-custom-archive-more-link arrow-link" href="<?php the_permalink( $related_post_id ); ?>"><?php echo esc_html( $link_label ); ?><span class="screen-reader-text"><?php echo get_the_title( $related_post_id ); //phpcs:ignore ?></span></a>
 			</a>
 		</div>
 	<?php

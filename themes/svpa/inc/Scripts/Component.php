@@ -52,7 +52,7 @@ class Component implements Component_Interface {
 		}
 
 		$js_files = array(
-			'svpa-global-js'  => array(
+			'svpa-global-js' => array(
 				'file'         => 'global.min.js',
 				'dependencies' => array(),
 				'in_footer'    => true,
@@ -97,7 +97,6 @@ class Component implements Component_Interface {
 
 		$js_files = $this->get_js_files();
 		foreach ( $js_files as $handle => $data ) {
-			// $src     = $css_uri . $data['file'];
 			$version = svpa()->get_asset_version( $js_dir . $data['file'] );
 			$asset   = $js_uri . svpa()->get_asset_path( $data['file'] );
 
@@ -122,6 +121,4 @@ class Component implements Component_Interface {
 			}
 		}
 	}
-
-
 }

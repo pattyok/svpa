@@ -50,7 +50,6 @@ class Component implements Component_Interface {
 		// Add support for wide-aligned images.
 		add_theme_support( 'align-wide' );
 
-
 		// Enable templates.
 		add_theme_support( 'block-template-parts' );
 
@@ -61,7 +60,10 @@ class Component implements Component_Interface {
 		update_option( '_carkeekblocks_featuredimage_use_opacity', true );
 		update_option( '_carkeekblocks_featuredimage_opacity_default', 50 );
 
-		update_option( '_carkeekblocks_site_credits', '<li class="contact-info">Website Design: <a href="http://beansnrice.com" target="_blank">Beans n\' Rice</a></li>
-				<li class="contact-info">Website Development: <a href="https://carkeekstudios.com"  target="_blank">Carkeek Studios</a></li>' );
+		update_option(
+			'_carkeekblocks_site_credits',
+			'<li class="contact-info">Website Design: <a href="http://beansnrice.com" target="_blank">Beans n\' Rice</a></li>
+				<li class="contact-info">Website Development: <a href="https://carkeekstudios.com"  target="_blank">Carkeek Studios</a></li>'
+		);
 	}
 }

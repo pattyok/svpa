@@ -30,7 +30,7 @@ $thumb_style  = '';
 $photo_credit = '';
 
 
-$is_header   = isset( $args ) && isset( $args['is_header'] ) && true == $args['is_header'];
+$is_header   = isset( $args ) && isset( $args['is_header'] ) && true === $args['is_header'];
 $focal_point = get_post_meta( $postid, '_carkeekblocks_featured_image_focal_point', true );
 $style       = '';
 if ( ! empty( $focal_point ) ) {
@@ -44,10 +44,10 @@ if ( $is_header ) {
 	$photo_credit = get_post_meta( get_post_thumbnail_id(), 'ck_photo_credit', true );
 
 	$use_opacity = get_option( '_carkeekblocks_featuredimage_use_opacity', false );
-	if ( true == $use_opacity ) {
-		$image_opacity = get_post_meta( $postid, '_carkeekblocks_featured_image_opacity', true );
+	if ( true === $use_opacity ) {
+		$image_opacity = (int) get_post_meta( $postid, '_carkeekblocks_featured_image_opacity', true );
 		// if 101 that is default, so set to 0.
-		$image_opacity = 101 == $image_opacity ? 0 : $image_opacity;
+		$image_opacity = 101 === $image_opacity ? 0 : $image_opacity;
 		if ( $image_opacity && 0 !== $image_opacity && 101 !== $image_opacity ) {
 			$thumb_class .= ' has-image-opacity';
 			$thumb_style  = '--featured-image-opacity: ' . $image_opacity;

@@ -19,6 +19,7 @@
 	& a,
 	& a:hover,
 	& a:visited {
+		background-color: transparent;
 		color: $white;
 	}
 
@@ -454,4 +455,11 @@
 			}
 		}
 	}
+}
+
+.ck-photo-credit {
+	font-size: 1rem;
+}
+.ck-photo-credit--below {
+	font-style: italic;
 }

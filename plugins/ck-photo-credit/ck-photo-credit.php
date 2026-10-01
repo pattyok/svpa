@@ -28,6 +28,7 @@ class CK_Photo_Credit_Plugin {
 	 * Block attribute keys.
 	 */
 	const ATTR_SHOW     = 'ckShowPhotoCredit';
+	const ATTR_USE_CAPTION = 'ckPhotoCreditUseCaption';
 	const ATTR_POSITION = 'ckPhotoCreditPosition';
 
 	/**
@@ -217,8 +218,16 @@ class CK_Photo_Credit_Plugin {
 		if ( ! $attachment_id ) {
 			return $block_content;
 		}
-
-		$credit = get_post_meta( $attachment_id, self::META_KEY, true );
+		$use_caption = ! empty( $attrs[ self::ATTR_USE_CAPTION ] );
+		if ( $use_caption ) {
+			$caption = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+			if ( is_string( $caption ) && '' !== trim( $caption ) ) {
+				$credit = $caption;
+			}
+		}
+		if ( empty( $credit ) ) {
+			$credit = get_post_meta( $attachment_id, self::META_KEY, true );
+		}
 		if ( ! is_string( $credit ) || '' === trim( $credit ) ) {
 			return $block_content;
 		}

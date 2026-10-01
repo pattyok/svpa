@@ -51,8 +51,8 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: classname/type of the variable, 2: interface name */
-						__( 'The theme templating component %1$s does not implement the %2$s interface.', 'svpa' ),
-						gettype( $component ),
+						__( 'The theme templating component %1$s does not implement the %2$s interface.', 'svpa' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						gettype( $component ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 						Templating_Component_Interface::class
 					)
 				);
@@ -78,8 +78,8 @@ class Template_Tags {
 			throw new BadMethodCallException(
 				sprintf(
 					/* translators: %s: template tag name */
-					__( 'The template tag %s does not exist.', 'svpa' ),
-					'svpa()->' . $method . '()'
+					__( 'The template tag %s does not exist.', 'svpa' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+					'svpa()->' . $method . '()' // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 				)
 			);
 		}
@@ -107,9 +107,9 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'svpa' ),
-						$method_name,
-						get_class( $component )
+						__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'svpa' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						$method_name, // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						get_class( $component ) // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 					)
 				);
 			}
@@ -118,9 +118,9 @@ class Template_Tags {
 				throw new RuntimeException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'svpa' ),
-						$method_name,
-						get_class( $component )
+						__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'svpa' ), // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						$method_name, // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+						get_class( $component ) // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 					)
 				);
 			}

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template part for displaying a post
  *
@@ -36,7 +35,7 @@ namespace WP_Rig\WP_Rig;
 						<div class="entry-byline">
 
 							<span class="meta-label">By:</span>
-							<?php echo $byline; ?>
+							<?php echo wp_kses_post( $byline ); ?>
 
 						</div>
 					<?php endif; ?>

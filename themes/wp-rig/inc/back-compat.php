@@ -79,7 +79,7 @@ add_action( 'load-customize.php', 'wp_rig_customize' );
  * Prevents the Theme Preview from being loaded when requirements are not met.
  */
 function wp_rig_preview() {
-	if ( isset( $_GET['preview'] ) ) {
+	if ( isset( $_GET['preview'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only check to block an outdated theme preview, no data is processed.
 		wp_die( esc_html( wp_rig_get_insufficient_requirements_message() ) );
 	}
 }

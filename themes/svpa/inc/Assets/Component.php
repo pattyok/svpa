@@ -40,7 +40,7 @@ class Component implements Component_Interface {
 	 */
 	public function __construct( $manifest_path ) {
 		if ( file_exists( $manifest_path ) ) {
-			$this->manifest = json_decode( file_get_contents( $manifest_path ), true );
+			$this->manifest = json_decode( file_get_contents( $manifest_path ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reading a local build manifest file, not a remote URL.
 		} else {
 			$this->manifest = array();
 		}
@@ -64,11 +64,11 @@ class Component implements Component_Interface {
 	 * Returns the whole collection or one item if key is provided.
 	 *
 	 * @param string $key the file key in the manifest.
-	 * @param string $default will return default if no file is found in the manifest.
+	 * @param string $default_value will return default_value if no file is found in the manifest.
 	 *
 	 * @return string or array depending on inputs.
 	 */
-	public function getPath( $key = '', $default = null ) {
+	public function getPath( $key = '', $default_value = null ) {
 		$collection = $this->manifest;
 		if ( is_null( $key ) ) {
 			return $collection;
@@ -78,7 +78,7 @@ class Component implements Component_Interface {
 		}
 		foreach ( explode( '.', $key ) as $segment ) {
 			if ( ! isset( $collection[ $segment ] ) ) {
-				return $default;
+				return $default_value;
 			} else {
 				$collection = $collection[ $segment ];
 			}

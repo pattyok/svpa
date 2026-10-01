@@ -23,7 +23,7 @@ $active  = empty( $current ) ? 'active' : '';
 
 	foreach ( $c_terms as $c_term ) {
 		if ( 'blog' !== $c_term->slug ) {
-			$active = $current == $c_term->term_id ? 'active' : '';
+			$active = (int) $current === (int) $c_term->term_id ? 'active' : '';
 			?>
 			<li class="category-select-item <?php echo esc_attr( $active ); ?>">
 				<a href="<?php echo esc_url( get_category_link( $c_term ) ); ?>">

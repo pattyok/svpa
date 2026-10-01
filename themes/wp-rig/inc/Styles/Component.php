@@ -85,9 +85,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags(): array {
-		return array(
-
-		);
+		return array();
 	}
 
 	/**
@@ -112,7 +110,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		// Enqueue Typekit fonts if using.
 		$fontawesome_kit_url = $this->get_fontawesome_fonts_url();
 		if ( ! empty( $fontawesome_kit_url ) ) {
-			// dequeue um fontawesome
+			// Dequeue um fontawesome.
 			wp_dequeue_style( 'um_fontawesome-css' );
 			wp_enqueue_script( 'wp-rig-fa', $fontawesome_kit_url, array(), null, array( 'in_footer' => true ) ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		}
@@ -127,12 +125,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$version = wp_rig()->get_asset_version( $css_dir . $data['file'] );
 			$asset   = $css_uri . wp_rig()->get_asset_path( $data['file'] );
 			$deps    = array();
+
 			/*
 			* Enqueue global stylesheets immediately and register the other ones for later use
 			* (unless preloading stylesheets is disabled, in which case stylesheets should be immediately
 			* enqueued based on whether they are necessary for the page content).
 			*/
-			if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) ) {
+			if ( $data['global'] || ( ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) ) ) {
 				wp_enqueue_style( $handle, $asset, $deps, $version, $data['media'] );
 			} else {
 				wp_register_style( $handle, $asset, $deps, $version, $data['media'] );
