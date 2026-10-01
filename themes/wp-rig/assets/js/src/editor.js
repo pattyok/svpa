@@ -236,8 +236,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	wp.blocks.registerBlockVariation('core/group', {
-		name: 'section',
+		name: 'section-dark',
 		title: 'Section - Dark Background',
+		isDefault: true,
 		attributes: {
 			layout: { inherit: true },
 			align: 'full',
