@@ -225,19 +225,35 @@ document.addEventListener('DOMContentLoaded', function () {
 			className: 'section',
 		},
 		innerBlocks: [
-			['core/heading', { textAlign: 'center' }],
+			['core/heading', { }],
 			[
 				'core/paragraph',
 				{
 					fontSize: 'default',
-					align: 'center',
-					className: 'is-style-intro-text',
 				},
 			],
+		],
+		scope: ['inserter'],
+		keywords: ['section', 'group', 'columns'],
+	});
+
+	wp.blocks.registerBlockVariation('core/group', {
+		name: 'section',
+		title: 'Section - Dark Background',
+		isDefault: true,
+		attributes: {
+			layout: { inherit: true },
+			align: 'full',
+			backgroundColor: 'primary',
+			className: 'section',
+		},
+		innerBlocks: [
+			['core/heading', { }],
 			[
-				'core/buttons',
-				{ layout: { type: 'flex', justifyContent: 'center' } },
-				[['core/button', { className: 'is-style-arrow-link' }]],
+				'core/paragraph',
+				{
+					fontSize: 'default',
+				},
 			],
 		],
 		scope: ['inserter'],
@@ -251,23 +267,34 @@ document.addEventListener('DOMContentLoaded', function () {
 		attributes: {
 			layout: { inherit: true },
 			align: 'full',
-			backgroundColor: 'tint-lt',
+			backgroundColor: 'grey-light',
 			className: 'section',
+			style: {
+				border: {
+					top: {
+						color: 'var:preset|color|grey-med',
+						width: '1px',
+					},
+					right: {
+
+					},
+					bottom: {
+						color: 'var:preset|color|grey-med',
+						width: '1px',
+					},
+					left: {
+
+					},
+				}
+			}
 		},
 		innerBlocks: [
-			['core/heading', { textAlign: 'center' }],
+			['core/heading', { }],
 			[
 				'core/paragraph',
 				{
 					fontSize: 'default',
-					align: 'center',
-					className: 'is-style-intro-text',
 				},
-			],
-			[
-				'core/buttons',
-				{ layout: { type: 'flex', justifyContent: 'center' } },
-				[['core/button', { className: 'is-style-arrow-link' }]],
 			],
 		],
 		scope: ['inserter'],
@@ -333,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		name: 'separator',
 		title: 'Separator',
 		isDefault: true,
-		attributes: { align: 'full' },
+		attributes: {},
 		scope: ['inserter'],
 		keywords: ['hr', 'separator'],
 	});

@@ -22,6 +22,7 @@ class CK_Photo_Credit_Plugin {
 	 * Attachment meta key for photo credits.
 	 */
 	const META_KEY = 'ck_photo_credit';
+	const META_KEY_LINK = 'ck_photo_credit_link';
 
 	/**
 	 * Block attribute keys.
@@ -41,6 +42,22 @@ class CK_Photo_Credit_Plugin {
 		add_filter( 'attachment_fields_to_edit', array( $instance, 'add_attachment_field' ), 10, 2 );
 		add_filter( 'attachment_fields_to_save', array( $instance, 'save_attachment_field' ), 10, 2 );
 		add_filter( 'render_block', array( $instance, 'inject_photo_credit' ), 10, 2 );
+		add_filter( 'wp_prepare_attachment_for_js', array( $instance, 'add_meta_to_attachment_js' ), 10, 2 );
+	}
+
+	/**
+	 * Expose photo credit meta on the classic media modal's attachment objects.
+	 *
+	 * @param array   $response   Attachment data sent to the JS media modal.
+	 * @param WP_Post $attachment Attachment post object.
+	 * @return array
+	 */
+	public function add_meta_to_attachment_js( $response, $attachment ) {
+		$response['meta']                       = isset( $response['meta'] ) && is_array( $response['meta'] ) ? $response['meta'] : array();
+		$response['meta'][ self::META_KEY ]      = get_post_meta( $attachment->ID, self::META_KEY, true );
+		$response['meta'][ self::META_KEY_LINK ] = get_post_meta( $attachment->ID, self::META_KEY_LINK, true );
+
+		return $response;
 	}
 
 	/**
@@ -50,6 +67,19 @@ class CK_Photo_Credit_Plugin {
 		register_post_meta(
 			'attachment',
 			self::META_KEY,
+			array(
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+				'sanitize_callback' => 'wp_kses_post',
+				'auth_callback'     => function () {
+					return current_user_can( 'upload_files' );
+				},
+			)
+		);
+		register_post_meta(
+			'attachment',
+			self::META_KEY_LINK,
 			array(
 				'type'              => 'string',
 				'single'            => true,
@@ -117,6 +147,18 @@ class CK_Photo_Credit_Plugin {
 			),
 		);
 
+		$form_fields[ self::META_KEY_LINK ] = array(
+			'label' => __( 'Image Link', 'wp-rig' ),
+			'input' => 'html',
+			'html'  => sprintf(
+				'<input type="url" name="attachments[%1$d][%2$s]" value="%3$s"><p class="help">%4$s</p>',
+				absint( $post->ID ),
+				esc_attr( self::META_KEY_LINK ),
+				esc_textarea( get_post_meta( $post->ID, self::META_KEY_LINK, true ) ),
+				esc_html__( 'Add a url to be used in the extended gallery block - as for logos.', 'wp-rig' )
+			),
+		);
+
 		return $form_fields;
 	}
 
@@ -135,6 +177,11 @@ class CK_Photo_Credit_Plugin {
 		if ( array_key_exists( self::META_KEY, $attachment ) ) {
 			$value = wp_kses_post( wp_unslash( (string) $attachment[ self::META_KEY ] ) );
 			update_post_meta( $post['ID'], self::META_KEY, $value );
+		}
+
+		if ( array_key_exists( self::META_KEY_LINK, $attachment ) ) {
+			$value = wp_kses_post( wp_unslash( (string) $attachment[ self::META_KEY_LINK ] ) );
+			update_post_meta( $post['ID'], self::META_KEY_LINK, $value );
 		}
 
 		return $post;

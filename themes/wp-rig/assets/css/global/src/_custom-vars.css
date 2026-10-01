@@ -26,7 +26,7 @@ $btnBackground:  var(--wp--preset--color--accent);
 $btnBorder: 1px solid var(--wp--preset--color--accent);
 $btnText: #fff;
 $btnFont: var(--wp--preset--font-family--headings);
-$btnFontWeight: 900;
+$btnFontWeight: 800;
 $btnFontSize: var(--font-size-button);
 $btnBorderHover: 1px solid var(--wp--preset--color--accent-2);
 $btnBackgroundHover: var(--wp--preset--color--accent-2);

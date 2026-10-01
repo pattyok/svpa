@@ -4,6 +4,15 @@
 .has-accent-1-background-color,
 .has-contrast-background-color {
 	color: $white;
+	& .wp-block-button .wp-block-button__link {
+		background-color: $white;
+		color: $colorLink;
+		&:hover {
+			background-color: $colorLink;
+			color: $white;
+		}
+	}
+
 	& svg,
 	& .wp-block-button.is-style-arrow-link .wp-block-button__link,
 	& :--heading:not(.has-text-color),
@@ -12,6 +21,7 @@
 	& a:visited {
 		color: $white;
 	}
+
 }
 .has-white-transparent-background-color,
 .has-white-background-color {
@@ -155,9 +165,13 @@
 			text-shadow: 0 0 8px rgba(0, 0, 0, 0.50);
 		}
 	}
+	& ul.slick-slider figcaption {
+		color: var(--color-caption);
+	}
 }
 
-.home .wp-block-carkeek-blocks-extended-gallery {
+/** Single Slider **/
+.wp-block-carkeek-blocks-extended-gallery.is-style-single {
 	--slide-gutter: 0;
 }
 
@@ -364,15 +378,25 @@
 }
 
 .wp-block-carkeek-blocks-accordion {
+	--ck-color-accordion-header-bg: transparent;
+	--ck-accordion-panel-spacing: 0;
+	--ck-accordion-panel-bg: transparent;
+	--ck-color-accordion-header-focus-bg: transparent;
+	--ck-color-accordion-header-focus-text: var(--wp--preset--color--accent-1);
+	--ck-color-accordion-header-expanded-bg: transparent;
+	--ck-accordion-borders: 1px solid var(--color-border);
 	& .accordion__heading {
-		border-top: 1px solid var(--color-border);
+		border-top: none;
 		font-family: var(--wp--preset--font-family--headings);
-		font-weight: 700;
-		font-size: var(--font-size-h4);
+		font-weight: 800;
+		font-size: var(--font-size-h5);
 		color: $primary;
-	}
-	& .accordion__trigger {
-		font-weight: inherit;
+		&:hover {
+			color: $accent1;
+		}
+		&:first-child {
+			border-top: var(--ck-accordion-borders);
+		}
 	}
 }
 
