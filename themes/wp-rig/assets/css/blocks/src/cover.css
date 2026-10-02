@@ -5,7 +5,7 @@
 	padding: 0;
 
 	&:not(.has-aspect-ratio) {
-		aspect-ratio: 1.6 !important;
+		aspect-ratio: 1.52 !important;
 		width: 100% !important;
 		height: auto;
 		min-height: 350px;

@@ -1,0 +1,114 @@
+[
+  {
+    "slug": "main",
+    "category": "general",
+    "title": "SVPA Site Guide",
+    "related_file": "",
+    "summary": "Start here - who built the site and where to get help.",
+    "updated_at": "2026-10-01T21:38:01.281Z"
+  },
+  {
+    "slug": "header-footer",
+    "category": "general",
+    "title": "Site Header and Footer",
+    "related_file": "",
+    "summary": "Editing the main menu and the site footer.",
+    "updated_at": "2026-10-02T17:10:40.591Z"
+  },
+  {
+    "slug": "blockeditor",
+    "category": "working-with-blocks",
+    "title": "Using the Block Editor",
+    "related_file": "",
+    "summary": "Block editor resources and the custom blocks on this site.",
+    "updated_at": "2026-10-02T16:55:33.557Z"
+  },
+  {
+    "slug": "layout-a-page",
+    "category": "working-with-blocks",
+    "title": "Layout a Page",
+    "related_file": "",
+    "summary": "Get content on a page to layout consistently.",
+    "updated_at": "2026-10-02T17:08:36.376Z"
+  },
+  {
+    "slug": "images",
+    "category": "working-with-blocks",
+    "title": "Images",
+    "related_file": "",
+    "summary": "Blocks for displaying images",
+    "updated_at": "2026-10-02T01:28:39.399Z"
+  },
+  {
+    "slug": "image-captions",
+    "category": "working-with-blocks",
+    "title": "Image Captions & Photo Credits",
+    "related_file": "",
+    "summary": "Blocks for displaying images",
+    "updated_at": "2026-10-02T01:54:18.743Z"
+  },
+  {
+    "slug": "buttons",
+    "category": "working-with-blocks",
+    "title": "Buttons/Call to Action",
+    "related_file": "",
+    "summary": "Additional Blocks that are customized for this site.",
+    "updated_at": "2026-10-02T17:23:53.298Z"
+  },
+  {
+    "slug": "accordion",
+    "category": "working-with-blocks",
+    "title": "Accordion/FAQ",
+    "related_file": "",
+    "summary": "Additional Blocks that are customized for this site.",
+    "updated_at": "2026-10-02T17:25:05.904Z"
+  },
+  {
+    "slug": "advanced",
+    "category": "working-with-blocks",
+    "title": "Advanced Blocks",
+    "related_file": "",
+    "summary": "Additional Blocks that are customized for this site.",
+    "updated_at": "2026-10-02T17:30:15.517Z"
+  },
+  {
+    "slug": "news",
+    "category": "custom-post-types",
+    "title": "Posts (News)",
+    "related_file": "",
+    "summary": "Add/Edit News Posts",
+    "updated_at": "2026-10-02T17:49:21.338Z"
+  },
+  {
+    "slug": "people",
+    "category": "custom-post-types",
+    "title": "People (Our Team)",
+    "related_file": "",
+    "summary": "Add/Edit People",
+    "updated_at": "2026-10-02T18:01:33.293Z"
+  },
+  {
+    "slug": "jobs",
+    "category": "custom-post-types",
+    "title": "Jobs (Work With Us)",
+    "related_file": "",
+    "summary": "Add/Edit Jobs",
+    "updated_at": "2026-10-02T17:56:27.256Z"
+  },
+  {
+    "slug": "annual-reports",
+    "category": "custom-post-types",
+    "title": "Annual Reports (Our Impact)",
+    "related_file": "",
+    "summary": "Add/Edit News Posts",
+    "updated_at": "2026-10-02T17:57:10.777Z"
+  },
+  {
+    "slug": "image-hot-spot",
+    "category": "custom-post-types",
+    "title": "Image Hot Spot",
+    "related_file": "",
+    "summary": "Add/Edit News Posts",
+    "updated_at": "2026-10-02T17:57:46.165Z"
+  }
+]

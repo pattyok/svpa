@@ -362,6 +362,72 @@ document.addEventListener('DOMContentLoaded', function () {
 		scope: ['inserter'],
 		keywords: ['hr', 'separator'],
 	});
+
+	wp.blocks.registerBlockVariation('carkeek-blocks/extended-gallery', {
+		name: 'logo-grid',
+		title: 'Logo Grid',
+		attributes: {
+			"columnsMobile": 2,
+			"columnsTablet": 3,
+			"containImages": true,
+			"imageHeight": 250,
+			"imageWidth": 250,
+		},
+		scope: ['inserter'],
+		keywords: ['logo', 'grid', 'image'],
+	});
+	wp.blocks.registerBlockVariation('carkeek-blocks/extended-gallery', {
+		name: 'image-carousel',
+		title: 'Image Carousel',
+		attributes: {
+			"displayAs": "carousel",
+			"linkImages": "lightbox",
+			"showCaptions": true,
+			"overlayCaptions": false,
+			"autoPlay": false,
+			"slidesToShow": 3,
+			"slidesToScroll": 3,
+			"slidesToShowMobile": 2,
+			"slidesToScrollMobile": 2,
+			"slidesToShowTablet": 3,
+			"slidesToScrollTablet": 3,
+		},
+		scope: ['inserter'],
+		keywords: ['image', 'carousel'],
+	});
+	wp.blocks.registerBlockVariation('carkeek-blocks/extended-gallery', {
+		name: 'image-slider',
+		title: 'Image Slider',
+		attributes: {
+			"displayAs": "carousel",
+			"columnGap": 0,
+			"thumbSize": "full",
+			"cropImages": true,
+			"showPlayButton": true,
+			"showArrows": false,
+			"align": "full",
+			"autoPlay": true,
+			"slidesToShow": 1,
+			"slidesToScroll": 1,
+			"slidesToShowMobile": 1,
+			"slidesToScrollMobile": 1,
+			"slidesToShowTablet": 1,
+			"slidesToScrollTablet": 1,
+		},
+		scope: ['inserter'],
+		keywords: ['image', 'slider', 'gallery'],
+	});
+	wp.blocks.registerBlockVariation('carkeek-blocks/accordion', {
+		name: 'accordion',
+		title: 'Accordion',
+		isDefault: true,
+		attributes: {
+			"expandIcon": "plus",
+			"isFAQ": true
+		},
+		scope: ['inserter'],
+		keywords: ['accordion', 'faq'],
+	});
 });
 
 //Set the defaults on core blocks that we want to modify.

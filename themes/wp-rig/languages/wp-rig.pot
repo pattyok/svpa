@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Last-Translator: The WP Rig Contributors\n"
-"POT-Creation-Date: 2026-09-30 21:16+0000\n"
+"POT-Creation-Date: 2026-10-02 18:21+0000\n"
 "Report-Msgid-Bugs-To: WP Rig\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -149,23 +149,23 @@ msgstr ""
 msgid "Secondary"
 msgstr ""
 
-#: inc/Theme_Docs/Component.php:54, inc/Theme_Docs/Component.php:55, inc/Theme_Docs/Component.php:87
+#: inc/Theme_Docs/Component.php:61, inc/Theme_Docs/Component.php:62, inc/Theme_Docs/Component.php:94
 msgid "Theme Docs"
 msgstr ""
 
-#: inc/Theme_Docs/Component.php:90
-msgid "No docs have been compiled yet. Run npm run bundle (or npm run dev) in wp-rig after adding a docs/**/*.md file."
+#: inc/Theme_Docs/Component.php:97
+msgid "No docs have been compiled yet. Run npm run dev (or npm run build) in wp-rig after adding a docs/**/*.md file."
 msgstr ""
 
-#: inc/Theme_Docs/Component.php:161
+#: inc/Theme_Docs/Component.php:175
 msgid "possibly stale"
 msgstr ""
 
-#: inc/Theme_Docs/Component.php:159
+#: inc/Theme_Docs/Component.php:173
 msgid "orphaned: source file not found"
 msgstr ""
 
-#: inc/Theme_Docs/Component.php:165
+#: inc/Theme_Docs/Component.php:181
 msgid "Related file:"
 msgstr ""
 
@@ -239,11 +239,21 @@ msgstr ""
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: template-parts/content/related-posts.php:35
+#: template-parts/content/pagination.php:12
+msgctxt "Previous post link"
+msgid "<span class=\"nav-label prev\">&larr; Previous</span><span class=\"nav-title\"> %title </span>"
+msgstr ""
+
+#: template-parts/content/pagination.php:13
+msgctxt "Next post link"
+msgid "<span class=\"nav-label next\">Next &rarr;</span><span class=\"nav-title\"> %title </span>"
+msgstr ""
+
+#: template-parts/content/related-posts.php:40
 msgid "Read More"
 msgstr ""
 
-#: template-parts/content/related-posts.php:41
+#: template-parts/content/related-posts.php:46
 msgid "Join Us"
 msgstr ""
 

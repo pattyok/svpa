@@ -23,6 +23,7 @@
 !style.css
 !/*.php
 !/inc/
+!/docs/
 !/template-parts/
 !/config/
 /config/config.local.json

@@ -175,13 +175,13 @@ function login_styles() {
 	?>
 	<style type="text/css">
 		body.login {
-			background: linear-gradient(90deg, #0D5B0E 0%, #328F41 100%);
+			background: #F5F5F7;
 		}
 		body.login div#login h1 {
 			text-align: center;
 		}
 		body.login div#login h1 a {
-			background-image: url(<?php echo esc_url( get_theme_file_uri( 'assets/images/logo_reverse.png' ) ); ?>);
+			background-image: url(<?php echo esc_url( get_theme_file_uri( 'assets/images/logo.png' ) ); ?>);
 			background-size: contain;
 			background-position: center;
 			width: 600px;
@@ -193,14 +193,14 @@ function login_styles() {
 			border-color: #ccc;
 		}
 		#wp-submit {
-			background-color: #E95234;
-			border-color: #E95234;
+			background-color: #38802B;
+			border-color: #38802B;
 			color: #fff;
 		}
 		a,
 		body.login #nav a,
 		body.login #backtoblog a {
-			color: #fff;
+			color: #38802B;
 
 		}
 		a:hover,
@@ -322,13 +322,13 @@ function add_dashboard_widgets() {
 		} else {
 			$logo = get_theme_file_uri( 'assets/images/logo.png' );
 		}
-		$documentation_url = 'https://docs.google.com/document/d/1vx3daDtzjs1ICGnNJzTTS7a7_4luPCXMYObZBNUeSJY/edit?usp=sharing';
+		$documentation_url = '/wp-admin/admin.php?page=theme-docs';
 		$content = '<div class="ck-dashboard-widget">';
 		$content .= '<img style="width:300px;max-width:100%;height:auto;" src="' . esc_url( $logo ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" /><h2>' . esc_html( get_bloginfo( 'name' ) ) . '</h2>';
 
 		$content .= '<p>This site is built with a Custom theme by Carkeek Studios.</p>';
 		if (!empty($documentation_url)) {
-		$content .= 'Refer to your <a href="' . esc_url($documentation_url) . '" target="_BLANK">site documentation</a> for tips on managing this site.</p>';
+		$content .= 'Refer to your <a href="' . esc_url($documentation_url) . '" target="_BLANK">Theme Docs</a> for tips on managing this site.</p>';
 		}
 		$content .= '<p>For additional help, feel free to reach out <a href="mailto:patty@carkeekstudios.com" target="_blank">patty@carkeekstudios.com</a></p>';
 		$content .= '</div>';

@@ -15,6 +15,7 @@ use function esc_html;
 use function esc_html__;
 use function esc_url;
 use function get_theme_file_path;
+use function get_theme_file_uri;
 use function menu_page_url;
 use function sanitize_key;
 use function wp_unslash;
@@ -22,13 +23,19 @@ use function wp_unslash;
 /**
  * Class for the "Theme Docs" admin page.
  *
- * Reads docs/manifest.json (compiled at build time by `gulp/docs.js` from
+ * Reads assets/docs/manifest.json (compiled by `gulp/docs.js` from
  * docs/**\/*.md - see svpa/docs/README.md) and renders the pre-compiled
- * HTML for each documented theme item, grouped by category.
+ * HTML for each doc, grouped by category. The doc with the slug "main" is
+ * shown when no doc is selected.
  */
 class Component implements Component_Interface {
 
 	const PAGE_SLUG = 'theme-docs';
+
+	const DEFAULT_DOC_SLUG = 'main';
+
+	// Must match DOCS_URL_PLACEHOLDER in gulp/docs.js.
+	const DOCS_URL_PLACEHOLDER = '__THEME_DOCS_URL__';
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -61,12 +68,12 @@ class Component implements Component_Interface {
 	}
 
 	/**
-	 * Reads and decodes docs/manifest.json.
+	 * Reads and decodes assets/docs/manifest.json.
 	 *
 	 * @return array List of doc entries, or an empty array if no manifest exists yet.
 	 */
 	protected function get_manifest(): array {
-		$manifest_path = get_theme_file_path( 'docs/manifest.json' );
+		$manifest_path = get_theme_file_path( 'assets/docs/manifest.json' );
 
 		if ( ! file_exists( $manifest_path ) ) {
 			return array();
@@ -87,18 +94,18 @@ class Component implements Component_Interface {
 		echo '<h1>' . esc_html__( 'Theme Docs', 'svpa' ) . '</h1>';
 
 		if ( empty( $manifest ) ) {
-			echo '<p>' . esc_html__( 'No docs have been compiled yet. Run npm run bundle (or npm run dev) in svpa after adding a docs/**/*.md file.', 'svpa' ) . '</p>';
+			echo '<p>' . esc_html__( 'No docs have been compiled yet. Run npm run dev (or npm run build) in svpa after adding a docs/**/*.md file.', 'svpa' ) . '</p>';
 			echo '</div>';
 			return;
 		}
 
 		$grouped = array();
 		foreach ( $manifest as $entry ) {
+			// Manifest is already in sidebar order (see gulp/docs.js).
 			$grouped[ $entry['category'] ][] = $entry;
 		}
-		ksort( $grouped );
 
-		$selected_slug = isset( $_GET['doc'] ) ? sanitize_key( wp_unslash( $_GET['doc'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$selected_slug = isset( $_GET['doc'] ) ? sanitize_key( wp_unslash( $_GET['doc'] ) ) : self::DEFAULT_DOC_SLUG; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$selected      = null;
 		foreach ( $manifest as $entry ) {
 			if ( $entry['slug'] === $selected_slug ) {
@@ -117,10 +124,16 @@ class Component implements Component_Interface {
 			.theme-docs-nav ul { margin: 0 0 8px; }
 			.theme-docs-nav li a.is-active { font-weight: 600; }
 			.theme-docs-content { flex: 1; background: #fff; border: 1px solid #c3c4c7; padding: 24px; min-width: 0; }
+			.theme-docs-content [id] { scroll-margin-top: 48px; }
 			.theme-docs-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 3px; margin-left: 8px; }
 			.theme-docs-badge.is-orphaned { background: #f8d7da; color: #842029; }
 			.theme-docs-badge.is-stale { background: #fff3cd; color: #664d03; }
 			.theme-docs-related-file { color: #646970; font-size: 13px; }
+			.theme-docs-content img { max-width: 100%; height: auto; }
+			.theme-docs-content table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+			.theme-docs-content table th,
+			.theme-docs-content table td { border: 1px solid #c3c4c7; padding: 8px; text-align: left; }
+			.theme-docs-content table img {max-width: 300px; }
 		</style>';
 
 		echo '<div class="theme-docs-layout">';
@@ -151,23 +164,28 @@ class Component implements Component_Interface {
 	 * @param array $entry Manifest entry.
 	 */
 	protected function render_doc( array $entry ) {
-		$related_path   = get_theme_file_path( $entry['related_file'] );
-		$related_exists = file_exists( $related_path );
+		$related_file = isset( $entry['related_file'] ) ? $entry['related_file'] : '';
 
 		echo '<h2>' . esc_html( $entry['title'] );
-		if ( ! $related_exists ) {
-			echo ' <span class="theme-docs-badge is-orphaned">' . esc_html__( 'orphaned: source file not found', 'svpa' ) . '</span>';
-		} elseif ( filemtime( $related_path ) > strtotime( $entry['updated_at'] ) ) {
-			echo ' <span class="theme-docs-badge is-stale">' . esc_html__( 'possibly stale', 'svpa' ) . '</span>';
+		if ( $related_file ) {
+			$related_path = get_theme_file_path( $related_file );
+			if ( ! file_exists( $related_path ) ) {
+				echo ' <span class="theme-docs-badge is-orphaned">' . esc_html__( 'orphaned: source file not found', 'svpa' ) . '</span>';
+			} elseif ( filemtime( $related_path ) > strtotime( $entry['updated_at'] ) ) {
+				echo ' <span class="theme-docs-badge is-stale">' . esc_html__( 'possibly stale', 'svpa' ) . '</span>';
+			}
 		}
 		echo '</h2>';
 
-		echo '<p class="theme-docs-related-file">' . esc_html__( 'Related file:', 'svpa' ) . ' <code>' . esc_html( $entry['related_file'] ) . '</code></p>';
+		if ( $related_file ) {
+			echo '<p class="theme-docs-related-file">' . esc_html__( 'Related file:', 'svpa' ) . ' <code>' . esc_html( $related_file ) . '</code></p>';
+		}
 
-		$html_path = get_theme_file_path( "docs/{$entry['category']}/{$entry['slug']}.html" );
+		$html_path = get_theme_file_path( "assets/docs/{$entry['category']}/{$entry['slug']}.html" );
 		if ( file_exists( $html_path ) ) {
 			// Pre-rendered at build time from developer-authored Markdown, not user input.
-			echo file_get_contents( $html_path ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			$html = file_get_contents( $html_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			echo str_replace( self::DOCS_URL_PLACEHOLDER, esc_url( get_theme_file_uri( 'assets/docs' ) ), $html ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 }

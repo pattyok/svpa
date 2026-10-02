@@ -4,14 +4,7 @@
 .has-accent-1-background-color,
 .has-contrast-background-color {
 	color: $white;
-	& .wp-block-button .wp-block-button__link {
-		background-color: $white;
-		color: $colorLink;
-		&:hover {
-			background-color: $colorLink;
-			color: $white;
-		}
-	}
+
 
 	& svg,
 	& .wp-block-button.is-style-arrow-link .wp-block-button__link,
@@ -22,7 +15,26 @@
 		background-color: transparent;
 		color: $white;
 	}
+	& .wp-block-button .wp-block-button__link {
+		background-color: $colorLink;
+		color: $white;
 
+		&:hover {
+			background-color: $yellow;
+			color: $white;
+		}
+	}
+
+}
+.has-secondary-background-color {
+	& .wp-block-button .wp-block-button__link {
+		background-color: $white;
+		color: $colorLink;
+		&:hover {
+			background-color: $colorLink;
+			color: $white;
+		}
+	}
 }
 .has-white-transparent-background-color,
 .has-white-background-color {

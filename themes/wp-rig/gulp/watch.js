@@ -62,5 +62,8 @@ export default function watch() {
 		series(images, reload)
 	);
 
-	gulpWatch(backslashToForwardSlash(paths.docs.src), docs);
+	gulpWatch(
+		backslashToForwardSlash(`${paths.docs.srcDir}/**/*`),
+		series(docs, reload)
+	);
 }

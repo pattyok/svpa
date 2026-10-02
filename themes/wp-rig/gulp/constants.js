@@ -118,7 +118,7 @@ const paths = {
 	docs: {
 		src: `${rootPath}/docs/**/*.md`,
 		srcDir: `${rootPath}/docs`,
-		dest: `${rootPath}/docs`,
+		dest: `${assetsDir}/docs`,
 	},
 	languages: {
 		src: [
@@ -154,7 +154,7 @@ if (isProd) {
 		src: `${prodThemePath}/**/*.php`,
 		dest: `${prodThemePath}/languages/${config.theme.slug}.pot`,
 	};
-	paths.docs.dest = `${prodThemePath}/docs`;
+	paths.docs.dest = `${prodAssetsDir}/docs`;
 }
 
 export { paths };
