@@ -44,8 +44,8 @@
 	}
 	& .page-title,
 	& .entry-title {
-		padding-top: $spacingSmall;
-		padding-bottom: $spacingSmall;
+		padding-top: $spacingDefault;
+		padding-bottom: $spacingDefault;
 		max-width: 100%;
 		margin: 0 var(--padding-responsive-wide);
 		color: $pageHeaderColor;

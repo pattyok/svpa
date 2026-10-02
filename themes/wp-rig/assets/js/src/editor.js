@@ -372,6 +372,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			"containImages": true,
 			"imageHeight": 250,
 			"imageWidth": 250,
+			"columnGap": 5
 		},
 		scope: ['inserter'],
 		keywords: ['logo', 'grid', 'image'],
