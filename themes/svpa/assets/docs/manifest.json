@@ -8,6 +8,22 @@
     "updated_at": "2026-10-01T21:38:01.281Z"
   },
   {
+    "slug": "site-features",
+    "category": "general",
+    "title": "Site Features",
+    "related_file": "",
+    "summary": "Editing the main menu and the site footer.",
+    "updated_at": "2026-10-02T19:37:50.288Z"
+  },
+  {
+    "slug": "accessibility",
+    "category": "general",
+    "title": "Accessibility",
+    "related_file": "",
+    "summary": "Editing the main menu and the site footer.",
+    "updated_at": "2026-10-02T19:37:53.861Z"
+  },
+  {
     "slug": "header-footer",
     "category": "general",
     "title": "Site Header and Footer",

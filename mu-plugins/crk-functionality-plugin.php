@@ -320,7 +320,7 @@ function add_dashboard_widgets() {
 			$logo = wp_get_attachment_image_src( $logo, 'full' );
 			$logo = $logo[0];
 		} else {
-			$logo = get_theme_file_uri( 'assets/images/logo.png' );
+			$logo = get_theme_file_uri( 'assets/images/logo_svpa.png' );
 		}
 		$documentation_url = '/wp-admin/admin.php?page=theme-docs';
 		$content = '<div class="ck-dashboard-widget">';
