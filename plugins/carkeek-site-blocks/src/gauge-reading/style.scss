@@ -1,0 +1,275 @@
+.gauge-reading {
+	--gauge-rule: #ddd;
+	--gauge-normal: #94c838;
+	--gauge-normal-bg: #ddebc8;
+	--gauge-near: #a57c00;
+	--gauge-near-bg: #FFEAC2;
+	--gauge-flooding: #E83C3C;
+	--gauge-flooding-bg: #FAD4D4;
+	--gauge-other: #555;
+	--gauge-other-bg: #eee;
+
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 20px;
+	overflow: hidden;
+	color: #000;
+	background: #fff;
+	border: 2px solid #d1d1d1;
+	border-radius: 30px;
+
+	& a {
+		color: inherit;
+	}
+}
+
+.gauge-reading__header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 0 10px;
+}
+
+.gauge-reading__logo {
+	flex: 0 0 auto;
+	width: 120px;
+	height: 125px;
+}
+
+.gauge-reading__titles {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	gap: 5px;
+	min-width: 0;
+	padding: 13px 6px;
+	overflow-wrap: break-word;
+}
+
+.gauge-reading__heading {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--headings);
+	font-size: 28px;
+	font-weight: 800;
+	line-height: normal;
+	text-transform: none;
+	color: inherit;
+
+	& a {
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+}
+
+.gauge-reading__time,
+.gauge-reading__credit {
+	margin: 0;
+	font-size: 14px;
+	line-height: normal;
+}
+
+.gauge-reading__time strong {
+	font-weight: 700;
+}
+
+.gauge-reading__body {
+	display: flex;
+	gap: 10px;
+	align-items: stretch;
+	padding: 4px 0;
+}
+
+.gauge-reading__map {
+	position: relative;
+	flex: 1 1 0;
+	min-width: 0;
+	min-height: 265px;
+	overflow: hidden;
+	border-radius: 20px;
+}
+
+.gauge-reading__map-image {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+// Floodzilla pin (inline SVG): fill follows status, arrow follows trend.
+// The tip sits at 50% / 84.6% of the SVG box (the rest is shadow room).
+.gauge-reading__marker {
+	position: absolute;
+	top: var(--marker-y, 50%);
+	left: var(--marker-x, 50%);
+	line-height: 0;
+	transform: translate(-50%, -84.6%);
+}
+
+.gauge-reading__pin {
+	display: block;
+	width: 40px;
+	height: auto;
+	overflow: visible;
+	filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.16));
+}
+
+.gauge-reading__pin-fill {
+	fill: var(--gauge-marker, var(--gauge-other));
+}
+
+.gauge-reading__pin-arrow {
+	transform-box: fill-box;
+	transform-origin: center;
+}
+
+.gauge-reading__marker.is-trend-rising .gauge-reading__pin-arrow {
+	transform: rotate(-30deg);
+}
+
+.gauge-reading__marker.is-trend-falling .gauge-reading__pin-arrow {
+	transform: rotate(30deg);
+}
+
+.gauge-reading__details {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.gauge-reading__values {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--global);
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 27px;
+
+	&.is-empty p {
+		margin: 0;
+		padding: 10px 0;
+		border-top: 1px solid var(--gauge-rule);
+	}
+}
+
+.gauge-reading__row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 0.3em;
+	align-items: center;
+	padding: 10px 0;
+	border-top: 1px solid var(--gauge-rule);
+
+	& dt {
+		margin: 0;
+		font-weight: 900;
+	}
+
+	& dd {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		margin: 0;
+	}
+
+	&.is-status dd {
+		margin-left: 6px;
+	}
+}
+
+.gauge-reading__pill {
+	display: inline-block;
+	min-width: 100px;
+	padding: 5px 18px;
+	font-weight: 900;
+	text-align: center;
+	color: var(--gauge-pill, var(--gauge-other));
+	background: var(--gauge-pill-bg, var(--gauge-other-bg));
+	border-radius: 10px;
+}
+
+.gauge-reading__trend {
+	display: inline-flex;
+	gap: 10px;
+	align-items: center;
+
+	& .gauge-reading__arrow {
+		width: 37px;
+		height: auto;
+	}
+
+	&.is-trend-rising .gauge-reading__arrow {
+		transform: rotate(-30deg);
+	}
+
+	&.is-trend-falling .gauge-reading__arrow {
+		transform: rotate(30deg);
+	}
+}
+
+.gauge-reading__credit {
+	padding: 10px 0;
+
+	& a {
+		font-weight: inherit;
+	}
+	border-top: 1px solid var(--gauge-rule);
+}
+
+// Status colors. Near Flooding / Flooding are placeholders until designed.
+.is-flood-normal {
+	--gauge-marker: var(--gauge-normal);
+	--gauge-pill: var(--gauge-normal);
+	--gauge-pill-bg: var(--gauge-normal-bg);
+}
+
+.is-flood-near-flooding {
+	--gauge-marker: #e0a800;
+	--gauge-pill: var(--gauge-near);
+	--gauge-pill-bg: var(--gauge-near-bg);
+}
+
+.is-flood-flooding {
+	--gauge-marker: var(--gauge-flooding);
+	--gauge-pill: var(--gauge-flooding);
+	--gauge-pill-bg: var(--gauge-flooding-bg);
+}
+
+@media (max-width: 600px) {
+
+	.gauge-reading {
+		padding: 16px;
+		border-radius: 20px;
+	}
+
+	.gauge-reading__header {
+		padding: 0;
+	}
+
+	.gauge-reading__logo {
+		width: 72px;
+		height: 75px;
+	}
+
+	.gauge-reading__titles {
+		padding: 0;
+	}
+
+	.gauge-reading__heading {
+		font-size: 22px;
+	}
+
+	.gauge-reading__body {
+		flex-direction: column;
+	}
+
+	.gauge-reading__map {
+		flex: 0 0 auto;
+		min-height: 220px;
+	}
+}

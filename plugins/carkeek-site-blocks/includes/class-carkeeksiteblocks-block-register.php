@@ -65,6 +65,8 @@ class CarkeekSiteBlocks_Block_Register {
 
 		register_block_type( "$dir/build/expand-collapse-section" );
 
+		register_block_type( "$dir/build/gauge-reading" );
+
 	}
 
 	/** Get Selected or Random Color

@@ -411,6 +411,14 @@
 			border-top: var(--ck-accordion-borders);
 		}
 	}
+	& .ck-accordion-panel {
+		h2 {
+			font-size: var(--font-size-h5);
+		}
+		h3, h4, h5 {
+			font-size: var(--font-size-h6);
+		}
+	}
 }
 
 .ck-archive-tax-header {
@@ -478,4 +486,21 @@
 
 ul.ck-blocks-gallery-grid.has-caption-under .ck-blocks-gallery-grid-item figure {
 	justify-content: flex-start;
+}
+
+.wp-block-page-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	& .current-menu-item {
+		& a {
+			color: $global;
+			cursor: default;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
 }
