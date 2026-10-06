@@ -119,6 +119,7 @@ if ( ! class_exists( 'CarkeekSiteBlocks' ) ) :
 
 			//require_once CARKEEKSITEBLOCKS_PLUGIN_DIR . 'includes/class-carkeeksiteblocks-block-assets.php';
 			require_once CARKEEKSITEBLOCKS_PLUGIN_DIR . 'includes/class-carkeeksiteblocks-block-register.php';
+			require_once CARKEEKSITEBLOCKS_PLUGIN_DIR . 'includes/class-carkeeksiteblocks-gauge-readings.php';
 
 
 		}

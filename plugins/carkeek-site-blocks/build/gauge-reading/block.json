@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "carkeek-site-blocks/gauge-reading",
+  "version": "0.1.0",
+  "title": "River Gauge Reading",
+  "category": "widgets",
+  "icon": "chart-line",
+  "description": "Latest reading from a Floodzilla river gauge.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "stationId": {
+      "type": "string",
+      "default": "USGS-MF11"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Middle Fork Snoqualmie River"
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mapImageId": {
+      "type": "number"
+    },
+    "markerX": {
+      "type": "number",
+      "default": 50
+    },
+    "markerY": {
+      "type": "number",
+      "default": 50
+    }
+  },
+  "keywords": [
+    "gauge",
+    "gage",
+    "river",
+    "flood",
+    "floodzilla"
+  ],
+  "textdomain": "carkeek-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "editorStyle": "file:./index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}
