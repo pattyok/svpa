@@ -238,6 +238,24 @@ class CarkeekSiteBlocks_Gauge_Readings {
 	}
 
 	/**
+	 * Map pin, adapted from Floodzilla's mapicon-flat-green.svg.
+	 *
+	 * Inlined so CSS can color the fill by flood status and rotate the arrow by
+	 * trend. The original's <style> classes and shadow filter are replaced with
+	 * attributes and a CSS drop-shadow so multiple pins can't collide.
+	 *
+	 * @return string
+	 */
+	private static function pin_svg() {
+		return '<svg class="gauge-reading__pin" viewBox="0 0 72 78.14" width="40" height="43" focusable="false">'
+			. '<g transform="translate(9 6)">'
+			. '<path fill="#fff" fill-opacity=".92" d="M27 3a24 24 0 0 0-4.72 47.54c1.73.32 4.79 4.57 4.79 4.57s3.29-4.28 4.59-4.56A24 24 0 0 0 27 3m0-3a26.955 26.955 0 0 1 20.83 44.15 27.334 27.334 0 0 1-6.88 5.93 27.613 27.613 0 0 1-8.32 3.34 26.077 26.077 0 0 0-3.18 3.52l-2.46 3.2-2.36-3.27c0-.01-.58-.8-1.34-1.68a9.923 9.923 0 0 0-1.78-1.73 26.554 26.554 0 0 1-15.25-9.11A27.015 27.015 0 0 1 27 0z"/>'
+			. '<path class="gauge-reading__pin-fill" d="M27 3a23.995 23.995 0 0 1 4.66 47.54c-1.3.28-4.59 4.56-4.59 4.56s-3.06-4.24-4.79-4.57A24 24 0 0 1 27 3z"/>'
+			. '<g transform="translate(13 15)"><path class="gauge-reading__pin-arrow" fill="#fff" d="M27.867 12.631l-3.72-3.72A.668.668 0 0 0 23 9.377v2.387H4.333a1.333 1.333 0 1 0 0 2.667H23v2.387a.66.66 0 0 0 1.133.467l3.72-3.72a.656.656 0 0 0 .013-.933z"/></g>'
+			. '</g></svg>';
+	}
+
+	/**
 	 * Numeric field as a float, or null when missing.
 	 *
 	 * @param mixed  $data Source array.
@@ -380,7 +398,7 @@ class CarkeekSiteBlocks_Gauge_Readings {
 			'time'   => '<p class="gauge-reading__time" data-gauge-part="time"><strong>' . esc_html__( 'Last Reading:', 'carkeek-blocks' ) . '</strong> '
 				. '<span class="gauge-reading__relative"></span>'
 				. '<time datetime="' . esc_attr( $date->format( 'c' ) ) . '">' . esc_html( wp_date( $format, $timestamp ) ) . '</time></p>',
-			'marker' => '<span class="gauge-reading__marker ' . esc_attr( $classes ) . '" data-gauge-part="marker" aria-hidden="true">' . $arrow . '</span>',
+			'marker' => '<span class="gauge-reading__marker ' . esc_attr( $classes ) . '" data-gauge-part="marker" aria-hidden="true">' . self::pin_svg() . '</span>',
 			'values' => '<dl class="gauge-reading__values" data-gauge-part="values">' . $values . '</dl>',
 		);
 	}

@@ -101,37 +101,39 @@
 	object-fit: cover;
 }
 
-// Pin: circle colored by status, pointing at --marker-x / --marker-y.
+// Floodzilla pin (inline SVG): fill follows status, arrow follows trend.
+// The tip sits at 50% / 84.6% of the SVG box (the rest is shadow room).
 .gauge-reading__marker {
 	position: absolute;
 	top: var(--marker-y, 50%);
 	left: var(--marker-x, 50%);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 28px;
-	height: 28px;
-	background: var(--gauge-marker, var(--gauge-other));
-	border: 2px solid #fff;
-	border-radius: 50%;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-	transform: translate(-50%, calc(-100% - 6px));
+	line-height: 0;
+	transform: translate(-50%, -84.6%);
+}
 
-	&::after {
-		position: absolute;
-		top: 100%;
-		left: 50%;
-		content: "";
-		border: 6px solid transparent;
-		border-top-color: var(--gauge-marker, var(--gauge-other));
-		transform: translateX(-50%);
-	}
+.gauge-reading__pin {
+	display: block;
+	width: 40px;
+	height: auto;
+	overflow: visible;
+	filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.16));
+}
 
-	& .gauge-reading__arrow {
-		width: 16px;
-		height: auto;
-		filter: brightness(0) invert(1);
-	}
+.gauge-reading__pin-fill {
+	fill: var(--gauge-marker, var(--gauge-other));
+}
+
+.gauge-reading__pin-arrow {
+	transform-box: fill-box;
+	transform-origin: center;
+}
+
+.gauge-reading__marker.is-trend-rising .gauge-reading__pin-arrow {
+	transform: rotate(-30deg);
+}
+
+.gauge-reading__marker.is-trend-falling .gauge-reading__pin-arrow {
+	transform: rotate(30deg);
 }
 
 .gauge-reading__details {
@@ -208,14 +210,6 @@
 	&.is-trend-falling .gauge-reading__arrow {
 		transform: rotate(30deg);
 	}
-}
-
-.gauge-reading__marker.is-trend-rising .gauge-reading__arrow {
-	transform: rotate(-30deg);
-}
-
-.gauge-reading__marker.is-trend-falling .gauge-reading__arrow {
-	transform: rotate(30deg);
 }
 
 .gauge-reading__credit {
