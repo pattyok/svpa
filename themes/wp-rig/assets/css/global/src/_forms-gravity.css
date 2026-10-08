@@ -36,26 +36,8 @@
 		font-size: 1rem;
 		color: var(--color-error);
 	}
-	.ginput_container_checkbox {
-		margin-top: 1rem;
-		& .gfield_checkbox {
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-		}
-	}
-	.gfield--choice-align-horizontal {
-		.ginput_container_checkbox {
-			& .gfield_checkbox {
-				display: flex;
-				flex-direction: row;
-				gap: 0.5rem;
-				& .gchoice {
-					display: flex;
-				}
-			}
-		}
-	}
+
+
 	& .ginput_container_consent,
 	& .gchoice {
 		display: flex;
@@ -63,7 +45,8 @@
 		gap: 0.5rem;
 		& p {
 			margin-top: 4px;
-			margin-bottom: 1.5rem;
+			margin-bottom: 0.5rem;
+
 		}
 		& .amount {
 			line-height: 1;
@@ -73,10 +56,22 @@
 		display: grid;
 		margin-top: 3px;
 	}
+	.ginput_container_radio,
+	.ginput_container_checkbox {
+		margin-top: 1rem;
+		& .gfield_radio,
+		& .gfield_checkbox {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
 
 	& .gfield--choice-align-horizontal {
-		& .gfield_radio {
+		& .gfield_radio,
+		& .gfield_checkbox {
 			display: flex;
+			flex-direction: row;
 			& .gchoice {
 				display: flex;
 			}
