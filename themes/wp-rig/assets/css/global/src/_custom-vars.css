@@ -3,7 +3,7 @@ $fontFamilyGlobal: var(--wp--preset--font-family--global);
 $fontFamilyHeadings: var(--wp--preset--font-family--headings);
 $fontFamilyNav: var(--wp--preset--font-family--global);
 $fontFamilyHeadingsSans: var(--wp--preset--font-family--headings);
-$fontFamilyForms: var(--wp--preset--font-family--headings);
+$fontFamilyForms: var(--wp--preset--font-family--global);
 
 $global: var(--wp--preset--color--contrast);
 $primary: var(--wp--preset--color--primary); /**  green **/
@@ -22,17 +22,17 @@ $gray800: var(--wp--preset--color--gray-800);
 
 $colorHeadings: var(--wp--preset--color--headings);
 
-$btnBackground:  var(--wp--preset--color--accent);
-$btnBorder: 1px solid var(--wp--preset--color--accent);
+$btnBackground:  var(--wp--preset--color--accent-1);
+$btnBorder: 1px solid var(--wp--preset--color--accent-1);
 $btnText: #fff;
 $btnFont: var(--wp--preset--font-family--headings);
 $btnFontWeight: 800;
 $btnFontSize: var(--font-size-button);
-$btnBorderHover: 1px solid var(--wp--preset--color--accent-2);
+$btnBorderHover: var(--wp--preset--color--accent-2);
 $btnBackgroundHover: var(--wp--preset--color--accent-2);
 $btnBackgroundActive:  var(--wp--preset--color--accent-2);
-$btnTextHover: #fff;
-$btnTextActive:  #fff;
+$btnTextHover: var(--wp--preset--color--contrast);
+$btnTextActive:  var(--wp--preset--color--contrast);
 $btnBorderRadius: 0;
 
 $menuFontSize: var(--font-size-nav);

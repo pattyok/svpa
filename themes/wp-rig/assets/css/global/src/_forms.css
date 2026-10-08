@@ -186,7 +186,7 @@ input[type="checkbox"] {
 	color: $colorBorders;
 	width: 1.15em;
 	height: 1.15em;
-	border: 0.05em solid $colorBorders;
+	border: 1px solid $colorBorders;
 
 	transform: translateY(-0.075em);
 	display: grid;

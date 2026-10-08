@@ -1,14 +1,22 @@
-.gform_required_legend {
-	display: none;
-}
+
 
 .page .gform_wrapper.gravity-theme {
+	.gform_required_legend {
+		margin-bottom: 1.5rem;
+	}
 	& .gform_fields {
-		grid-row-gap: 1.5rem;
+		grid-row-gap: 1rem;
+		font-weight: 400;
 	}
 	& .ginput_complex label,
 	& .gfield_label {
 		font-size: 1.125rem;
+		font-weight: 400;
+		margin-bottom: 0.25rem;
+	}
+
+	& .ginput_complex {
+		row-gap: 0.5rem;
 	}
 	& .gfield_checkbox,
 	& .gfield_radio {
@@ -21,6 +29,8 @@
 	}
 	& .gsection {
 		border: none;
+		padding: 0;
+		margin-top: 1.5rem;
 	}
 	& .gfield_required {
 		font-size: 1rem;
@@ -29,11 +39,29 @@
 	& .ginput_container_consent,
 	& .gchoice {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 0.5rem;
+		& p {
+			margin-top: 4px;
+			margin-bottom: 1.5rem;
+		}
+		& .amount {
+			line-height: 1;
+		}
 	}
 	& .gfield-choice-input {
 		display: grid;
+		margin-top: 3px;
+	}
+
+	& .gfield--choice-align-horizontal {
+		& .gfield_radio {
+			display: flex;
+			& .gchoice {
+				display: flex;
+			}
+		}
+
 	}
 
 	/** Show the asterisk on sub labels, hide the default
@@ -61,17 +89,24 @@
 	}
 	& .gfield:not(.gfield--input-type-checkbox) {
 		& .gfield_label_before_complex {
-			font-size: var(--font-size-h4);
-			font-weight: 600;
+			font-size: var(--font-size-h6);
+			font-family: var(--wp--preset--font-family--headings);
+			font-weight: 800;
 			margin-top: 1rem;
 
 		}
 	}
-
+	& .amount,
 	& .gsection_title {
-		font-size: var(--font-size-h4);
-		font-weight: 600;
-		color: $global;
+		font-size: var(--font-size-h5);
+		font-weight: 800;
+		font-family: var(--wp--preset--font-family--headings);
+		color: var(--wp--preset--color--header);
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+	hr {
+		margin-top: 1.5rem;
 		margin-bottom: 0;
 	}
 }

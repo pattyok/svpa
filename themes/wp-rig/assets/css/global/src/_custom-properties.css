@@ -70,7 +70,7 @@
 	--font-size-h3: calc(25 / var(--global-font-size) * 1rem);
 	--font-size-h4: calc(25 / var(--global-font-size) * 1rem);
 	--font-size-h5: calc(25 / var(--global-font-size) * 1rem);
-	--font-size-h6: calc(16 / var(--global-font-size) * 1rem);
+	--font-size-h6: calc(21 / var(--global-font-size) * 1rem);
 	--heading-spacing: 0.5em;
 
 	--header-height: 100px;
@@ -113,7 +113,7 @@
 
 @media (--desktop-up) {
 	:root {
-		--content-width: 64vw;
+		--content-width: min(64vw, 1200px);
 		--content-width-wide: 74vw;
 		--member-menu-btn-max-width: 125px;
 		--header-image-width: clamp(290px, 24vw, 356px);
