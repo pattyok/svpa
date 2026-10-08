@@ -65,6 +65,12 @@
 	padding-left: 2rem;
 	padding-right: 2rem;
 }
+.wp-block-cover .wp-block-group.has-background {
+	padding: 2rem;
+	.wp-block-pullquote {
+		padding: 0;
+	}
+}
 @media (--tablet-up) {
 
 	.wp-block-cover {
