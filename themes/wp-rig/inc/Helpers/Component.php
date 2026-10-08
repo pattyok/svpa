@@ -44,6 +44,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		add_filter( 'the_title', array( $this, 'people_the_title' ), 10, 2 );
 		add_filter( 'post_type_link', array( $this, 'custom_annual_report_permalink' ), 10, 4 );
+		add_filter( 'gform_required_legend', array( $this, 'gform_required_legend' ), 10, 2 );
 	}
 
 
@@ -526,5 +527,16 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			}
 		}
 		return $post_link;
+	}
+
+	/**
+	 * Customize the required legend for Gravity Forms.
+	 *
+	 * @param string $legend Existing legend markup.
+	 * @param array  $form   Form data.
+	 * @return string Modified legend markup.
+	 */
+	public function gform_required_legend( $legend, $form ) {
+		return 'Required fields are marked <span class="gfield_required gfield_required_asterisk">*</span>';
 	}
 }

@@ -45,7 +45,7 @@ body {
 hr {
 	box-sizing: border-box;
 	border: none;
-	border-bottom: 1px solid #dedede;
+	border-bottom: 2px solid var(--wp--preset--color--gray-300);
 	margin-top: 0;
 }
 
