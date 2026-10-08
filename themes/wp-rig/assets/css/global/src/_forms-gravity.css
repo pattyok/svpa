@@ -36,6 +36,26 @@
 		font-size: 1rem;
 		color: var(--color-error);
 	}
+	.ginput_container_checkbox {
+		margin-top: 1rem;
+		& .gfield_checkbox {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
+	.gfield--choice-align-horizontal {
+		.ginput_container_checkbox {
+			& .gfield_checkbox {
+				display: flex;
+				flex-direction: row;
+				gap: 0.5rem;
+				& .gchoice {
+					display: flex;
+				}
+			}
+		}
+	}
 	& .ginput_container_consent,
 	& .gchoice {
 		display: flex;
@@ -87,15 +107,7 @@
 			}
 		}
 	}
-	& .gfield:not(.gfield--input-type-checkbox) {
-		& .gfield_label_before_complex {
-			font-size: var(--font-size-h6);
-			font-family: var(--wp--preset--font-family--headings);
-			font-weight: 800;
-			margin-top: 1rem;
 
-		}
-	}
 	& .amount,
 	& .gsection_title {
 		font-size: var(--font-size-h5);
