@@ -102,7 +102,7 @@
 	:root {
 		--content-width: 74vw;
 		--content-width-wide: 83vw;
-
+		--font-size-h1: calc(60 / var(--global-font-size) * 1rem);
 		--font-size-h2: calc(46 / var(--global-font-size) * 1rem);
 		--font-size-h3: calc(36 / var(--global-font-size) * 1rem);
 		--font-size-h4: calc(28 / var(--global-font-size) * 1rem);
@@ -117,7 +117,6 @@
 		--content-width-wide: 74vw;
 		--member-menu-btn-max-width: 125px;
 		--header-image-width: clamp(290px, 24vw, 356px);
-		--font-size-h1: calc(50 / var(--global-font-size) * 1rem);
 
 	}
 }
