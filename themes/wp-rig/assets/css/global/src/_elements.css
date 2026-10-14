@@ -170,6 +170,7 @@ button.facetwp-load-more,
 .arrow-link > a,
 a.arrow-link {
 	font-family: var(--wp--preset--font-family--headings);
+	background-color: transparent;
 	color: $colorLink;
 	border: none;
 	padding: 0;

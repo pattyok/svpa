@@ -10,16 +10,15 @@
 		margin-right: auto;
 	}
 }
-.wp-block-heading {
-	& a {
-		font-weight: inherit;
-		color: inherit;
-	}
-}
+
 .wp-block-heading,
 h1, h2, h3, h4, h5, h6 {
 	color: var(--wp--preset--color--header);
 	line-height: normal;
+	& a {
+		font-weight: inherit;
+		color: var(--wp--preset--color--accent-1);
+	}
 }
 
 h1,
