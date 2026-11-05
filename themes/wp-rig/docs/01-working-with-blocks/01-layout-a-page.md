@@ -17,7 +17,7 @@ On Content pages, we usually group the page into sections to create more visuall
 
 
 
-## Background Colors
+### Background Colors
 
 Add a highlight to your page with groups with a background color.
 

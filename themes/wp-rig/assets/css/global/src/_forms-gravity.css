@@ -15,6 +15,7 @@
 		margin-bottom: 0.25rem;
 	}
 
+
 	& .ginput_complex {
 		row-gap: 0.5rem;
 	}
@@ -102,8 +103,8 @@
 			}
 		}
 	}
-
-	& .amount,
+	& .gf-heading-label .gform-field-label__text,
+	& .gfield_radio .amount,
 	& .gsection_title {
 		font-size: var(--font-size-h5);
 		font-weight: 800;
@@ -111,6 +112,13 @@
 		color: var(--wp--preset--color--header);
 		margin-bottom: 0;
 		margin-top: 0;
+	}
+	& .gfield_radio .amount {
+		font-size: 1.375rem;
+		margin-bottom: 8px;
+	}
+	& .gf-heading-label {
+		margin-top: 1rem;
 	}
 	hr {
 		margin-top: 1.5rem;

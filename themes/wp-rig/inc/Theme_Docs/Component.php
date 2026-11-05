@@ -134,6 +134,8 @@ class Component implements Component_Interface {
 			.theme-docs-content table th,
 			.theme-docs-content table td { border: 1px solid #c3c4c7; padding: 8px; text-align: left; }
 			.theme-docs-content table img {max-width: 300px; }
+			.theme-docs-content h2 { font-size: 1.5em; }
+			.theme-docs-content h3 { margin-top: 30px; margin-bottom: 16px; border-bottom: 1px solid #c3c4c7; }
 		</style>';
 
 		echo '<div class="theme-docs-layout">';
