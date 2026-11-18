@@ -1,12 +1,5 @@
-.page-header-event {
-	max-width: var(--content-width);
-	margin: var(--wp--preset--spacing--50) auto;
-	& h1 {
-		margin-top: 0;
-	}
-	& .entry-parent-link {
-		color: $primary;
-	}
+.single-carkeek_event {
+
 	& .event-header {
 		display: flex;
 		flex-direction: column-reverse;
@@ -17,6 +10,7 @@
 		}
 	}
 	& .event-details {
+		margin-top: var(--wp--preset--spacing--50);
 		display: flex;
 		flex-direction: column;
 		gap: var(--wp--preset--spacing--40);
@@ -31,11 +25,22 @@
 		}
 	}
 	& .event-meta {
-		font-size: 1.3125rem;
+		font-weight: 400;
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--30);
 	}
-	& .event-meta-label {
+	& .event-label {
 		font-weight: var(--font-weight--bold);
+		font-family: var(--wp--preset--font-family--headings);
+		font-size: 1.375rem;
 		color: $primary;
+	}
+
+	& .carkeek-event__dates {
+		& span {
+			display: block;
+		}
 	}
 
 	& .event-cta {
@@ -45,20 +50,7 @@
 
 		}
 	}
-	& .event-shift {
-		display: flex;
-		flex-direction: column;
-		gap: var(--wp--preset--spacing--30);
 
-		& .button {
-			max-width: 125px;
-		}
-	}
-	& .full-shift-note {
-		font-size: 0.875rem;
-		color: $gray800;
-		font-style: italic;
-	}
 
 	& .post-thumbnail img {
 		width: 100%;
@@ -95,27 +87,7 @@
 
 .single-carkeek_event {
 	.wp-element-button {
-		background-color: $accent1;
-		color: #fff;
-		border: 2px solid $accent1;
-		&:hover {
-			background-color: #fff;
-			color: $accent1;
-			border: 2px solid $accent1;
-			text-decoration: none;
-		}
+		display: inline-block;
 	}
 }
 
-.wp-block-volunteer-event-management-event-registration {
-	& .event-meta {
-		font-family: var(--wp--preset--font-family--headings-sans);
-		border-bottom: 1px solid $colorBorders;
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
-		& a {
-			font-size: var(--font-size-h4);
-			font-weight: var(--font-weight--bold);
-		}
-	}
-}

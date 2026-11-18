@@ -88,7 +88,7 @@ if ( is_404() ) {
 		the_archive_description( '<div class="archive-description is-style-intro-text">', '</div>' );
 	?>
 	<?php
-} elseif ( is_singular( 'post' ) ) {
+} elseif ( is_singular() && ! is_page() ) {
 	?>
 	<header class="page-header">
 		<div class="entry-title">
