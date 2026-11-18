@@ -46,10 +46,14 @@ namespace WP_Rig\WP_Rig;
 
 			</div>
 		</div>
-		<?php if ( has_post_thumbnail() ) : ?>
-		<div class="page-content-featured">
-			<?php get_template_part( 'template-parts/content/entry-thumbnail', get_post_type(), array( 'is_header' => false, 'include_caption' => true ) ); ?>
-		</div>
+		<?php if ( has_post_thumbnail() ) :
+			$hide_image = filter_var( get_post_meta( $post->ID, '_carkeekblocks_featuredimage_hidden', true ), FILTER_VALIDATE_BOOLEAN );
+			if ( ! $hide_image ) :
+		?>
+			<div class="page-content-featured">
+				<?php get_template_part( 'template-parts/content/entry-thumbnail', get_post_type(), array( 'is_header' => false, 'include_caption' => true ) ); ?>
+			</div>
+			<?php endif; ?>
 		<?php endif; ?>
 	<?php endif; ?>
 	<?php
