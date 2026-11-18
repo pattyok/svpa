@@ -5,8 +5,8 @@
 		margin-bottom: 1.5rem;
 	}
 	& .gform_fields {
-		grid-row-gap: 1rem;
-		font-weight: 400;
+		grid-row-gap: 1.5rem;
+
 	}
 	& .ginput_complex label,
 	& .gfield_label {
@@ -17,6 +17,33 @@
 
 	.gfield_hidden {
 		display: none;
+	}
+
+	.gfield_description {
+		font-weight: 300;
+		color: var(--wp--preset--color--gray-800);
+	}
+
+	.field_sublabel_above .gfield_description {
+		margin-top: 0;
+		padding: 0;
+	}
+
+	.gform-theme-button {
+		background-color: transparent;
+		border: 1px solid var(--wp--preset--color--gray-800);
+		color: var(--wp--preset--color--gray-800);
+		&:hover {
+			background-color: var(--wp--preset--color--gray-800);
+			color: var(--wp--preset--color--white);
+		}
+	}
+
+	.gform_drop_area {
+		& .gform-theme-button {
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 
 
@@ -31,6 +58,8 @@
 	}
 	& select {
 		padding: var(--padding-button) !important;
+		font-size: 1rem;
+		font-weight: 300;
 	}
 	& .gsection {
 		border: none;
