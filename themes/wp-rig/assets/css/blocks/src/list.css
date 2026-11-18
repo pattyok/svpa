@@ -6,3 +6,10 @@ ul.is-style-no-bullets {
 ul.is-style-two-col {
 	columns: 2;
 }
+
+.wp-block-list {
+	&.has-2-columns-desktop,
+	&.has-2-columns-tablet {
+		column-gap: 40px;
+	}
+}

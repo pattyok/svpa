@@ -345,9 +345,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		if ( 0 !== $parent && ! empty( $parent ) ) {
 			if ( $link_parent ) {
-				$breacrumbs .= '<a class="entry-parent-link all-caps" href="' . esc_url( get_the_permalink( $parent ) ) . '">' . wp_kses_post( get_the_title( $parent ) ) . '</a>';
+				$breacrumbs .= '<a class="entry-parent-link" href="' . esc_url( get_the_permalink( $parent ) ) . '">' . wp_kses_post( get_the_title( $parent ) ) . '</a>';
 			} else {
-				$breacrumbs .= '<div class="entry-parent-link all-caps">' . wp_kses_post( get_the_title( $parent ) ) . '</div>';
+				$breacrumbs .= '<div class="entry-parent-link">' . wp_kses_post( get_the_title( $parent ) ) . '</div>';
 			}
 		}
 		if ( $show_current ) {

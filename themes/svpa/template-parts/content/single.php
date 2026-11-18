@@ -16,7 +16,7 @@ namespace WP_Rig\WP_Rig;
 		<div class="entry-header">
 			<div class="entry-title">
 				<?php
-				svpa()->make_breadcrumbs( get_post_type() );
+				echo '<h1>' . wp_kses_post( get_the_title() ) . '</h1>';
 				?>
 			</div>
 			<div class="entry-meta">
@@ -46,6 +46,11 @@ namespace WP_Rig\WP_Rig;
 
 			</div>
 		</div>
+		<?php if ( has_post_thumbnail() ) : ?>
+		<div class="page-content-featured">
+			<?php get_template_part( 'template-parts/content/entry-thumbnail', get_post_type(), array( 'is_header' => false, 'include_caption' => true ) ); ?>
+		</div>
+		<?php endif; ?>
 	<?php endif; ?>
 	<?php
 	get_template_part( 'template-parts/content/entry-content', get_post_type() );

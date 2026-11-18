@@ -137,12 +137,21 @@
 }
 
 .post-thumbnail {
-
+	position: relative;
 	& .image-caption {
 		padding: 0.25rem;
 		position: absolute;
 		bottom: 0;
 		left: 0;
+	}
+}
+
+.page-content-featured {
+	.image-caption {
+		margin-top: 0.5rem;
+		position: relative;
+		color:  $global;
+		font-size: 1rem;
 	}
 }
 

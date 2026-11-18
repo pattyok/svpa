@@ -57,7 +57,7 @@ if ( $is_header ) {
 
 if ( is_singular( get_post_type() ) || $is_header ) {
 	/** Pages and posts. */
-
+	$caption = get_the_post_thumbnail_caption( $postid );
 	?>
 	<div class="post-thumbnail <?php echo esc_attr( $thumb_class ); ?>" style="<?php echo $thumb_style; //phpcs:ignore ?>">
 		<?php
@@ -72,6 +72,9 @@ if ( is_singular( get_post_type() ) || $is_header ) {
 		?>
 		<?php if ( $photo_credit ) : ?>
 			<p class="ck-photo-credit ck-photo-credit--overlay"><?php echo wp_kses_post( $photo_credit ); ?></p>
+		<?php endif; ?>
+		<?php if ( $caption && isset( $args['include_caption'] ) && true === $args['include_caption'] ) : ?>
+			<p class="image-caption"><?php echo wp_kses_post( $caption ); ?></p>
 		<?php endif; ?>
 	</div><!-- .post-thumbnail -->
 

@@ -229,7 +229,7 @@
 		gap: 0.5rem;
 	}
 	&.is-style-borders.alignfull {
-		padding-top: 0;
+		padding-top: var(--wp--preset--spacing--50);
 		padding-bottom: 0;
 		& .ck-custom-archive__list {
 			max-width: none;
