@@ -400,6 +400,10 @@
 	}
 }
 
+.carkeek-events-archive__empty {
+	text-align: center;
+}
+
 .carkeek-events-archive.is-dynamic {
 	gap: 1.875rem;
 
